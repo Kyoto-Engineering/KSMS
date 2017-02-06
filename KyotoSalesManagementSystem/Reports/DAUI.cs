@@ -74,7 +74,8 @@ namespace KyotoSalesManagementSystem.Reports
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string ct = "select   T.QuotationId from  Quotation T JOIN RefNumForQuotation N ON T.QuotationId = N.QuotationId  where N.ReferenceNo='" + comboBox1.Text + "'";
+
+                string ct = "SELECT DOiD FROM DeleveryOrder INNER JOIN Quotation ON DeleveryOrder.QuotationId = Quotation.QuotationId INNER JOIN RefNumForQuotation ON Quotation.QuotationId = RefNumForQuotation.QuotationId  where RefNumForQuotation.ReferenceNo='" + comboBox1.Text + "'";
                 cmd = new SqlCommand(ct);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();
