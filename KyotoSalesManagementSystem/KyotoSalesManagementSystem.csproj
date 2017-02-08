@@ -234,6 +234,12 @@
     <Compile Include="UI\QuotationForOvercease.Designer.cs">
       <DependentUpon>QuotationForOvercease.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\QuotationMMix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\QuotationMMix.Designer.cs">
+      <DependentUpon>QuotationMMix.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\QuotationSChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\QuotationForOvercease.resx">
       <DependentUpon>QuotationForOvercease.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\QuotationMMix.resx">
+      <DependentUpon>QuotationMMix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\QuotationSChange.resx">
       <DependentUpon>QuotationSChange.cs</DependentUpon>

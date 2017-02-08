@@ -77,7 +77,28 @@ namespace KyotoSalesManagementSystem.UI
                 MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-            else
+            else if (ftype==3)
+            {
+                try
+                {
+                    DataGridViewRow dr = dataGridView1.SelectedRows[0];
+
+                    this.Dispose();
+                    Quotation frm = new Quotation();
+                    frm.Show();
+                    frm.txtClientId.Text = dr.Cells[0].Value.ToString();
+                    frm.txtClientName.Text = dr.Cells[1].Value.ToString();
+                    frm.labelm.Text = labeln.Text;
+                    frm.dateTimePicker1.Focus();
+                    //frm.txtAttention.Focus();
+                    // this.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
+            }
+            else if (ftype == 2)
             {
                 try
                 {
@@ -85,6 +106,27 @@ namespace KyotoSalesManagementSystem.UI
 
                     this.Dispose();
                     QuotationForCustom frm = new QuotationForCustom();
+                    frm.Show();
+                    frm.txtClientId.Text = dr.Cells[0].Value.ToString();
+                    frm.txtClientName.Text = dr.Cells[1].Value.ToString();
+                    frm.labelm.Text = labeln.Text;
+                    frm.dateTimePicker1.Focus();
+                    //frm.txtAttention.Focus();
+                    // this.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (ftype == 4)
+            {
+                try
+                {
+                    DataGridViewRow dr = dataGridView1.SelectedRows[0];
+
+                    this.Dispose();
+                    QuotationMMix frm = new QuotationMMix();
                     frm.Show();
                     frm.txtClientId.Text = dr.Cells[0].Value.ToString();
                     frm.txtClientName.Text = dr.Cells[1].Value.ToString();

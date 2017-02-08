@@ -633,7 +633,8 @@ namespace KyotoSalesManagementSystem.UI
         private void btnClientGrid_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            SalesClientRecord frm = new SalesClientRecord();
+            SalesClientGrid22 frm = new SalesClientGrid22();
+            SalesClientGrid22.ftype = 3;
             frm.Show();
             //this.Visible = false;
             //dynamic frm = new SalesClientRecord();

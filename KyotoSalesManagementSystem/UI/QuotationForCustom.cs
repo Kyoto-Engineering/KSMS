@@ -285,8 +285,8 @@ namespace KyotoSalesManagementSystem.UI
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            takeRemovePric = Convert.ToDecimal(listView1.SelectedItems[0].SubItems[2].Text);
-            takeRemoveQuantity = Convert.ToDecimal(listView1.SelectedItems[0].SubItems[3].Text);
+            takeRemovePric = Convert.ToDecimal(listView1.SelectedItems[0].SubItems[3].Text);
+            takeRemoveQuantity = Convert.ToDecimal(listView1.SelectedItems[0].SubItems[4].Text);
             takeRemove = (takeRemoveQuantity * takeRemovePric);
             subAmount = subAmount - takeRemove;
             takeRemove2 = Convert.ToDecimal(txtTotalPrice.Text);
@@ -455,7 +455,7 @@ namespace KyotoSalesManagementSystem.UI
                     cmd.Parameters.AddWithValue("d5", listView1.Items[i].SubItems[4].Text);
                     cmd.Parameters.AddWithValue("d6", listView1.Items[i].SubItems[5].Text);
                     cmd.Parameters.AddWithValue("d7", listView1.Items[i].SubItems[6].Text);
-                    cmd.Parameters.AddWithValue("d8", listView1.Items[i].SubItems[6].Text);
+                    cmd.Parameters.AddWithValue("d8", listView1.Items[i].SubItems[7].Text);
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();

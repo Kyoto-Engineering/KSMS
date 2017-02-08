@@ -107,5 +107,12 @@ namespace KyotoSalesManagementSystem.UI
             f2.ShowDialog();
             this.Visible = true;
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            QuotationMMix frm = new QuotationMMix();
+            frm.Show();
+        }
     }
 }
