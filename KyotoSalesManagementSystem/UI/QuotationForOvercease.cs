@@ -742,22 +742,20 @@ namespace KyotoSalesManagementSystem.UI
 
 
 
-            else if (checkROP.Checked)
-            {
-                if (string.IsNullOrWhiteSpace(txtROP.Text))
+            else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROP.Text))
                 {
                     MessageBox.Show("Insert Rest Of Payment Or Untick Check Box", "Input Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtROP.Focus();
 
                 }
-                else if (string.IsNullOrWhiteSpace(txtROPDays.Text))
+                else if (checkROP.Checked &&  string.IsNullOrWhiteSpace(txtROPDays.Text))
                 {
                     MessageBox.Show("Insert Rest Of Payment Number of Days Or Untick Check Box", "Input Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtROPDays.Focus();
                 }
-            }
+            
             //end my code
             else
             {
