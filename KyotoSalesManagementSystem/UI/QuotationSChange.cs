@@ -27,14 +27,42 @@ namespace KyotoSalesManagementSystem.UI
             if (comboBox1.Text == "Accepted")
             {
                 comboBox2.Text = "Valid";
+                textBox2.Visible = false;
+                textBox2.Enabled = false;
+                richTextBox1.Enabled = false;
+                richTextBox1.Visible = false;
+                label5.Visible = false;
+                label4.Visible = false;
             }
             else if (comboBox1.Text == "Not Accepted")
             {
                 comboBox2.Text = "Invalid";
+                textBox2.Visible = true;
+                textBox2.Enabled = true;
+                richTextBox1.Enabled = true;
+                richTextBox1.Visible = true;
+                label5.Visible = true;
+                label4.Visible = true;
             }
             else if (comboBox1.Text == "Review Wanted")
             {
                 comboBox2.Text = "Invalid";
+                textBox2.Visible = true;
+                textBox2.Enabled = true;
+                richTextBox1.Enabled = true;
+                richTextBox1.Visible = true;
+                label5.Visible = true;
+                label4.Visible = true;
+            }
+            else if (comboBox1.Text == "Time Increased")
+            {
+                comboBox2.Text = "Valid";
+                textBox2.Visible = true;
+                textBox2.Enabled = true;
+                richTextBox1.Enabled = true;
+                richTextBox1.Visible = true;
+                label5.Visible = true;
+                label4.Visible = true;
             }
         }
          
@@ -67,6 +95,20 @@ namespace KyotoSalesManagementSystem.UI
             this.Dispose();
             PendingQuoto frm = new PendingQuoto();
             frm.Show(); 
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char) Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch)&&e.KeyChar!='.'||!Decimal.TryParse(textBox2.Text+ch,out x))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
