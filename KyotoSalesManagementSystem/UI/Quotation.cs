@@ -515,22 +515,20 @@ namespace KyotoSalesManagementSystem.UI
 
 
 
-            else if (checkROP.Checked)
-            {
-                if (string.IsNullOrWhiteSpace(txtROP.Text))
+            else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROP.Text))
                 {
                     MessageBox.Show("Insert Rest Of Payment Or Untick Check Box", "Input Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtROP.Focus();
 
                 }
-                else if (string.IsNullOrWhiteSpace(txtROPDays.Text))
+                else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROPDays.Text))
                 {
                     MessageBox.Show("Insert Rest Of Payment Number of Days Or Untick Check Box", "Input Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtROPDays.Focus();
                 }
-            }
+            
             else
             {
 
@@ -1483,7 +1481,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "NewProductList";
+            with1.DatabaseName = "ProductNRelatedDB";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             CrystalReport2 cr = new CrystalReport2();

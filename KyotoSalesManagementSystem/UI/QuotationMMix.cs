@@ -35,7 +35,7 @@ namespace KyotoSalesManagementSystem.UI
         public decimal totalPercent, myMOBAd1, myPAS1, myPOD1, myROP1;
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
-             
+        private delegate void ChangeFocusDelegate(Control ctl);
              
 
 
@@ -214,6 +214,32 @@ namespace KyotoSalesManagementSystem.UI
                     cmd.Parameters.AddWithValue("d5", listView1.Items[i].SubItems[4].Text);
                     cmd.Parameters.AddWithValue("d6", listView1.Items[i].SubItems[5].Text);
                     cmd.Parameters.AddWithValue("d7", listView1.Items[i].SubItems[6].Text);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void SaveMXQuotation()
+        {
+            try
+            {
+                // GetQuotationId();
+
+                for (int i = 0; i <= listView1.Items.Count - 1; i++)
+                {
+                    con = new SqlConnection(cs.DBConn);
+                    string cb = "insert into MXItems(QuotationId,ItemDescription,UnitPrice,Quantity) VALUES(@d1,@d2,@d3,@d4)";
+                    cmd = new SqlCommand(cb);
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("d1", quotationId);
+                    cmd.Parameters.AddWithValue("d2", listView3.Items[i].SubItems[1].Text);
+                    cmd.Parameters.AddWithValue("d3", listView3.Items[i].SubItems[2].Text);
+                    cmd.Parameters.AddWithValue("d4", listView3.Items[i].SubItems[3].Text);
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -518,23 +544,21 @@ namespace KyotoSalesManagementSystem.UI
 
 
 
-            else if (checkROP.Checked)
-            {
-                if (string.IsNullOrWhiteSpace(txtROP.Text))
+            else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROP.Text))
                 {
                     MessageBox.Show("Insert Rest Of Payment Or Untick Check Box", "Input Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtROP.Focus();
 
                 }
-                else if (string.IsNullOrWhiteSpace(txtROPDays.Text))
+                else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROPDays.Text))
                 {
                     MessageBox.Show("Insert Rest Of Payment Number of Days Or Untick Check Box", "Input Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtROPDays.Focus();
                 }
                 
-            }
+            
             else if (listView1.Items.Count < 1)
             {
                 MessageBox.Show("Insert Product Before Submit", "Input Error",
@@ -1518,7 +1542,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "NewProductList";
+            with1.DatabaseName = "ProductNRelatedDB";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             CrystalReport2 cr = new CrystalReport2();
@@ -2015,7 +2039,7 @@ namespace KyotoSalesManagementSystem.UI
                     lst1.SubItems.Add(textBox1.Text);
                     lst1.SubItems.Add(textBox4.Text);
                     lst1.SubItems.Add(textBox3.Text);
-                    listView1.Items.Add(lst1);
+                    listView3.Items.Add(lst1);
 
                     CalculateTotalAmount2();
                     GetNetPayable();
@@ -2119,6 +2143,28 @@ namespace KyotoSalesManagementSystem.UI
                 e.Handled = true;
             }
 
+        }
+
+        private void textBox3_Enter(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                MessageBox.Show("Please Write Item description Before Quantity","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), textBox1);
+            }
+        }
+        private void changeFocus(Control ctl)
+        {
+            ctl.Focus();
+        }
+
+        private void textBox4_Enter(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox3.Text))
+            {
+                MessageBox.Show("Please Write Quantity before Price", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), textBox3);
+            }
         }
     }
 }

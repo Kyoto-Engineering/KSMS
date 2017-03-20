@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using KyotoSalesManagementSystem.DBGateway;
@@ -19,6 +20,7 @@ namespace KyotoSalesManagementSystem.LoginUI
         private SqlDataReader rdr;
         ConnectionString cs=new ConnectionString();
         public static int uId;
+        public string readyPassword,dbUserName,dbPassword;
         public frmLogin()
         {
             InitializeComponent();
@@ -40,40 +42,26 @@ namespace KyotoSalesManagementSystem.LoginUI
             }
             try
             {
-                SqlConnection myConnection = default(SqlConnection);
-                myConnection = new SqlConnection(cs.DBConn);
-
-                SqlCommand myCommand = default(SqlCommand);
-
-                myCommand = new SqlCommand("SELECT Username,password FROM Registration WHERE Username = @username AND password = @UserPassword", myConnection);
-                SqlParameter uName = new SqlParameter("@username", SqlDbType.VarChar);
-                SqlParameter uPassword = new SqlParameter("@UserPassword", SqlDbType.VarChar);
-                uName.Value = txtUserName.Text;
-                uPassword.Value = txtPassword.Text;
-                myCommand.Parameters.Add(uName);
-                myCommand.Parameters.Add(uPassword);
-
-                myCommand.Connection.Open();
-
-                SqlDataReader myReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                if (myReader.Read() == true)
+                string clearText = txtPassword.Text.Trim();
+                string password = clearText;
+                byte[] bytes = Encoding.Unicode.GetBytes(password);
+                byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
+                string readyPassword1 = Convert.ToBase64String(inArray);
+                readyPassword = readyPassword1;
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string qry = "SELECT UserName,Password FROM Registration WHERE UserName = '" + txtUserName.Text + "' AND Password = '" + readyPassword + "'";
+                cmd = new SqlCommand(qry, con);
+                rdr= cmd.ExecuteReader();
+                if (rdr.Read() == true)
                 {
-                    int i;
-                    ProgressBar1.Visible = true;
-                    ProgressBar1.Maximum = 5000;
-                    //ProgressBar1.Maximum = 5;
-                    ProgressBar1.Minimum = 0;
-                    ProgressBar1.Value = 4;
-                    ProgressBar1.Step = 1;
+                    dbUserName = (rdr.GetString(0));
+                    dbPassword = (rdr.GetString(1));
 
-                    for (i = 0; i <= 5000; i++)
-                    {
-                        ProgressBar1.PerformStep();
-                    }
+
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct = "select usertype,UserId from Registration where Username='" + txtUserName.Text + "' and Password='" + txtPassword.Text + "'";
+                    string ct = "select UserType,UserId from Registration where UserName='" + txtUserName.Text + "' and Password='" + readyPassword + "'";
                     cmd = new SqlCommand(ct);
                     cmd.Connection = con;
                     rdr = cmd.ExecuteReader();
@@ -87,9 +75,8 @@ namespace KyotoSalesManagementSystem.LoginUI
                         rdr.Close();
                     }
 
-                    if (txtUserType.Text.Trim() == "Admin")
+                    if (dbUserName == txtUserName.Text && dbPassword == readyPassword && txtUserType.Text.Trim() == "Admin")
                     {
-                        
                         MainUI frm = new MainUI();
                         this.Hide();
                         frm.Show();
@@ -97,10 +84,11 @@ namespace KyotoSalesManagementSystem.LoginUI
                         txtPassword.Clear();
                         txtUserName.Focus();
                         frm.txtlblUser.Text = txtUserName.Text;
+
                     }
-                    if (txtUserType.Text.Trim() == "User")
+                    if (dbUserName == txtUserName.Text && dbPassword == readyPassword && txtUserType.Text.Trim() == "User")
                     {
-                        this.Hide();
+                         this.Hide();
                         // OnlyUIForHR frm = new OnlyUIForHR();
                         this.Visible = false;
                         //frm.ShowDialog();
@@ -112,6 +100,11 @@ namespace KyotoSalesManagementSystem.LoginUI
                     }
 
                 }
+               
+
+                  
+
+                
 
 
                 else
@@ -123,12 +116,7 @@ namespace KyotoSalesManagementSystem.LoginUI
                     txtUserName.Focus();
 
                 }
-                if (myConnection.State == ConnectionState.Open)
-                {
-                    myConnection.Dispose();
-                }
-
-
+              
 
             }
             catch (Exception ex)
