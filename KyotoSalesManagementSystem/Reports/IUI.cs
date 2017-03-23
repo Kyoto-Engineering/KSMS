@@ -210,7 +210,7 @@ namespace KyotoSalesManagementSystem.Reports
             with1.DatabaseName = "ProductNRelatedDB";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
-            Invoice cr = new Invoice();
+            InvoiceC cr = new InvoiceC();
             tables = cr.Database.Tables;
             foreach (Table table in tables)
             {
