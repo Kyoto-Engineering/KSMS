@@ -61,7 +61,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>sales_management_system_EVN_icon.ico</ApplicationIcon>
@@ -191,6 +191,12 @@
     </Compile>
     <Compile Include="UI\DeliveryOrder.Designer.cs">
       <DependentUpon>DeliveryOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Invoice.Designer.cs">
+      <DependentUpon>Invoice.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\MainUI.cs">
       <SubType>Form</SubType>
@@ -359,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DeliveryOrder.resx">
       <DependentUpon>DeliveryOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Invoice.resx">
+      <DependentUpon>Invoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>

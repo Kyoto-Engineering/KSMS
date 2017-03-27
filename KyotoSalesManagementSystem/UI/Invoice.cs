@@ -110,9 +110,38 @@ namespace KyotoSalesManagementSystem.UI
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
+                    
                     txtTotalPrice.Text = rdr["TotalPrice"].ToString();
-                    txtVATPercent.Text = rdr["QVat"].ToString();
-                    txtAITPercent.Text = rdr["QAIT"].ToString();
+                    if (!rdr.IsDBNull(1))
+                    {
+                        txtVATPercent.TextChanged -= txtVATPercent_TextChanged;
+                        txtVATPercent.Text = rdr["QVat"].ToString();
+                        txtVATPercent.TextChanged += txtVATPercent_TextChanged;
+                    }
+                    else
+                    {
+                        txtVATPercent.Text = null;
+                    }
+                    if (!rdr.IsDBNull(2))
+                    {
+                        txtAITPercent.TextChanged -= txtAITPercent_TextChanged;
+                        txtAITPercent.Text = rdr["QAIT"].ToString();
+                        txtAITPercent.TextChanged += txtAITPercent_TextChanged;
+                    }
+                    else
+                    {
+                        txtAITPercent.Text = null;
+                    }
+                    //if (!rdr.IsDBNull(3))
+                    //{
+                    //    txtDiscountPercent.TextChanged -= txtAdditionalDiscount_TextChanged;
+                    //    txtDiscountPercent.Text = rdr["Discount"].ToString();
+                    //    txtDiscountPercent.TextChanged += txtAdditionalDiscount_TextChanged;
+                    //}
+                    //else
+                    //{
+                    //    txtDiscountPercent.Text = null;
+                    //}
                     txtDiscountPercent.Text = rdr["Discount"].ToString();
                     txtNetPayable.Text=rdr["NetPayable"].ToString();
                     
@@ -143,8 +172,17 @@ namespace KyotoSalesManagementSystem.UI
                     {
                         txtDiscountAmount.Text = ((Convert.ToDecimal(txtTotalPrice.Text) * Convert.ToDecimal(txtDiscountPercent.Text)) / 100).ToString();
                     }
-                    
-                  
+
+                    if (txtAdditionalDiscount.Text == "")
+                    {
+                        txtAdditionalDiscount.Text = 0.ToString();
+
+                    }
+                    if (txtAdvancePayment.Text == "")
+                    {
+                        txtAdvancePayment.Text = 0.ToString();
+
+                    }
                 }
                 if ((rdr != null))
                 {
@@ -193,7 +231,7 @@ namespace KyotoSalesManagementSystem.UI
             decimal.TryParse(txtTotalPrice.Text, out val2);
             decimal V = (val1 * val2) / 100;
             txtVATAmount.Text = V.ToString();
-            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - Convert.ToDecimal(txtDiscountAmount.Text)).ToString();
+            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - (Convert.ToDecimal(txtDiscountAmount.Text)+Convert.ToDecimal(txtAdditionalDiscount.Text)+Convert.ToDecimal(txtAdvancePayment.Text))).ToString();
         }
 
         private void txtAITPercent_TextChanged(object sender, EventArgs e)
@@ -204,9 +242,25 @@ namespace KyotoSalesManagementSystem.UI
             decimal.TryParse(txtTotalPrice.Text, out val4);
             decimal A = (val3 * val4) / 100;
             txtAITAmount.Text = A.ToString();
-            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - Convert.ToDecimal(txtDiscountAmount.Text)).ToString();
+            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - (Convert.ToDecimal(txtDiscountAmount.Text) + Convert.ToDecimal(txtAdditionalDiscount.Text) + Convert.ToDecimal(txtAdvancePayment.Text))).ToString();
         }
 
-
+        //private void txtAdditionalDiscount_TextChanged(object sender, EventArgs e)
+        //{
+        //    decimal val5 = 0;
+        //    decimal val6 = 0;
+        //    decimal.TryParse(txtAdditionalDiscount.Text, out val5);
+        //    decimal.TryParse(txtTotalPrice.Text, out val6);
+        //    decimal AD=(val5 * 100) / val6;
+        //    txtAdditionalDiscountPercent.Text = AD.ToString();
+        //    txtNetPayable.Text = (Convert.ToDecimal(txtTotalPrice.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
+        //}
+        public static string SafeGetString(SqlDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex))
+                return reader.GetString(colIndex);
+            return string.Empty;
+        }
+       
     }
 }
