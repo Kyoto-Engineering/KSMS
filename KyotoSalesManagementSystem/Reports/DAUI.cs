@@ -75,7 +75,7 @@ namespace KyotoSalesManagementSystem.Reports
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
 
-                string ct = "SELECT DOiD FROM DeleveryOrder INNER JOIN Quotation ON DeleveryOrder.QuotationId = Quotation.QuotationId INNER JOIN RefNumForQuotation ON Quotation.QuotationId = RefNumForQuotation.QuotationId  where RefNumForQuotation.ReferenceNo='" + comboBox1.Text + "'";
+                string ct = "SELECT DeleveryOrder.DOiD, Quotation.QType FROM DeleveryOrder INNER JOIN Quotation ON DeleveryOrder.QuotationId = Quotation.QuotationId INNER JOIN RefNumForQuotation ON Quotation.QuotationId = RefNumForQuotation.QuotationId  where RefNumForQuotation.ReferenceNo='" + comboBox1.Text + "'";
                 cmd = new SqlCommand(ct);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();
@@ -84,6 +84,7 @@ namespace KyotoSalesManagementSystem.Reports
                 {
                     // txtBalance.Text = (rdr.GetDouble(0).ToString());
                     quotationId = (rdr.GetInt32(0));
+                    qtype = (rdr.GetString(1));
                  
                 }
                 con.Close();
@@ -137,16 +138,32 @@ namespace KyotoSalesManagementSystem.Reports
             with1.DatabaseName = "ProductNRelatedDB";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
-            DO cr = new DO();
-            tables = cr.Database.Tables;
-            foreach (Table table in tables)
+             if (qtype=="Custom")
             {
-                reportLogonInfo = table.LogOnInfo;
-                reportLogonInfo.ConnectionInfo = reportConInfo;
-                table.ApplyLogOnInfo(reportLogonInfo);
+               DOC cr = new DOC();
+               tables = cr.Database.Tables;
+               foreach (Table table in tables)
+               {
+                   reportLogonInfo = table.LogOnInfo;
+                   reportLogonInfo.ConnectionInfo = reportConInfo;
+                   table.ApplyLogOnInfo(reportLogonInfo);
+               }
+               f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+               f2.crystalReportViewer1.ReportSource = cr;
             }
-            f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-            f2.crystalReportViewer1.ReportSource = cr;
+            else
+            {
+                DO cr =new DO();
+                tables = cr.Database.Tables;
+                foreach (Table table in tables)
+                {
+                    reportLogonInfo = table.LogOnInfo;
+                    reportLogonInfo.ConnectionInfo = reportConInfo;
+                    table.ApplyLogOnInfo(reportLogonInfo);
+                }
+                f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+                f2.crystalReportViewer1.ReportSource = cr;
+            }
             this.Visible = false;
 
             f2.ShowDialog();

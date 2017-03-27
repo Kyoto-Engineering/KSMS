@@ -25,7 +25,7 @@
     <ProductName>Kyoto Sales Management System</ProductName>
     <PublisherName>IT, Department, Kyoto Engineering &amp; Automation Ltd.</PublisherName>
     <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -156,16 +156,34 @@
       <DependentUpon>DO.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\DOC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\DOO.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DOO.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\DOOC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOOC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Invoice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Invoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\InvoiceC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceC.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\IUI.cs">
@@ -346,13 +364,25 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DO.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOC.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOO.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOO.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOC.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Invoice.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceC.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\IUI.resx">
       <DependentUpon>IUI.cs</DependentUpon>
