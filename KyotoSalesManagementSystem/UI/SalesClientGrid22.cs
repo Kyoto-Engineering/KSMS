@@ -32,7 +32,7 @@ namespace KyotoSalesManagementSystem.UI
                 con.Open();
                 cmd =
                     new SqlCommand(
-                        "SELECT SalesClient.SClientId, SalesClient.ClientName, EmailBank.Email, ContactPersonDetails.ContactPersonName, ContactPersonDetails.Designation, ContactPersonDetails.CellNumber, SalesClient.EndUser FROM SalesClient INNER JOIN ContactPersonDetails ON SalesClient.SClientId = ContactPersonDetails.SClientId INNER JOIN EmailBank ON SalesClient.EmailBankId = EmailBank.EmailBankId   order by SalesClient.SClientId desc",
+                        "SELECT SalesClient.SClientId, SalesClient.ClientName, EmailBank.Email, ContactPersonDetails.ContactPersonName, ContactPersonDetails.Designation, ContactPersonDetails.CellNumber, SalesClient.EndUser FROM SalesClient Left JOIN ContactPersonDetails ON SalesClient.SClientId = ContactPersonDetails.SClientId Left JOIN EmailBank ON SalesClient.EmailBankId = EmailBank.EmailBankId   order by SalesClient.SClientId desc",
                         con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
