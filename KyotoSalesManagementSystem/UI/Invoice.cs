@@ -19,7 +19,10 @@ namespace KyotoSalesManagementSystem.UI
         private ConnectionString cs = new ConnectionString();
         public int refId, quotationId, sclientId, sQN, invoiceId, user_id;
         public string referenceNo;
-       
+        public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
+        public decimal vt = 0, ait = 0, dis = 0, t = 0;
+        public Nullable<decimal> vatNull, aitNull, disNull;
+
         public Invoice()
         {
             InitializeComponent();
@@ -106,11 +109,11 @@ namespace KyotoSalesManagementSystem.UI
                 con.Open();
                 cmd = con.CreateCommand();
 
-                cmd.CommandText ="select TotalPrice,QVat,QAIT,Discount,NetPayable from Quotation where QuotationId='" + quotationId + "'";
+                cmd.CommandText = "select TotalPrice,QVat,QAIT,Discount,NetPayable from Quotation where QuotationId='" + quotationId + "'";
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
-                    
+
                     txtTotalPrice.Text = rdr["TotalPrice"].ToString();
                     if (!rdr.IsDBNull(1))
                     {
@@ -143,8 +146,8 @@ namespace KyotoSalesManagementSystem.UI
                     //    txtDiscountPercent.Text = null;
                     //}
                     txtDiscountPercent.Text = rdr["Discount"].ToString();
-                    txtNetPayable.Text=rdr["NetPayable"].ToString();
-                    
+                    txtNetPayable.Text = rdr["NetPayable"].ToString();
+
                     if (txtVATPercent.Text == "")
                     {
                         txtVATAmount.Text = 0.ToString();
@@ -173,16 +176,17 @@ namespace KyotoSalesManagementSystem.UI
                         txtDiscountAmount.Text = ((Convert.ToDecimal(txtTotalPrice.Text) * Convert.ToDecimal(txtDiscountPercent.Text)) / 100).ToString();
                     }
 
-                    if (txtAdditionalDiscount.Text == "")
-                    {
-                        txtAdditionalDiscount.Text = 0.ToString();
+                    //if (txtAdditionalDiscount.Text == "")
+                    //{
+                    //    txtAdditionalDiscount.Text = 0.ToString();
 
-                    }
-                    if (txtAdvancePayment.Text == "")
-                    {
-                        txtAdvancePayment.Text = 0.ToString();
+                    //}
 
-                    }
+                    //if (txtAdvancePayment.Text == "")
+                    //{
+                    //    txtAdvancePayment.Text = 0.ToString();
+
+                    //}
                 }
                 if ((rdr != null))
                 {
@@ -231,7 +235,7 @@ namespace KyotoSalesManagementSystem.UI
             decimal.TryParse(txtTotalPrice.Text, out val2);
             decimal V = (val1 * val2) / 100;
             txtVATAmount.Text = V.ToString();
-            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - (Convert.ToDecimal(txtDiscountAmount.Text)+Convert.ToDecimal(txtAdditionalDiscount.Text)+Convert.ToDecimal(txtAdvancePayment.Text))).ToString();
+            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - (Convert.ToDecimal(txtDiscountAmount.Text) + Convert.ToDecimal(txtAdditionalDiscount.Text) + Convert.ToDecimal(txtAdvancePayment.Text))).ToString();
         }
 
         private void txtAITPercent_TextChanged(object sender, EventArgs e)
@@ -245,22 +249,188 @@ namespace KyotoSalesManagementSystem.UI
             txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - (Convert.ToDecimal(txtDiscountAmount.Text) + Convert.ToDecimal(txtAdditionalDiscount.Text) + Convert.ToDecimal(txtAdvancePayment.Text))).ToString();
         }
 
-        //private void txtAdditionalDiscount_TextChanged(object sender, EventArgs e)
-        //{
-        //    decimal val5 = 0;
-        //    decimal val6 = 0;
-        //    decimal.TryParse(txtAdditionalDiscount.Text, out val5);
-        //    decimal.TryParse(txtTotalPrice.Text, out val6);
-        //    decimal AD=(val5 * 100) / val6;
-        //    txtAdditionalDiscountPercent.Text = AD.ToString();
-        //    txtNetPayable.Text = (Convert.ToDecimal(txtTotalPrice.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
-        //}
         public static string SafeGetString(SqlDataReader reader, int colIndex)
         {
             if (!reader.IsDBNull(colIndex))
                 return reader.GetString(colIndex);
             return string.Empty;
         }
-       
+
+        private void txtVATPercent_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch) && ch != '.' || !Decimal.TryParse(txtVATPercent.Text + ch, out x))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtAITPercent_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch) && ch != '.' || !Decimal.TryParse(txtAITPercent.Text + ch, out x))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtAdditionalDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch) && ch != '.' || !Decimal.TryParse(txtAdditionalDiscount.Text + ch, out x))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtAdvancePayment_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch) && ch != '.' || !Decimal.TryParse(txtAdvancePayment.Text + ch, out x))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public void GetNETPayable()
+        {
+            t = decimal.Parse(txtTotalPrice.Text);
+
+            if (!string.IsNullOrWhiteSpace(txtVATPercent.Text))
+            {
+                vatNull = vt = decimal.Parse(txtVATPercent.Text);
+
+            }
+            else
+            {
+                vt = 0;
+                txtVATAmount.Clear();
+                vatNull = null;
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtAITPercent.Text))
+            {
+                aitNull = ait = decimal.Parse(txtAITPercent.Text);
+            }
+            else
+            {
+                ait = 0;
+                aitNull = null;
+                txtAITAmount.Clear();
+            }
+            if (!string.IsNullOrWhiteSpace(txtDiscountPercent.Text))
+            {
+                disNull = dis = decimal.Parse(txtDiscountPercent.Text);
+            }
+            else
+            {
+                dis = 0;
+                disNull = null;
+                txtDiscountAmount.Clear();
+            }
+            myVAT = (t * vt) / 100;
+            myAIT = (t * ait) / 100;
+            myDis = (t * dis) / 100;
+
+            myNetPayable = t + myVAT + myAIT - myDis;
+            txtVATAmount.Text = myVAT.ToString();
+            txtAITAmount.Text = myAIT.ToString();
+            txtDiscountAmount.Text = myDis.ToString();
+            txtNetPayable.Text = myNetPayable.ToString();
+        }
+
+        public void GetNetPayableWithAdditionalDiscount()
+        {
+            GetNETPayable();
+            txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
+               
+        }
+
+        private void txtAdditionalDiscount_TextChanged(object sender, EventArgs e)
+        {
+           
+            decimal val5 = 0;
+            decimal val6 = 0;
+            decimal.TryParse(txtAdditionalDiscount.Text, out val5);
+            decimal.TryParse(txtNetPayable.Text, out val6);
+            //decimal AD = val5;
+            //txtAdditionalDiscount.Text = AD.ToString();
+            ////txtNetPayable.Text = (Convert.ToDecimal(txtTotalPrice.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
+            //txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
+
+            if (val5 <= 0)
+            {
+                GetNETPayable();
+                //txtNetPayable.Text = val6.ToString();
+                
+            }
+            else
+            {
+               // GetNETPayable();
+               //txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
+                GetNetPayableWithAdditionalDiscount();
+            }
+        }
+
+        private void txtAdvancePayment_TextChanged(object sender, EventArgs e)
+        {
+            decimal val7 = 0;
+            decimal val8 = 0;
+            decimal.TryParse(txtAdvancePayment.Text, out val7);
+            decimal.TryParse(txtNetPayable.Text, out val8);
+
+            if (val7 <= 0)
+            {
+                if (string.IsNullOrWhiteSpace(txtAdditionalDiscount.Text))
+                {
+                    GetNETPayable();
+                }
+                else
+                {
+                    GetNetPayableWithAdditionalDiscount();
+
+                }
+                
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(txtAdditionalDiscount.Text))
+                {
+                    GetNETPayable();
+                    txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdvancePayment.Text)).ToString();
+                }
+                else
+                {
+                    GetNetPayableWithAdditionalDiscount();
+                    txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdvancePayment.Text)).ToString();
+                }
+               
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

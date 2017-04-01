@@ -175,6 +175,7 @@
             this.btnSave.TabIndex = 156;
             this.btnSave.Text = "Generate Invoice";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // cmbQuotation
             // 
@@ -299,6 +300,7 @@
             this.txtVATPercent.Size = new System.Drawing.Size(73, 26);
             this.txtVATPercent.TabIndex = 175;
             this.txtVATPercent.TextChanged += new System.EventHandler(this.txtVATPercent_TextChanged);
+            this.txtVATPercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVATPercent_KeyPress);
             // 
             // txtAITPercent
             // 
@@ -308,6 +310,7 @@
             this.txtAITPercent.Size = new System.Drawing.Size(74, 26);
             this.txtAITPercent.TabIndex = 177;
             this.txtAITPercent.TextChanged += new System.EventHandler(this.txtAITPercent_TextChanged);
+            this.txtAITPercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAITPercent_KeyPress);
             // 
             // label17
             // 
@@ -424,6 +427,8 @@
             this.txtAdditionalDiscount.Name = "txtAdditionalDiscount";
             this.txtAdditionalDiscount.Size = new System.Drawing.Size(94, 26);
             this.txtAdditionalDiscount.TabIndex = 194;
+            this.txtAdditionalDiscount.TextChanged += new System.EventHandler(this.txtAdditionalDiscount_TextChanged);
+            this.txtAdditionalDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAdditionalDiscount_KeyPress);
             // 
             // AdvancePaymentlabel
             // 
@@ -443,6 +448,8 @@
             this.txtAdvancePayment.Name = "txtAdvancePayment";
             this.txtAdvancePayment.Size = new System.Drawing.Size(94, 26);
             this.txtAdvancePayment.TabIndex = 196;
+            this.txtAdvancePayment.TextChanged += new System.EventHandler(this.txtAdvancePayment_TextChanged);
+            this.txtAdvancePayment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAdvancePayment_KeyPress);
             // 
             // dtpDueDate
             // 

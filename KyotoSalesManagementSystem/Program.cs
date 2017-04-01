@@ -19,7 +19,8 @@ namespace KyotoSalesManagementSystem
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new MainUI());
             //Application.Run(new frmLogin());
-Application.Run(new Invoice());
+            Application.Run(new Invoice());
+            //Application.Run(new DeliveryOrder());
         }
     }
 }
