@@ -110,6 +110,7 @@
             this.dtpPromisedDate.Name = "dtpPromisedDate";
             this.dtpPromisedDate.Size = new System.Drawing.Size(252, 25);
             this.dtpPromisedDate.TabIndex = 155;
+            this.dtpPromisedDate.ValueChanged += new System.EventHandler(this.dtpPromisedDate_ValueChanged);
             // 
             // lblPromisedDate
             // 
@@ -188,6 +189,7 @@
             this.cmbQuotation.Size = new System.Drawing.Size(264, 25);
             this.cmbQuotation.TabIndex = 150;
             this.cmbQuotation.SelectedIndexChanged += new System.EventHandler(this.cmbQuotation_SelectedIndexChanged);
+            this.cmbQuotation.Leave += new System.EventHandler(this.cmbQuotation_Leave);
             // 
             // lblQuotation
             // 
@@ -460,6 +462,7 @@
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(252, 25);
             this.dtpDueDate.TabIndex = 198;
+            this.dtpDueDate.ValueChanged += new System.EventHandler(this.dtpDueDate_ValueChanged);
             // 
             // lblDueDate
             // 
@@ -481,6 +484,7 @@
             this.dtpInvoiceDate.Name = "dtpInvoiceDate";
             this.dtpInvoiceDate.Size = new System.Drawing.Size(252, 25);
             this.dtpInvoiceDate.TabIndex = 197;
+            this.dtpInvoiceDate.ValueChanged += new System.EventHandler(this.dtpInvoiceDate_ValueChanged);
             // 
             // lblInvoiceDate
             // 

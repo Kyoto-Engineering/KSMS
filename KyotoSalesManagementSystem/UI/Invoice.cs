@@ -22,6 +22,7 @@ namespace KyotoSalesManagementSystem.UI
         public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
+        private delegate void ChangeFocusDelegate(Control ctl);
 
         public Invoice()
         {
@@ -31,6 +32,11 @@ namespace KyotoSalesManagementSystem.UI
         private void Invoice_Load(object sender, EventArgs e)
         {
             QuotationIdLoad();
+        }
+
+        private void changeFocus(Control ctl)
+        {
+            ctl.Focus();
         }
 
         public void SelectSclientId()
@@ -70,7 +76,7 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.CommandText =
                     "select ClientName,CFlatNo,CHouseNo,CRoadNo,CBlock,CArea,CPS,CPSCode,CDistrict,CContactNo,ContactPersonName,CellNumber from SalesClient2 where SClientId= '" +
                     sclientId + "'";
-                // "select TotalPrice,QVat,QAIT,Discount,NetPayable from Quotation where QuotationId='" + quotationId + "'";
+
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
@@ -81,7 +87,7 @@ namespace KyotoSalesManagementSystem.UI
                     txtLandPhone.Text = rdr["CContactNo"].ToString();
                     txtRP.Text = rdr["ContactPersonName"].ToString();
                     txtCellPhone.Text = rdr["CellNumber"].ToString();
-                    //txtTotalPrice.Text = rdr["TotalPrice"]
+                    
                 }
                 if ((rdr != null))
                 {
@@ -114,6 +120,7 @@ namespace KyotoSalesManagementSystem.UI
                 if (rdr.Read())
                 {
 
+
                     txtTotalPrice.Text = rdr["TotalPrice"].ToString();
                     if (!rdr.IsDBNull(1))
                     {
@@ -135,16 +142,6 @@ namespace KyotoSalesManagementSystem.UI
                     {
                         txtAITPercent.Text = null;
                     }
-                    //if (!rdr.IsDBNull(3))
-                    //{
-                    //    txtDiscountPercent.TextChanged -= txtAdditionalDiscount_TextChanged;
-                    //    txtDiscountPercent.Text = rdr["Discount"].ToString();
-                    //    txtDiscountPercent.TextChanged += txtAdditionalDiscount_TextChanged;
-                    //}
-                    //else
-                    //{
-                    //    txtDiscountPercent.Text = null;
-                    //}
                     txtDiscountPercent.Text = rdr["Discount"].ToString();
                     txtNetPayable.Text = rdr["NetPayable"].ToString();
 
@@ -176,17 +173,17 @@ namespace KyotoSalesManagementSystem.UI
                         txtDiscountAmount.Text = ((Convert.ToDecimal(txtTotalPrice.Text) * Convert.ToDecimal(txtDiscountPercent.Text)) / 100).ToString();
                     }
 
-                    //if (txtAdditionalDiscount.Text == "")
-                    //{
-                    //    txtAdditionalDiscount.Text = 0.ToString();
+                    if (txtAdditionalDiscount.Text == "")
+                    {
+                        txtAdditionalDiscount.Text = 0.ToString();
 
-                    //}
+                    }
 
-                    //if (txtAdvancePayment.Text == "")
-                    //{
-                    //    txtAdvancePayment.Text = 0.ToString();
+                    if (txtAdvancePayment.Text == "")
+                    {
+                        txtAdvancePayment.Text = 0.ToString();
 
-                    //}
+                    }
                 }
                 if ((rdr != null))
                 {
@@ -229,25 +226,23 @@ namespace KyotoSalesManagementSystem.UI
 
         private void txtVATPercent_TextChanged(object sender, EventArgs e)
         {
+            
             decimal val1 = 0;
             decimal val2 = 0;
             decimal.TryParse(txtVATPercent.Text, out val1);
             decimal.TryParse(txtTotalPrice.Text, out val2);
-            decimal V = (val1 * val2) / 100;
-            txtVATAmount.Text = V.ToString();
-            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - (Convert.ToDecimal(txtDiscountAmount.Text) + Convert.ToDecimal(txtAdditionalDiscount.Text) + Convert.ToDecimal(txtAdvancePayment.Text))).ToString();
-        }
+            GetNETPayable();
+         }
 
         private void txtAITPercent_TextChanged(object sender, EventArgs e)
         {
+            
             decimal val3 = 0;
             decimal val4 = 0;
             decimal.TryParse(txtAITPercent.Text, out val3);
             decimal.TryParse(txtTotalPrice.Text, out val4);
-            decimal A = (val3 * val4) / 100;
-            txtAITAmount.Text = A.ToString();
-            txtNetPayable.Text = ((Convert.ToDecimal(txtTotalPrice.Text) + Convert.ToDecimal(txtVATAmount.Text) + Convert.ToDecimal(txtAITAmount.Text)) - (Convert.ToDecimal(txtDiscountAmount.Text) + Convert.ToDecimal(txtAdditionalDiscount.Text) + Convert.ToDecimal(txtAdvancePayment.Text))).ToString();
-        }
+            GetNETPayable();
+             }
 
         public static string SafeGetString(SqlDataReader reader, int colIndex)
         {
@@ -315,6 +310,7 @@ namespace KyotoSalesManagementSystem.UI
         public void GetNETPayable()
         {
             t = decimal.Parse(txtTotalPrice.Text);
+            
 
             if (!string.IsNullOrWhiteSpace(txtVATPercent.Text))
             {
@@ -348,6 +344,7 @@ namespace KyotoSalesManagementSystem.UI
                 disNull = null;
                 txtDiscountAmount.Clear();
             }
+            
             myVAT = (t * vt) / 100;
             myAIT = (t * ait) / 100;
             myDis = (t * dis) / 100;
@@ -373,22 +370,16 @@ namespace KyotoSalesManagementSystem.UI
             decimal val6 = 0;
             decimal.TryParse(txtAdditionalDiscount.Text, out val5);
             decimal.TryParse(txtNetPayable.Text, out val6);
-            //decimal AD = val5;
-            //txtAdditionalDiscount.Text = AD.ToString();
-            ////txtNetPayable.Text = (Convert.ToDecimal(txtTotalPrice.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
-            //txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
-
+            
             if (val5 <= 0)
             {
                 GetNETPayable();
-                //txtNetPayable.Text = val6.ToString();
+                
                 
             }
             else
             {
-               // GetNETPayable();
-               //txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdditionalDiscount.Text)).ToString();
-                GetNetPayableWithAdditionalDiscount();
+               GetNetPayableWithAdditionalDiscount();
             }
         }
 
@@ -408,9 +399,7 @@ namespace KyotoSalesManagementSystem.UI
                 else
                 {
                     GetNetPayableWithAdditionalDiscount();
-
-                }
-                
+                }                
             }
             else
             {
@@ -423,14 +412,157 @@ namespace KyotoSalesManagementSystem.UI
                 {
                     GetNetPayableWithAdditionalDiscount();
                     txtNetPayable.Text = (Convert.ToDecimal(txtNetPayable.Text) - Convert.ToDecimal(txtAdvancePayment.Text)).ToString();
-                }
-               
+                }               
             }
         }
 
+        private void SaveInvoice()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                String query = "insert into Invoice(InvoiceDate, DueDate, InvVAT, InvAIT, AdditionalDiscount, AdvancePayment, NETPayable, PromisedDate,QuotationId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@d1", dtpInvoiceDate.Value);
+                cmd.Parameters.AddWithValue("@d2", dtpDueDate.Value);
+                cmd.Parameters.AddWithValue("@d3", Convert.ToDecimal(txtVATPercent.Text));
+                cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAITPercent.Text));
+                cmd.Parameters.AddWithValue("@d5", Convert.ToDecimal(txtAdditionalDiscount.Text));
+                cmd.Parameters.AddWithValue("@d6", Convert.ToDecimal(txtAdvancePayment.Text));
+                cmd.Parameters.AddWithValue("@d7", Convert.ToDecimal(txtNetPayable.Text));
+                cmd.Parameters.AddWithValue("@d8", dtpPromisedDate.Value);
+                cmd.Parameters.AddWithValue("@d9", quotationId);
+                invoiceId = (int)cmd.ExecuteScalar();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaveReferenceNumForInvoice()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string qr2 = "SELECT SClientId,SQN FROM RefNumForQuotation WHERE ReferenceNo= '" + cmbQuotation.Text + "'";
+                cmd = new SqlCommand(qr2, con);
+                rdr = cmd.ExecuteReader();
+                if (rdr.Read())
+                {
+                    sclientId = (rdr.GetInt32(0));
+                    sQN = (rdr.GetInt32(1));
+
+                    referenceNo = "OIA-INV-" + sclientId + "-" + sQN + "-" + quotationId + "-" + invoiceId + "";
+                }
+                con = new SqlConnection(cs.DBConn);
+                string cb = "insert into RefNumForInvoice(Code,SClientId,SIN,QuotationId,InvoiceId,RefInvoiceNo) VALUES (@d1,@d2,@d3,@d4,@d5,@d6)";
+                cmd = new SqlCommand(cb);
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("d1", "OIA-INV");
+                cmd.Parameters.AddWithValue("d2", sclientId);
+                cmd.Parameters.AddWithValue("d3", sQN);
+                cmd.Parameters.AddWithValue("d4", quotationId);
+                cmd.Parameters.AddWithValue("d5", invoiceId);
+                cmd.Parameters.AddWithValue("d6", referenceNo);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cmbQuotation.Text))
+            {
+                MessageBox.Show("Please select Quotation Id/Ref/Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbQuotation);
+            }
 
+            else
+            {
+                SaveInvoice();
+                MessageBox.Show("Successfully Generated", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveReferenceNumForInvoice();
+                ClearData();
+                QuotationIdLoad();
+                cmbQuotation.ResetText();
+            }
+        }
+
+        private void ClearData()
+        {
+            cmbQuotation.Items.Clear();
+            cmbQuotation.SelectedIndex = -1;
+            txtInvoiceParty.Clear();
+            txtPayerAddress.Clear();
+            txtLandPhone.Clear();
+            txtRP.Clear();
+            txtCellPhone.Clear();
+            dtpInvoiceDate.ResetText();
+            dtpDueDate.ResetText();
+            txtTotalPrice.Clear();
+            txtVATPercent.TextChanged -= txtVATPercent_TextChanged;
+            txtVATPercent.Clear();
+            //txtVATPercent.TextChanged -= txtVATPercent_TextChanged;
+            txtVATAmount.Clear();
+            txtAITPercent.TextChanged -= txtAITPercent_TextChanged;
+            txtAITPercent.Clear();
+            txtAITAmount.Clear();
+            txtDiscountPercent.Clear();
+            txtDiscountAmount.Clear();
+            txtAdditionalDiscount.TextChanged -= txtAdditionalDiscount_TextChanged;
+            txtAdditionalDiscount.Clear();
+            txtAdvancePayment.TextChanged -= txtAdvancePayment_TextChanged;
+            txtAdvancePayment.Clear();
+            txtNetPayable.Clear();
+            dtpPromisedDate.ResetText();            
+        }
+
+        private void dtpInvoiceDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpInvoiceDate.Value > DateTime.Now)
+            {
+                MessageBox.Show("Should not be exceed Date Time from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpInvoiceDate.ResetText();
+            }
+        }
+
+        private void dtpDueDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpInvoiceDate.Value > dtpDueDate.Value)
+            {
+                MessageBox.Show("Due Date Should be grater than or Equal to Invoice Date", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpDueDate.ResetText();
+            } 
+        }
+
+        private void dtpPromisedDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpDueDate.Value > dtpPromisedDate.Value)
+            {
+                MessageBox.Show("Promised Date Should be grater than or Equal to Due Date", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpDueDate.ResetText();
+                dtpPromisedDate.ResetText();
+            } 
+        }
+
+        private void cmbQuotation_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(cmbQuotation.Text) && !cmbQuotation.Items.Contains(cmbQuotation.Text))
+            {
+                MessageBox.Show("Please Select A Valid Quotation Id/Ref/Number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbQuotation.ResetText();
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbQuotation);
+            }
         }
     }
 }
