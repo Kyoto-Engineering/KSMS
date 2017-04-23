@@ -128,6 +128,7 @@ namespace KyotoSalesManagementSystem.UI
                     this.Dispose();
                     QuotationMMix frm = new QuotationMMix();
                     frm.Show();
+                    
                     frm.txtClientId.Text = dr.Cells[0].Value.ToString();
                     frm.txtClientName.Text = dr.Cells[1].Value.ToString();
                     frm.labelm.Text = labeln.Text;
@@ -140,6 +141,7 @@ namespace KyotoSalesManagementSystem.UI
                     MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            
     }
 }
 }

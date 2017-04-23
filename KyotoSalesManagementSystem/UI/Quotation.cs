@@ -35,6 +35,7 @@ namespace KyotoSalesManagementSystem.UI
         public decimal totalPercent, myMOBAd1, myPAS1, myPOD1, myROP1;
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
+        public Nullable<Int64> brandid;
              
              
 
@@ -51,7 +52,8 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(ProductListSummary.ItemCode),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from ProductListSummary,MasterStocks where MasterStocks.Sl=ProductListSummary.Sl order by MasterStocks.Sl desc", con);
+                //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(ProductListSummary.ItemCode),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from ProductListSummary,MasterStocks where MasterStocks.Sl=ProductListSummary.Sl order by MasterStocks.Sl desc", con);
+                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, MasterStocks.UnitPrice FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl order by MasterStocks.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)
@@ -111,7 +113,8 @@ namespace KyotoSalesManagementSystem.UI
         }
         private void Quotation_Load(object sender, EventArgs e)
         {
-            GetData();
+            GetBrand();
+            //GetData();
             userId = frmLogin.uId.ToString();
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
@@ -120,6 +123,29 @@ namespace KyotoSalesManagementSystem.UI
             groupBox6.Enabled = false;
             groupBox7.Enabled = false;
         }
+
+        private void GetBrand()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string ctt = "select BrandName from Brand";
+                cmd = new SqlCommand(ctt);
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    BrandcomboBox.Items.Add(rdr.GetValue(0).ToString());
+                }
+                //cmbGender.Items.Add("Not In The List");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         private void cmbClientName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -634,6 +660,8 @@ namespace KyotoSalesManagementSystem.UI
             SalesClientGrid22 frm = new SalesClientGrid22();
             SalesClientGrid22.ftype = 3;
             frm.Show();
+           
+
             //this.Visible = false;
             //dynamic frm = new SalesClientRecord();
             //frm.ShowDialog();
@@ -1900,6 +1928,46 @@ namespace KyotoSalesManagementSystem.UI
             this.Dispose();
             MainUI frm = new MainUI();
             frm.Show();
+        }
+
+        private void BrandcomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //groupBox4.Enabled = true;
+
+            try
+            {
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string ct = "select BrandId from Brand  where  Brand.BrandName='" + BrandcomboBox.Text + "' ";
+                cmd = new SqlCommand(ct);
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
+
+                if (rdr.Read())
+                {
+                    
+                    brandid = Convert.ToInt64(rdr["BrandId"]);
+                }
+                con.Close();
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(ProductListSummary.ItemCode),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from ProductListSummary,MasterStocks where MasterStocks.Sl=ProductListSummary.Sl order by MasterStocks.Sl desc", con);
+                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, MasterStocks.UnitPrice FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
+                rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                dataGridView1.Rows.Clear();
+                while (rdr.Read() == true)
+                {
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5]);
+                }
+                con.Close();            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
     }
 }
