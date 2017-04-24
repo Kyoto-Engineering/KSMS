@@ -1400,7 +1400,7 @@
         private System.Windows.Forms.TextBox txtDiscountPercent;
         private System.Windows.Forms.TextBox txtTotalPrice;
         public  System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -1432,7 +1432,7 @@
         private System.Windows.Forms.CheckBox checkVAT;
         private System.Windows.Forms.CheckBox checkAIT;
         private System.Windows.Forms.CheckBox checkDiscount;
-        private System.Windows.Forms.GroupBox groupBox3;
+        public System.Windows.Forms.GroupBox groupBox3;
         public System.Windows.Forms.TextBox txtTotalAmount;
         internal System.Windows.Forms.Label Label11;
         internal System.Windows.Forms.Label Label12;
@@ -1447,7 +1447,7 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtSProductName;
+        public System.Windows.Forms.TextBox txtSProductName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelv;
@@ -1462,7 +1462,7 @@
         private wmgCMS.WaterMarkTextBox txtOfferValidity;
         private System.Windows.Forms.Label label27;
         private wmgCMS.WaterMarkTextBox txtLeadTime;
-        private System.Windows.Forms.TextBox txtProId;
+        public System.Windows.Forms.TextBox txtProId;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
@@ -1501,7 +1501,7 @@
         private wmgCMS.WaterMarkTextBox waterMarkTextBox1;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label33;
         public System.Windows.Forms.ComboBox BrandcomboBox;
     }

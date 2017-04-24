@@ -29,10 +29,11 @@ namespace KyotoSalesManagementSystem.UI
         public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
         public string pId, referenceNo, mAdv, pDoc, pOD, rOP, myMobAd, myPAS, myPOD, myROP;
         public int quotationId, sClientIdForRefNum, sQN;
-            public decimal totalPercent, myMOBAd1, myPAS1, myPOD1, myROP1;
+        public decimal totalPercent, myMOBAd1, myPAS1, myPOD1, myROP1;
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
-             
+        public Nullable<Int64> brandid;
+
         public QuotationForOvercease()
         {
             InitializeComponent();
@@ -177,7 +178,7 @@ namespace KyotoSalesManagementSystem.UI
 
                 txtProductName.Text = "";
                 txtUnitPrice.Text = "";
-               // txtAvailableQuantity.Text = "";
+                // txtAvailableQuantity.Text = "";
                 txtQuotQuantity.Text = "";
                 txtTotalAmount.Text = "";
                 txtMOQ.Text = "";
@@ -268,7 +269,11 @@ namespace KyotoSalesManagementSystem.UI
         }
         private void QuotationForOvercease_Load(object sender, EventArgs e)
         {
-            GetData();
+            GetBrand();
+            BrandcomboBox.Enabled = false;
+            txtOProductId.Enabled = false;
+            txtOSProductName.Enabled = false;
+            //GetData();
             userId = frmLogin.uId.ToString();
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
@@ -276,6 +281,28 @@ namespace KyotoSalesManagementSystem.UI
             groupBox4.Enabled = false;
             groupBox6.Enabled = false;
             groupBox7.Enabled = false;
+        }
+
+        private void GetBrand()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string ctt = "select BrandName from Brand";
+                cmd = new SqlCommand(ctt);
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    BrandcomboBox.Items.Add(rdr.GetValue(0).ToString());
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -407,7 +434,7 @@ namespace KyotoSalesManagementSystem.UI
             {
 
                 con = new SqlConnection(cs.DBConn);
-                string cb = "insert into Quotation(TotalPrice,QVat,QAIT,Discount,NetPayable,Validity,Delivery,UserId,Dates,QStatus,ValidityStatus,QType) VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int,SCOPE_IDENTITY())";
+                string cb = "insert into Quotation(TotalPrice,QVat,QAIT,Discount,NetPayable,Validity,Delivery,UserId,Dates,QStatus,ValidityStatus,QType,BrandId) VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int,SCOPE_IDENTITY())";
                 cmd = new SqlCommand(cb);
                 cmd.Connection = con;
                 cmd.Parameters.AddWithValue("d1", txtTotalPrice.Text);
@@ -422,8 +449,9 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("d10", "Quoted");
                 cmd.Parameters.AddWithValue("d11", "Valid");
                 cmd.Parameters.AddWithValue("d12", "Omron");
+                cmd.Parameters.AddWithValue("d13", brandid);
                 con.Open();
-                quotationId = (int) cmd.ExecuteScalar();
+                quotationId = (int)cmd.ExecuteScalar();
                 con.Close();
             }
             catch (Exception ex)
@@ -435,7 +463,7 @@ namespace KyotoSalesManagementSystem.UI
         {
             try
             {
-               // GetQuotationId();
+                // GetQuotationId();
 
                 for (int i = 0; i <= listView1.Items.Count - 1; i++)
                 {
@@ -609,12 +637,12 @@ namespace KyotoSalesManagementSystem.UI
             mAdv = "Mobilization Advance  " + myMobAd + "%";
             pDoc = "Payment at Sight Of Chalan/BL/Shipping Document  " + myPAS + "%";
             pOD = "Payment on Delivery  " + myPOD + "%";
-            rOP = "Rest Of Payment  " + myROP + "%  within" + txtROPDays.Text+" days";
+            rOP = "Rest Of Payment  " + myROP + "%  within" + txtROPDays.Text + " days";
             try
             {
                 if (checkMobAd.Checked)
                 {
-                   
+
                     con = new SqlConnection(cs.DBConn);
                     string cb = "insert into PaymentTerms(Text1,QuotationId) VALUES (@d1,@d2)";
                     cmd = new SqlCommand(cb);
@@ -687,7 +715,7 @@ namespace KyotoSalesManagementSystem.UI
                         con.Close();
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -743,20 +771,20 @@ namespace KyotoSalesManagementSystem.UI
 
 
             else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROP.Text))
-                {
-                    MessageBox.Show("Insert Rest Of Payment Or Untick Check Box", "Input Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtROP.Focus();
+            {
+                MessageBox.Show("Insert Rest Of Payment Or Untick Check Box", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtROP.Focus();
 
-                }
-                else if (checkROP.Checked &&  string.IsNullOrWhiteSpace(txtROPDays.Text))
-                {
-                    MessageBox.Show("Insert Rest Of Payment Number of Days Or Untick Check Box", "Input Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtROPDays.Focus();
-                }
-            
-            //end my code
+            }
+            else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROPDays.Text))
+            {
+                MessageBox.Show("Insert Rest Of Payment Number of Days Or Untick Check Box", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtROPDays.Focus();
+            }
+
+        //end my code
             else
             {
 
@@ -809,10 +837,10 @@ namespace KyotoSalesManagementSystem.UI
             if (checkVAT.Checked)
             {
                 txtVATPercent.ReadOnly = false;
-                    //tPrice = Convert.ToDecimal(txtTotalPrice.Text);
-                    txtVATPercent.Text = "5";
+                //tPrice = Convert.ToDecimal(txtTotalPrice.Text);
+                txtVATPercent.Text = "5";
                 txtVATPercent.Focus();
-            
+
             }
             else
             {
@@ -836,7 +864,7 @@ namespace KyotoSalesManagementSystem.UI
             {
 
                 txtAITPercent.ReadOnly = false;
-                    txtAITPercent.Text = "4";
+                txtAITPercent.Text = "4";
                 txtAITPercent.Focus();
 
             }
@@ -849,7 +877,7 @@ namespace KyotoSalesManagementSystem.UI
 
             GetNetPayable();
 
-           
+
         }
 
         private void checkDiscount_CheckedChanged(object sender, EventArgs e)
@@ -863,9 +891,9 @@ namespace KyotoSalesManagementSystem.UI
             if (checkDiscount.Checked)
             {
 
-                    txtDiscountPercent.ReadOnly = false;
-                    txtDiscountPercent.Text = "5";
-                    txtDiscountPercent.Focus();
+                txtDiscountPercent.ReadOnly = false;
+                txtDiscountPercent.Text = "5";
+                txtDiscountPercent.Focus();
 
             }
             else
@@ -934,7 +962,8 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                cmd = new SqlCommand("SELECT RTRIM(Sl),RTRIM(ProductGenericDescription),RTRIM(ItemDescription),RTRIM(ItemCode) from ProductListSummary where ProductListSummary.ItemCode like '" + txtOProductId.Text + "%' order by ProductListSummary.Sl", con);
+                //cmd = new SqlCommand("SELECT RTRIM(Sl),RTRIM(ProductGenericDescription),RTRIM(ItemDescription),RTRIM(ItemCode) from ProductListSummary where ProductListSummary.ItemCode like '" + txtOProductId.Text + "%' order by ProductListSummary.Sl", con);
+                cmd = new SqlCommand("SELECT T.Sl,T.ProductGenericDescription,T.ItemDescription,T.ItemCode from Brand b INNER JOIN ProductListSummary T ON b.BrandId=T.BrandId where b.BrandName='" + BrandcomboBox.Text + "' and  T.ItemCode like '" + txtOProductId.Text + "%' order by T.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)
@@ -949,7 +978,7 @@ namespace KyotoSalesManagementSystem.UI
             }
         }
 
-       
+
 
         private void txtOSProductName_TextChanged(object sender, EventArgs e)
         {
@@ -957,7 +986,8 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                cmd = new SqlCommand("SELECT RTRIM(Sl),RTRIM(ProductGenericDescription),RTRIM(ItemDescription),RTRIM(ItemCode) from ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtOSProductName.Text + "%' order by ProductListSummary.Sl", con);
+                //cmd = new SqlCommand("SELECT RTRIM(Sl),RTRIM(ProductGenericDescription),RTRIM(ItemDescription),RTRIM(ItemCode) from ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtOSProductName.Text + "%' order by ProductListSummary.Sl", con);
+                cmd = new SqlCommand("SELECT T.Sl,T.ProductGenericDescription,T.ItemDescription,T.ItemCode from Brand b INNER JOIN ProductListSummary T ON b.BrandId=T.BrandId where b.BrandName='" + BrandcomboBox.Text + "' and  T.ProductGenericDescription like '" + txtOSProductName.Text + "%' order by T.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)
@@ -1101,7 +1131,7 @@ namespace KyotoSalesManagementSystem.UI
             }
         }
 
-        
+
 
         private void txtPASChalan_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1188,8 +1218,8 @@ namespace KyotoSalesManagementSystem.UI
         {
             if (checkROP.Checked)
             {
-               txtROP.ReadOnly = false;
-               txtROPDays.ReadOnly = false;
+                txtROP.ReadOnly = false;
+                txtROPDays.ReadOnly = false;
                 txtROP.Focus();
             }
             else
@@ -1203,7 +1233,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void txtMAPercent_Validating(object sender, CancelEventArgs e)
         {
-            
+
             decimal val1 = 100;
             decimal val2 = 0;
             decimal val3 = 0;
@@ -1217,7 +1247,7 @@ namespace KyotoSalesManagementSystem.UI
                 MessageBox.Show("Mobilization Advance must be less Or Equal than 100", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtMAPercent.Clear();
                 txtMAPercent.Focus();
-               
+
             }
         }
 
@@ -1227,7 +1257,7 @@ namespace KyotoSalesManagementSystem.UI
             decimal val2 = 0;
             decimal val3 = 0;
             decimal.TryParse(txtPASChalan.Text, out val2);
-            
+
             if (val2 == val3)
             {
                 checkPASCBS.Checked = false;
@@ -1237,13 +1267,13 @@ namespace KyotoSalesManagementSystem.UI
                 MessageBox.Show("Payment at Sight Of Chalan/BL/Shipping Document  must be less Or Equal than 100", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPASChalan.Clear();
                 txtPASChalan.Focus();
-               
+
             }
         }
 
         private void txtPOD1_Validating(object sender, CancelEventArgs e)
         {
-             decimal val1 = 100;
+            decimal val1 = 100;
             decimal val2 = 0;
             decimal val3 = 0;
             decimal.TryParse(txtPOD1.Text, out val2);
@@ -1256,7 +1286,7 @@ namespace KyotoSalesManagementSystem.UI
                 MessageBox.Show("Payment on  Delivery must be less Or Equal than 100", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPOD1.Clear();
                 txtPOD1.Focus();
-               
+
             }
 
         }
@@ -1272,13 +1302,13 @@ namespace KyotoSalesManagementSystem.UI
                 checkROP.Checked = false;
             }
             else
-            if (val2 > val1)
-            {
-                MessageBox.Show("Rest Of Payment must be less Or Equal than 100", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtROP.Clear();
-                txtROP.Focus();
-               
-            } 
+                if (val2 > val1)
+                {
+                    MessageBox.Show("Rest Of Payment must be less Or Equal than 100", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtROP.Clear();
+                    txtROP.Focus();
+
+                }
         }
         //my code end
         private void txtUnitPrice_KeyPress(object sender, KeyPressEventArgs e)
@@ -1299,7 +1329,7 @@ namespace KyotoSalesManagementSystem.UI
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46))
             {
                 e.Handled = true;
-                
+
             }
         }
 
@@ -1308,20 +1338,20 @@ namespace KyotoSalesManagementSystem.UI
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46))
             {
                 e.Handled = true;
-                
+
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.WindowState=FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void txtQuotNote_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button2_Click(this,new EventArgs());
+                button2_Click(this, new EventArgs());
             }
         }
 
@@ -1517,8 +1547,50 @@ namespace KyotoSalesManagementSystem.UI
                 e.Handled = true;
             }
         }
-        
+
+        private void BrandcomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtOProductId.Enabled = true;
+            txtOSProductName.Enabled = true;
+            groupBox3.Enabled = true;
+            groupBox2.Enabled = true;
+            groupBox7.Enabled = true;
+            try
+            {
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string ct = "select BrandId from Brand  where  Brand.BrandName='" + BrandcomboBox.Text + "' ";
+                cmd = new SqlCommand(ct);
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
+
+                if (rdr.Read())
+                {
+
+                    brandid = Convert.ToInt64(rdr["BrandId"]);
+                }
+                con.Close();
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                //cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, MasterStocks.UnitPrice FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
+                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode  FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId where Brand.BrandName='" + BrandcomboBox.Text + "' order by ProductListSummary.Sl desc", con);
+                rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                dataGridView1.Rows.Clear();
+                while (rdr.Read() == true)
+                {
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3]);
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
-        }
-        
-        
+
+    }
+}
+

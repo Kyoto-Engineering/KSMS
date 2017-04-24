@@ -114,6 +114,9 @@ namespace KyotoSalesManagementSystem.UI
         private void Quotation_Load(object sender, EventArgs e)
         {
             GetBrand();
+            BrandcomboBox.Enabled = false;
+            txtProId.Enabled = false;
+            txtSProductName.Enabled = false;
             //GetData();
             userId = frmLogin.uId.ToString();
             groupBox1.Enabled = false;
@@ -471,7 +474,7 @@ namespace KyotoSalesManagementSystem.UI
             {
 
                 con = new SqlConnection(cs.DBConn);
-                string cb = "insert into Quotation(TotalPrice,QVat,QAIT,Discount,NetPayable,Validity,Delivery,UserId,Dates,QStatus,ValidityStatus,QType) VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int,SCOPE_IDENTITY())";
+                string cb = "insert into Quotation(TotalPrice,QVat,QAIT,Discount,NetPayable,Validity,Delivery,UserId,Dates,QStatus,ValidityStatus,QType,BrandId) VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int,SCOPE_IDENTITY())";
                 cmd = new SqlCommand(cb);
                 cmd.Connection = con;
                 cmd.Parameters.AddWithValue("d1", txtTotalPrice.Text);
@@ -486,6 +489,7 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("d10","Quoted");
                 cmd.Parameters.AddWithValue("d11", "Valid");
                 cmd.Parameters.AddWithValue("d12", "Omron");
+                cmd.Parameters.AddWithValue("d13", brandid);
                 con.Open();
                 quotationId = (int) cmd.ExecuteScalar();
                 con.Close();
@@ -755,7 +759,8 @@ namespace KyotoSalesManagementSystem.UI
                
             con = new SqlConnection(cs.DBConn);
             con.Open();
-            cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ItemCode like '" + txtProId.Text + "%' order by N.Sl", con);
+            cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, N.UnitPrice FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId LEFT JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ItemCode like '" + txtProId.Text + "%' order by N.Sl desc", con);
+            //cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ItemCode like '" + txtProId.Text + "%' order by N.Sl", con);
             //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from MasterStocks,ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtSProductName.Text + "%' order by ProductListSummary.Sl", con);
             rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             dataGridView1.Rows.Clear();
@@ -780,7 +785,8 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ProductGenericDescription like '" + txtSProductName.Text + "%' order by N.Sl", con);
+                cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, N.UnitPrice FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId LEFT JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ProductGenericDescription like '" + txtSProductName.Text + "%' order by N.Sl desc", con);
+                //cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ProductGenericDescription like '" + txtSProductName.Text + "%' order by N.Sl", con);
                 //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from MasterStocks,ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtSProductName.Text + "%' order by ProductListSummary.Sl", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
@@ -1932,7 +1938,11 @@ namespace KyotoSalesManagementSystem.UI
 
         private void BrandcomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //groupBox4.Enabled = true;
+            txtProId.Enabled = true;
+            txtSProductName.Enabled = true;
+            groupBox3.Enabled = true;
+            groupBox2.Enabled = true;
+            groupBox7.Enabled = true;
 
             try
             {
@@ -1954,7 +1964,7 @@ namespace KyotoSalesManagementSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(ProductListSummary.ItemCode),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from ProductListSummary,MasterStocks where MasterStocks.Sl=ProductListSummary.Sl order by MasterStocks.Sl desc", con);
-                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, MasterStocks.UnitPrice FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
+                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, MasterStocks.UnitPrice FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId LEFT JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)

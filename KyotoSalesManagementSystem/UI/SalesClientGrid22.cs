@@ -55,6 +55,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+           
             if (ftype == 1)
             {
             
@@ -68,6 +69,12 @@ namespace KyotoSalesManagementSystem.UI
                 frm.txtClientId.Text = dr.Cells[0].Value.ToString();
                 frm.txtClientName.Text = dr.Cells[1].Value.ToString();
                 frm.labelm.Text = labeln.Text;
+                frm.BrandcomboBox.Enabled = true;
+                frm.txtOProductId.Enabled = false;
+                frm.txtOSProductName.Enabled = false;
+                frm.groupBox3.Enabled = false;
+                frm.groupBox2.Enabled = false;
+                frm.groupBox7.Enabled = false;
                 frm.dateTimePicker1.Focus();
                 //frm.txtAttention.Focus();
                 // this.Dispose();
@@ -89,6 +96,12 @@ namespace KyotoSalesManagementSystem.UI
                     frm.txtClientId.Text = dr.Cells[0].Value.ToString();
                     frm.txtClientName.Text = dr.Cells[1].Value.ToString();
                     frm.labelm.Text = labeln.Text;
+                    frm.BrandcomboBox.Enabled = true;
+                    frm.txtProId.Enabled = false;
+                    frm.txtSProductName.Enabled = false;
+                    frm.groupBox3.Enabled = false;
+                    frm.groupBox2.Enabled = false;
+                    frm.groupBox7.Enabled = false;
                     frm.dateTimePicker1.Focus();
                     //frm.txtAttention.Focus();
                     // this.Dispose();
