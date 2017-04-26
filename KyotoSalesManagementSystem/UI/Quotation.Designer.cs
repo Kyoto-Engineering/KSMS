@@ -80,10 +80,7 @@
             this.checkPOD = new System.Windows.Forms.CheckBox();
             this.checkROP = new System.Windows.Forms.CheckBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.txtQuotNote = new wmgCMS.WaterMarkTextBox();
-            this.txtOfferValidity = new wmgCMS.WaterMarkTextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.txtLeadTime = new wmgCMS.WaterMarkTextBox();
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -133,11 +130,16 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.BrandcomboBox = new System.Windows.Forms.ComboBox();
+            this.txtQuotNote = new wmgCMS.WaterMarkTextBox();
+            this.txtOfferValidity = new wmgCMS.WaterMarkTextBox();
+            this.txtLeadTime = new wmgCMS.WaterMarkTextBox();
             this.waterMarkTextBox1 = new wmgCMS.WaterMarkTextBox();
             this.txtContactNo = new wmgCMS.WaterMarkTextBox();
             this.txtDesignation = new wmgCMS.WaterMarkTextBox();
             this.txtAttention = new wmgCMS.WaterMarkTextBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -196,7 +198,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.listView1);
-            this.groupBox2.Location = new System.Drawing.Point(394, 182);
+            this.groupBox2.Location = new System.Drawing.Point(394, 207);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(448, 261);
             this.groupBox2.TabIndex = 13;
@@ -272,7 +274,7 @@
             this.btnSubmit.BackColor = System.Drawing.Color.Yellow;
             this.btnSubmit.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.Blue;
-            this.btnSubmit.Location = new System.Drawing.Point(327, 90);
+            this.btnSubmit.Location = new System.Drawing.Point(327, 79);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(104, 53);
             this.btnSubmit.TabIndex = 16;
@@ -284,7 +286,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(47, 4);
+            this.label2.Location = new System.Drawing.Point(47, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 15);
             this.label2.TabIndex = 20;
@@ -295,7 +297,7 @@
             this.txtClientId.BackColor = System.Drawing.Color.LightGray;
             this.txtClientId.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtClientId.ForeColor = System.Drawing.Color.Red;
-            this.txtClientId.Location = new System.Drawing.Point(107, 1);
+            this.txtClientId.Location = new System.Drawing.Point(107, 32);
             this.txtClientId.Name = "txtClientId";
             this.txtClientId.ReadOnly = true;
             this.txtClientId.Size = new System.Drawing.Size(122, 22);
@@ -306,7 +308,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(25, 27);
+            this.label8.Location = new System.Drawing.Point(25, 58);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(75, 15);
             this.label8.TabIndex = 22;
@@ -317,7 +319,7 @@
             this.txtClientName.BackColor = System.Drawing.Color.LightGray;
             this.txtClientName.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtClientName.ForeColor = System.Drawing.Color.Red;
-            this.txtClientName.Location = new System.Drawing.Point(106, 24);
+            this.txtClientName.Location = new System.Drawing.Point(106, 55);
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.ReadOnly = true;
             this.txtClientName.Size = new System.Drawing.Size(198, 22);
@@ -336,7 +338,7 @@
             // btnClientGrid
             // 
             this.btnClientGrid.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClientGrid.Location = new System.Drawing.Point(235, 0);
+            this.btnClientGrid.Location = new System.Drawing.Point(235, 31);
             this.btnClientGrid.Name = "btnClientGrid";
             this.btnClientGrid.Size = new System.Drawing.Size(64, 23);
             this.btnClientGrid.TabIndex = 0;
@@ -456,7 +458,7 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox1.Location = new System.Drawing.Point(8, 177);
+            this.groupBox1.Location = new System.Drawing.Point(8, 201);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(377, 440);
             this.groupBox1.TabIndex = 5;
@@ -667,30 +669,6 @@
             this.label29.TabIndex = 80;
             this.label29.Text = "(if Any)";
             // 
-            // txtQuotNote
-            // 
-            this.txtQuotNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtQuotNote.Location = new System.Drawing.Point(6, 233);
-            this.txtQuotNote.Multiline = true;
-            this.txtQuotNote.Name = "txtQuotNote";
-            this.txtQuotNote.Size = new System.Drawing.Size(293, 53);
-            this.txtQuotNote.TabIndex = 3;
-            this.txtQuotNote.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtQuotNote.WaterMarkText = "if Applicable";
-            this.txtQuotNote.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuotNote_KeyDown);
-            // 
-            // txtOfferValidity
-            // 
-            this.txtOfferValidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtOfferValidity.Location = new System.Drawing.Point(109, 16);
-            this.txtOfferValidity.Name = "txtOfferValidity";
-            this.txtOfferValidity.Size = new System.Drawing.Size(78, 20);
-            this.txtOfferValidity.TabIndex = 0;
-            this.txtOfferValidity.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtOfferValidity.WaterMarkText = "Num Of Days";
-            this.txtOfferValidity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtOfferValidity_KeyDown);
-            this.txtOfferValidity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOfferValidity_KeyPress);
-            // 
             // label27
             // 
             this.label27.AutoSize = true;
@@ -700,17 +678,6 @@
             this.label27.Size = new System.Drawing.Size(126, 15);
             this.label27.TabIndex = 77;
             this.label27.Text = "C) DeliveryLead Time";
-            // 
-            // txtLeadTime
-            // 
-            this.txtLeadTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtLeadTime.Location = new System.Drawing.Point(136, 184);
-            this.txtLeadTime.Name = "txtLeadTime";
-            this.txtLeadTime.Size = new System.Drawing.Size(72, 20);
-            this.txtLeadTime.TabIndex = 2;
-            this.txtLeadTime.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtLeadTime.WaterMarkText = "Num of Days";
-            this.txtLeadTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeadTime_KeyPress);
             // 
             // listView2
             // 
@@ -839,7 +806,7 @@
             this.groupBox3.Controls.Add(this.txtProductName);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.btnRemove);
-            this.groupBox3.Location = new System.Drawing.Point(310, 1);
+            this.groupBox3.Location = new System.Drawing.Point(310, 27);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(532, 175);
             this.groupBox3.TabIndex = 9;
@@ -1124,9 +1091,9 @@
             // txtSProductName
             // 
             this.txtSProductName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSProductName.Location = new System.Drawing.Point(1038, 37);
+            this.txtSProductName.Location = new System.Drawing.Point(1167, 39);
             this.txtSProductName.Name = "txtSProductName";
-            this.txtSProductName.Size = new System.Drawing.Size(186, 26);
+            this.txtSProductName.Size = new System.Drawing.Size(161, 26);
             this.txtSProductName.TabIndex = 7;
             this.txtSProductName.TextChanged += new System.EventHandler(this.txtSProductName_TextChanged);
             // 
@@ -1135,7 +1102,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(1035, 7);
+            this.label4.Location = new System.Drawing.Point(1163, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(174, 19);
             this.label4.TabIndex = 57;
@@ -1146,7 +1113,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(861, 8);
+            this.label5.Location = new System.Drawing.Point(1000, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 19);
             this.label5.TabIndex = 58;
@@ -1155,7 +1122,7 @@
             // labelv
             // 
             this.labelv.AutoSize = true;
-            this.labelv.Location = new System.Drawing.Point(386, 570);
+            this.labelv.Location = new System.Drawing.Point(386, 603);
             this.labelv.Name = "labelv";
             this.labelv.Size = new System.Drawing.Size(15, 13);
             this.labelv.TabIndex = 60;
@@ -1165,7 +1132,7 @@
             // labelg
             // 
             this.labelg.AutoSize = true;
-            this.labelg.Location = new System.Drawing.Point(387, 594);
+            this.labelg.Location = new System.Drawing.Point(387, 622);
             this.labelg.Name = "labelg";
             this.labelg.Size = new System.Drawing.Size(15, 13);
             this.labelg.TabIndex = 61;
@@ -1196,9 +1163,9 @@
             // txtProId
             // 
             this.txtProId.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProId.Location = new System.Drawing.Point(864, 38);
+            this.txtProId.Location = new System.Drawing.Point(1002, 37);
             this.txtProId.Name = "txtProId";
-            this.txtProId.Size = new System.Drawing.Size(158, 25);
+            this.txtProId.Size = new System.Drawing.Size(145, 25);
             this.txtProId.TabIndex = 6;
             this.txtProId.TextChanged += new System.EventHandler(this.txtSProductId_TextChanged);
             // 
@@ -1244,11 +1211,95 @@
             this.groupBox6.Controls.Add(this.txtAttention);
             this.groupBox6.Controls.Add(this.label3);
             this.groupBox6.Controls.Add(this.label1);
-            this.groupBox6.Location = new System.Drawing.Point(11, 48);
+            this.groupBox6.Location = new System.Drawing.Point(11, 74);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(296, 128);
             this.groupBox6.TabIndex = 801;
             this.groupBox6.TabStop = false;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label6);
+            this.groupBox7.Controls.Add(this.txtDiscountPercent);
+            this.groupBox7.Controls.Add(this.label16);
+            this.groupBox7.Controls.Add(this.txtTotalPrice);
+            this.groupBox7.Controls.Add(this.txtDiscountAmount);
+            this.groupBox7.Controls.Add(this.btnRefresh);
+            this.groupBox7.Controls.Add(this.btnSubmit);
+            this.groupBox7.Controls.Add(this.txtVATPercent);
+            this.groupBox7.Controls.Add(this.txtAITPercent);
+            this.groupBox7.Controls.Add(this.label17);
+            this.groupBox7.Controls.Add(this.label18);
+            this.groupBox7.Controls.Add(this.txtVATAmount);
+            this.groupBox7.Controls.Add(this.txtAITAmount);
+            this.groupBox7.Controls.Add(this.checkDiscount);
+            this.groupBox7.Controls.Add(this.label19);
+            this.groupBox7.Controls.Add(this.checkAIT);
+            this.groupBox7.Controls.Add(this.txtNetPayable);
+            this.groupBox7.Controls.Add(this.checkVAT);
+            this.groupBox7.Location = new System.Drawing.Point(403, 469);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(445, 171);
+            this.groupBox7.TabIndex = 802;
+            this.groupBox7.TabStop = false;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.ForeColor = System.Drawing.Color.Blue;
+            this.label33.Location = new System.Drawing.Point(862, 13);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(50, 19);
+            this.label33.TabIndex = 803;
+            this.label33.Text = "Brand";
+            // 
+            // BrandcomboBox
+            // 
+            this.BrandcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.BrandcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.BrandcomboBox.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrandcomboBox.FormattingEnabled = true;
+            this.BrandcomboBox.Location = new System.Drawing.Point(867, 38);
+            this.BrandcomboBox.Name = "BrandcomboBox";
+            this.BrandcomboBox.Size = new System.Drawing.Size(121, 25);
+            this.BrandcomboBox.TabIndex = 804;
+            this.BrandcomboBox.SelectedIndexChanged += new System.EventHandler(this.BrandcomboBox_SelectedIndexChanged);
+            // 
+            // txtQuotNote
+            // 
+            this.txtQuotNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.txtQuotNote.Location = new System.Drawing.Point(6, 233);
+            this.txtQuotNote.Multiline = true;
+            this.txtQuotNote.Name = "txtQuotNote";
+            this.txtQuotNote.Size = new System.Drawing.Size(293, 53);
+            this.txtQuotNote.TabIndex = 3;
+            this.txtQuotNote.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtQuotNote.WaterMarkText = "if Applicable";
+            this.txtQuotNote.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuotNote_KeyDown);
+            // 
+            // txtOfferValidity
+            // 
+            this.txtOfferValidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.txtOfferValidity.Location = new System.Drawing.Point(109, 16);
+            this.txtOfferValidity.Name = "txtOfferValidity";
+            this.txtOfferValidity.Size = new System.Drawing.Size(78, 20);
+            this.txtOfferValidity.TabIndex = 0;
+            this.txtOfferValidity.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtOfferValidity.WaterMarkText = "Num Of Days";
+            this.txtOfferValidity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtOfferValidity_KeyDown);
+            this.txtOfferValidity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOfferValidity_KeyPress);
+            // 
+            // txtLeadTime
+            // 
+            this.txtLeadTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.txtLeadTime.Location = new System.Drawing.Point(136, 184);
+            this.txtLeadTime.Name = "txtLeadTime";
+            this.txtLeadTime.Size = new System.Drawing.Size(72, 20);
+            this.txtLeadTime.TabIndex = 2;
+            this.txtLeadTime.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtLeadTime.WaterMarkText = "Num of Days";
+            this.txtLeadTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeadTime_KeyPress);
             // 
             // waterMarkTextBox1
             // 
@@ -1258,7 +1309,7 @@
             this.waterMarkTextBox1.Size = new System.Drawing.Size(197, 22);
             this.waterMarkTextBox1.TabIndex = 69;
             this.waterMarkTextBox1.WaterMarkColor = System.Drawing.Color.Gray;
-            this.waterMarkTextBox1.WaterMarkText = "if Applicable";
+            this.waterMarkTextBox1.WaterMarkText = "Enter Email Address";
             this.waterMarkTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.waterMarkTextBox1_KeyDown);
             this.waterMarkTextBox1.Validating += new System.ComponentModel.CancelEventHandler(this.waterMarkTextBox1_Validating);
             // 
@@ -1270,7 +1321,7 @@
             this.txtContactNo.Size = new System.Drawing.Size(197, 22);
             this.txtContactNo.TabIndex = 4;
             this.txtContactNo.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtContactNo.WaterMarkText = "eg 01XXXXXXXXX(if any)";
+            this.txtContactNo.WaterMarkText = "Enter Contact Number ";
             this.txtContactNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContactNo_KeyDown);
             this.txtContactNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContactNo_KeyPress);
             // 
@@ -1296,37 +1347,13 @@
             this.txtAttention.WaterMarkText = "if Applicable";
             this.txtAttention.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAttention_KeyDown);
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label6);
-            this.groupBox7.Controls.Add(this.txtDiscountPercent);
-            this.groupBox7.Controls.Add(this.label16);
-            this.groupBox7.Controls.Add(this.txtTotalPrice);
-            this.groupBox7.Controls.Add(this.txtDiscountAmount);
-            this.groupBox7.Controls.Add(this.btnRefresh);
-            this.groupBox7.Controls.Add(this.btnSubmit);
-            this.groupBox7.Controls.Add(this.txtVATPercent);
-            this.groupBox7.Controls.Add(this.txtAITPercent);
-            this.groupBox7.Controls.Add(this.label17);
-            this.groupBox7.Controls.Add(this.label18);
-            this.groupBox7.Controls.Add(this.txtVATAmount);
-            this.groupBox7.Controls.Add(this.txtAITAmount);
-            this.groupBox7.Controls.Add(this.checkDiscount);
-            this.groupBox7.Controls.Add(this.label19);
-            this.groupBox7.Controls.Add(this.checkAIT);
-            this.groupBox7.Controls.Add(this.txtNetPayable);
-            this.groupBox7.Controls.Add(this.checkVAT);
-            this.groupBox7.Location = new System.Drawing.Point(403, 446);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(445, 171);
-            this.groupBox7.TabIndex = 802;
-            this.groupBox7.TabStop = false;
-            // 
             // Quotation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ClientSize = new System.Drawing.Size(1343, 623);
+            this.ClientSize = new System.Drawing.Size(1343, 642);
+            this.Controls.Add(this.BrandcomboBox);
+            this.Controls.Add(this.label33);
             this.Controls.Add(this.txtProId);
             this.Controls.Add(this.labelg);
             this.Controls.Add(this.labelv);
@@ -1375,7 +1402,7 @@
         private System.Windows.Forms.TextBox txtDiscountPercent;
         private System.Windows.Forms.TextBox txtTotalPrice;
         public  System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -1407,7 +1434,7 @@
         private System.Windows.Forms.CheckBox checkVAT;
         private System.Windows.Forms.CheckBox checkAIT;
         private System.Windows.Forms.CheckBox checkDiscount;
-        private System.Windows.Forms.GroupBox groupBox3;
+        public System.Windows.Forms.GroupBox groupBox3;
         public System.Windows.Forms.TextBox txtTotalAmount;
         internal System.Windows.Forms.Label Label11;
         internal System.Windows.Forms.Label Label12;
@@ -1422,7 +1449,7 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtSProductName;
+        public System.Windows.Forms.TextBox txtSProductName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelv;
@@ -1437,7 +1464,7 @@
         private wmgCMS.WaterMarkTextBox txtOfferValidity;
         private System.Windows.Forms.Label label27;
         private wmgCMS.WaterMarkTextBox txtLeadTime;
-        private System.Windows.Forms.TextBox txtProId;
+        public System.Windows.Forms.TextBox txtProId;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
@@ -1476,6 +1503,8 @@
         private wmgCMS.WaterMarkTextBox waterMarkTextBox1;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label33;
+        public System.Windows.Forms.ComboBox BrandcomboBox;
     }
 }

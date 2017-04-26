@@ -20,7 +20,8 @@ namespace KyotoSalesManagementSystem.LoginUI
         private SqlDataReader rdr;
         ConnectionString cs=new ConnectionString();
         public static int uId;
-        public string readyPassword,dbUserName,dbPassword;
+        public static string EMail,NAme,DEsignation,COntact;
+        public string readyPassword, dbUserName, dbPassword;
         public frmLogin()
         {
             InitializeComponent();
@@ -61,7 +62,7 @@ namespace KyotoSalesManagementSystem.LoginUI
 
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct = "select UserType,UserId from Registration where UserName='" + txtUserName.Text + "' and Password='" + readyPassword + "'";
+                    string ct = "select UserType,UserId,Email,Name,Designation,ContactNo from Registration where UserName='" + txtUserName.Text + "' and Password='" + readyPassword + "'";
                     cmd = new SqlCommand(ct);
                     cmd.Connection = con;
                     rdr = cmd.ExecuteReader();
@@ -69,6 +70,10 @@ namespace KyotoSalesManagementSystem.LoginUI
                     {
                         txtUserType.Text = (rdr.GetString(0));
                         uId = (rdr.GetInt32(1));
+                        EMail = (rdr.GetString(2));
+                        NAme = (rdr.GetString(3));
+                        DEsignation = (rdr.GetString(4));
+                        COntact = (rdr.GetString(5));
                     }
                     if ((rdr != null))
                     {

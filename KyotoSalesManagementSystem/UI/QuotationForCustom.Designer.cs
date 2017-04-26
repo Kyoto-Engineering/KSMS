@@ -1112,7 +1112,7 @@
             this.waterMarkTextBox1.Size = new System.Drawing.Size(197, 22);
             this.waterMarkTextBox1.TabIndex = 112;
             this.waterMarkTextBox1.WaterMarkColor = System.Drawing.Color.Gray;
-            this.waterMarkTextBox1.WaterMarkText = "if Applicable";
+            this.waterMarkTextBox1.WaterMarkText = "Enter Email Address";
             this.waterMarkTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.waterMarkTextBox1_KeyDown);
             this.waterMarkTextBox1.Validating += new System.ComponentModel.CancelEventHandler(this.waterMarkTextBox1_Validating);
             // 
@@ -1125,7 +1125,7 @@
             this.txtContactNo.Size = new System.Drawing.Size(197, 22);
             this.txtContactNo.TabIndex = 4;
             this.txtContactNo.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtContactNo.WaterMarkText = "eg 01XXXXXXXXX(if any)";
+            this.txtContactNo.WaterMarkText = "Enter Contact Number ";
             this.txtContactNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContactNo_KeyDown);
             this.txtContactNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContactNo_KeyPress);
             // 

@@ -135,6 +135,8 @@
             this.txtAttention = new wmgCMS.WaterMarkTextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.BrandcomboBox = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1036,7 +1038,7 @@
             // txtOProductId
             // 
             this.txtOProductId.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOProductId.Location = new System.Drawing.Point(865, 45);
+            this.txtOProductId.Location = new System.Drawing.Point(993, 51);
             this.txtOProductId.Name = "txtOProductId";
             this.txtOProductId.Size = new System.Drawing.Size(158, 25);
             this.txtOProductId.TabIndex = 6;
@@ -1047,7 +1049,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(866, 16);
+            this.label5.Location = new System.Drawing.Point(994, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 19);
             this.label5.TabIndex = 105;
@@ -1058,7 +1060,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(1042, 15);
+            this.label4.Location = new System.Drawing.Point(1156, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(174, 19);
             this.label4.TabIndex = 104;
@@ -1067,7 +1069,7 @@
             // txtOSProductName
             // 
             this.txtOSProductName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOSProductName.Location = new System.Drawing.Point(1045, 44);
+            this.txtOSProductName.Location = new System.Drawing.Point(1159, 50);
             this.txtOSProductName.Name = "txtOSProductName";
             this.txtOSProductName.Size = new System.Drawing.Size(186, 26);
             this.txtOSProductName.TabIndex = 7;
@@ -1202,7 +1204,7 @@
             this.waterMarkTextBox1.Size = new System.Drawing.Size(197, 22);
             this.waterMarkTextBox1.TabIndex = 112;
             this.waterMarkTextBox1.WaterMarkColor = System.Drawing.Color.Gray;
-            this.waterMarkTextBox1.WaterMarkText = "if Applicable";
+            this.waterMarkTextBox1.WaterMarkText = "Enter Email Address";
             this.waterMarkTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.waterMarkTextBox1_KeyDown);
             this.waterMarkTextBox1.Validating += new System.ComponentModel.CancelEventHandler(this.waterMarkTextBox1_Validating);
             // 
@@ -1215,7 +1217,7 @@
             this.txtContactNo.Size = new System.Drawing.Size(197, 22);
             this.txtContactNo.TabIndex = 4;
             this.txtContactNo.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtContactNo.WaterMarkText = "eg 01XXXXXXXXX(if any)";
+            this.txtContactNo.WaterMarkText = "Enter Contact Number ";
             this.txtContactNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContactNo_KeyDown);
             this.txtContactNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContactNo_KeyPress);
             // 
@@ -1285,12 +1287,37 @@
             this.groupBox7.TabIndex = 115;
             this.groupBox7.TabStop = false;
             // 
+            // BrandcomboBox
+            // 
+            this.BrandcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.BrandcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.BrandcomboBox.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrandcomboBox.FormattingEnabled = true;
+            this.BrandcomboBox.Location = new System.Drawing.Point(863, 50);
+            this.BrandcomboBox.Name = "BrandcomboBox";
+            this.BrandcomboBox.Size = new System.Drawing.Size(121, 25);
+            this.BrandcomboBox.TabIndex = 806;
+            this.BrandcomboBox.SelectedIndexChanged += new System.EventHandler(this.BrandcomboBox_SelectedIndexChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.Blue;
+            this.label23.Location = new System.Drawing.Point(858, 25);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(50, 19);
+            this.label23.TabIndex = 805;
+            this.label23.Text = "Brand";
+            // 
             // QuotationForOvercease
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ClientSize = new System.Drawing.Size(1352, 653);
+            this.Controls.Add(this.BrandcomboBox);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.labelm);
             this.Controls.Add(this.txtOProductId);
             this.Controls.Add(this.label5);
@@ -1357,7 +1384,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.GroupBox groupBox3;
+        public System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtCountryOfOrigin;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox txtSpecification;
@@ -1374,7 +1401,7 @@
         public System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -1402,10 +1429,10 @@
         public System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTotalPrice;
         private System.Windows.Forms.TextBox txtDiscountPercent;
-        private System.Windows.Forms.TextBox txtOProductId;
+        public System.Windows.Forms.TextBox txtOProductId;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtOSProductName;
+        public System.Windows.Forms.TextBox txtOSProductName;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckBox checkDiscount;
@@ -1437,7 +1464,9 @@
         private wmgCMS.WaterMarkTextBox waterMarkTextBox1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.ComboBox BrandcomboBox;
+        private System.Windows.Forms.Label label23;
 
 
     }

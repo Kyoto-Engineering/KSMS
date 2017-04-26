@@ -110,6 +110,7 @@
             this.dtpPromisedDate.Name = "dtpPromisedDate";
             this.dtpPromisedDate.Size = new System.Drawing.Size(252, 25);
             this.dtpPromisedDate.TabIndex = 155;
+            this.dtpPromisedDate.ValueChanged += new System.EventHandler(this.dtpPromisedDate_ValueChanged);
             // 
             // lblPromisedDate
             // 
@@ -175,6 +176,7 @@
             this.btnSave.TabIndex = 156;
             this.btnSave.Text = "Generate Invoice";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // cmbQuotation
             // 
@@ -187,6 +189,7 @@
             this.cmbQuotation.Size = new System.Drawing.Size(264, 25);
             this.cmbQuotation.TabIndex = 150;
             this.cmbQuotation.SelectedIndexChanged += new System.EventHandler(this.cmbQuotation_SelectedIndexChanged);
+            this.cmbQuotation.Leave += new System.EventHandler(this.cmbQuotation_Leave);
             // 
             // lblQuotation
             // 
@@ -299,6 +302,7 @@
             this.txtVATPercent.Size = new System.Drawing.Size(73, 26);
             this.txtVATPercent.TabIndex = 175;
             this.txtVATPercent.TextChanged += new System.EventHandler(this.txtVATPercent_TextChanged);
+            this.txtVATPercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVATPercent_KeyPress);
             // 
             // txtAITPercent
             // 
@@ -308,6 +312,7 @@
             this.txtAITPercent.Size = new System.Drawing.Size(74, 26);
             this.txtAITPercent.TabIndex = 177;
             this.txtAITPercent.TextChanged += new System.EventHandler(this.txtAITPercent_TextChanged);
+            this.txtAITPercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAITPercent_KeyPress);
             // 
             // label17
             // 
@@ -424,6 +429,8 @@
             this.txtAdditionalDiscount.Name = "txtAdditionalDiscount";
             this.txtAdditionalDiscount.Size = new System.Drawing.Size(94, 26);
             this.txtAdditionalDiscount.TabIndex = 194;
+            this.txtAdditionalDiscount.TextChanged += new System.EventHandler(this.txtAdditionalDiscount_TextChanged);
+            this.txtAdditionalDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAdditionalDiscount_KeyPress);
             // 
             // AdvancePaymentlabel
             // 
@@ -443,6 +450,8 @@
             this.txtAdvancePayment.Name = "txtAdvancePayment";
             this.txtAdvancePayment.Size = new System.Drawing.Size(94, 26);
             this.txtAdvancePayment.TabIndex = 196;
+            this.txtAdvancePayment.TextChanged += new System.EventHandler(this.txtAdvancePayment_TextChanged);
+            this.txtAdvancePayment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAdvancePayment_KeyPress);
             // 
             // dtpDueDate
             // 
@@ -453,6 +462,7 @@
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(252, 25);
             this.dtpDueDate.TabIndex = 198;
+            this.dtpDueDate.ValueChanged += new System.EventHandler(this.dtpDueDate_ValueChanged);
             // 
             // lblDueDate
             // 
@@ -474,6 +484,7 @@
             this.dtpInvoiceDate.Name = "dtpInvoiceDate";
             this.dtpInvoiceDate.Size = new System.Drawing.Size(252, 25);
             this.dtpInvoiceDate.TabIndex = 197;
+            this.dtpInvoiceDate.ValueChanged += new System.EventHandler(this.dtpInvoiceDate_ValueChanged);
             // 
             // lblInvoiceDate
             // 
@@ -490,6 +501,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.ClientSize = new System.Drawing.Size(1076, 604);
             this.Controls.Add(this.dtpDueDate);
             this.Controls.Add(this.lblDueDate);

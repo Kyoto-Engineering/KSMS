@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -24,7 +26,7 @@ namespace KyotoSalesManagementSystem.UI
         ConnectionString cs = new ConnectionString();
         public string quotationBy;
         public double Tam;
-        public string salesClientId, userId, productId, firstProductId, tAmount;
+        public string salesClientId, userId, productId, firstProductId, tAmount,email,name,designation,contact;
         public decimal dmaount = 0, lTAmount = 0, subAmount = 0, takeRemovePric = 0, takeRemoveQuantity = 0, takeRemove = 0, takeRemove2 = 0, presentTotalPrice = 0, tPrice = 0, taxPercent = 0, txVatAmount;
         public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
         public string pId, referenceNo, mAdv, pDoc, pOD, rOP, myMobAd, myPAS, myPOD, myROP;
@@ -275,6 +277,10 @@ namespace KyotoSalesManagementSystem.UI
         {
             //GetData();
             userId = frmLogin.uId.ToString();
+            email = frmLogin.EMail.ToString();
+            name = frmLogin.NAme.ToString();
+            designation = frmLogin.DEsignation.ToString();
+            contact = frmLogin.COntact.ToString();
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
             groupBox3.Enabled = false;
@@ -702,7 +708,21 @@ namespace KyotoSalesManagementSystem.UI
         }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtOfferValidity.Text))
+            if (string.IsNullOrWhiteSpace(txtContactNo.Text))
+            {
+                MessageBox.Show("Please enter Contact Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtContactNo.Focus();
+
+            }
+
+            else if (string.IsNullOrWhiteSpace(waterMarkTextBox1.Text))
+            {
+                MessageBox.Show("Please enter valid Email Address", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                waterMarkTextBox1.Focus();
+
+            }
+            
+            else if (string.IsNullOrWhiteSpace(txtOfferValidity.Text))
             {
                 MessageBox.Show("Please enter offer Validity", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtOfferValidity.Focus();
@@ -777,9 +797,10 @@ namespace KyotoSalesManagementSystem.UI
                         SaveNoteTerms();
 
                         MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-                        Reset();
+                            MessageBoxIcon.Information);                        
                         Report();
+                        SetSenderPassword();
+                        Reset();
                         this.Close();
 
                     }
@@ -798,6 +819,85 @@ namespace KyotoSalesManagementSystem.UI
                 }
             }
         }
+
+
+        private void NewMailMessage(string pass)
+        {
+            try
+            {
+
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress(email,"Kyoto Engineering & Automation Ltd");
+                msg.To.Add(new MailAddress(waterMarkTextBox1.Text));              
+                msg.CC.Add(new MailAddress("info@keal.com.bd"));
+                msg.CC.Add(new MailAddress(email));
+                msg.Subject = "Your Quotation is Here";
+                msg.Body = "Dear Patron,<br/><br/>Thank you for your interest in our products and services. In reply to your recent request for a quotation I<br/>am pleased to provide you with the same by this email.<br/><br/>You will find the quotation in the following <b>private and confidential</b> link. This link is password protected.<br/>Soon we will upload the quotation to your folder. You may also upload the work order and other instructions<br/>to this folder using this link as you desire.<br/><br/><br/>" + "<b>Your Link:</b> https://keal.com.bd/FileStoring/index.php <br/>" + "<b>Your User Name:</b> " + waterMarkTextBox1.Text + "<br/> <b>Your Password:</b> " + txtContactNo.Text + "<br/><br/><br/>Please do not hesitate to contact us should you require any clarifications. Wish to conduct fruitful business<br/>with you all the time. We appreciate your continuous support.<br/><br/>Looking forward to receiving a work order soon from you against this quotation.<br/><br/>Best Regards,<br/><br/>" + name + "<br/>" + designation + "<br/>" + contact + "<br/><br/>" + "<b>NB:</b> This is a system generated email. We are a paperless company. We care for environment. Saving a <br/>" + "paper by not taking a printout of this quotation shall be our reward.";
+
+                msg.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+
+                smtp.Host = "smtp.yandex.com";
+                smtp.Credentials = new NetworkCredential(email, pass);
+                smtp.EnableSsl = true;
+                smtp.Send(msg);
+
+
+                MessageBox.Show("Mail Sending Successfully");
+            }
+
+            catch
+            {
+                MessageBox.Show("Please check your UserName & Password");
+            }
+        }
+
+
+
+
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (var stream = client.OpenRead("http://www.google.com"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show(@"There Is  No Internet Connectivity Now." + "\n" + @"Please Try Later", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+
+        private void SetSenderPassword()
+        {
+            bool x = false;
+            string y = null;
+            while (x == false)
+            {
+                y = Microsoft.VisualBasic.Interaction.InputBox("Please Input Your Mail password Here", "Input Here", "", -1, -1);
+                if (string.IsNullOrWhiteSpace(y))
+                {
+                    x = false;
+                }
+                else
+                {
+                    if (CheckForInternetConnection())
+                    {
+                        NewMailMessage(y);
+                        x = true;
+                    }
+                }
+            }
+        }
+
 
         private void checkVAT_CheckedChanged(object sender, EventArgs e)
         {

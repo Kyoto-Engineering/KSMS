@@ -40,6 +40,7 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labeln = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.combolabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -125,12 +126,23 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "List Of Sales Client";
             // 
+            // combolabel
+            // 
+            this.combolabel.AutoSize = true;
+            this.combolabel.Location = new System.Drawing.Point(687, 80);
+            this.combolabel.Name = "combolabel";
+            this.combolabel.Size = new System.Drawing.Size(29, 13);
+            this.combolabel.TabIndex = 6;
+            this.combolabel.Text = "label";
+            this.combolabel.Visible = false;
+            // 
             // SalesClientGrid22
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(835, 624);
+            this.Controls.Add(this.combolabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labeln);
             this.Controls.Add(this.label1);
@@ -158,5 +170,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Label labeln;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label combolabel;
     }
 }
