@@ -40,9 +40,11 @@ namespace KyotoSalesManagementSystem.UI
             try
             {
                 con = new SqlConnection(cs.DBConn);
+
                 string cd = "SELECT QType FROM Quotation where QuotationId='" + comboBox1.Text + "'";
                 cmd =new SqlCommand(cd);
                 cmd.Connection = con;
+                con.Open();
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
