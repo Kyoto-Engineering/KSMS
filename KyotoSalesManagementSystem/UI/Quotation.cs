@@ -597,10 +597,10 @@ namespace KyotoSalesManagementSystem.UI
                         SaveReferenceNumForQuotation();
                         SavePaymentTerms();
                         SaveNoteTerms();
-                        MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Reset();
+                        MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);                       
                         Report();
                         SetSenderPassword();
+                        Reset();
                         this.Close();
                         
                         
@@ -645,8 +645,10 @@ namespace KyotoSalesManagementSystem.UI
                 MailMessage msg = new MailMessage();
                 msg.From = new MailAddress(email,"Kyoto Engineering & Automation Ltd");
                 msg.To.Add(new MailAddress(waterMarkTextBox1.Text));
+                msg.CC.Add(new MailAddress("info@keal.com.bd"));
+                msg.CC.Add(new MailAddress(email));
                 msg.Subject = "Your Quotation is Here";
-                msg.Body = "Dear Patron,<br/><br/>Thank you for your interest in our products and services. In reply to your recent request for a quotation I<br/>am pleased to provide you with the same by this email.<br/><br/>You will find the quotation in the following <b>private and confidential</b> link. This link is password protected.<br/>Soon we will upload the quotation to your folder. You may also upload the work order and other instructions<br/>to this folder using this link as you desire.<br/><br/><br/>" + "<b>Your Link</b>: https://keal.com.bd/FileStoring/index.php <br/>" + "<b>Your User Name:</b> " + waterMarkTextBox1.Text + "<br/> <b>Your Password:</b> " + txtContactNo.Text + "<br/><br/><br/>Please do not hesitate to contact us should you require any clarifications. Wish to conduct fruitful business<br/>with you all the time. We appreciate your continuous support.<br/><br/>Looking forward to receiving a work order soon from you against this quotation.<br/><br/>Best Regards,<br/><br/>" + name + "<br/>" + designation + "<br/>" + contact + "<br/><br/>" + "NB: This is a system generated email. We are a paperless company. We care for environment. Saving a <br/>" + "paper by not taking a printout of this quotation shall be our reward.";
+                msg.Body = "Dear Patron,<br/><br/>Thank you for your interest in our products and services. In reply to your recent request for a quotation I<br/>am pleased to provide you with the same by this email.<br/><br/>You will find the quotation in the following <b>private and confidential</b> link. This link is password protected.<br/>Soon we will upload the quotation to your folder. You may also upload the work order and other instructions<br/>to this folder using this link as you desire.<br/><br/><br/>" + "<b>Your Link:</b> https://keal.com.bd/FileStoring/index.php <br/>" + "<b>Your User Name:</b> " + waterMarkTextBox1.Text + "<br/> <b>Your Password:</b> " + txtContactNo.Text + "<br/><br/><br/>Please do not hesitate to contact us should you require any clarifications. Wish to conduct fruitful business<br/>with you all the time. We appreciate your continuous support.<br/><br/>Looking forward to receiving a work order soon from you against this quotation.<br/><br/>Best Regards,<br/><br/>" + name + "<br/>" + designation + "<br/>" + contact + "<br/><br/>" + "<b>NB:</b> This is a system generated email. We are a paperless company. We care for environment. Saving a <br/>" + "paper by not taking a printout of this quotation shall be our reward.";
                 
                 msg.IsBodyHtml = true;
 
@@ -661,7 +663,7 @@ namespace KyotoSalesManagementSystem.UI
                 MessageBox.Show("Mail Sending Successfully");
             }
 
-            catch(Exception ex)
+            catch
             {
                 MessageBox.Show("Please check your UserName & Password");
             }
@@ -2080,7 +2082,9 @@ namespace KyotoSalesManagementSystem.UI
 
         }
 
-        //private void test_Click(object sender, EventArgs e)
+       
+
+        //private void test_Click_1(object sender, EventArgs e)
         //{
         //    if (string.IsNullOrWhiteSpace(txtContactNo.Text))
         //    {
@@ -2099,7 +2103,6 @@ namespace KyotoSalesManagementSystem.UI
         //    {
         //        SetSenderPassword();
         //    }
-                      
         //}
     }
 }

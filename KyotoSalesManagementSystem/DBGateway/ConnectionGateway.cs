@@ -13,7 +13,8 @@ namespace KyotoSalesManagementSystem.DBGateway
 
       public ConnectionGateway()
       {
-          string connectionString = @"Data Source=tcp:KyotoServer,49172;Initial Catalog=NewProductList1;User=sa;Password=SystemAdministrator;Persist Security Info=true"; 
+          string connectionString = @"Data Source=tcp:KyotoServer,49172;Initial Catalog=ProductNRelatedDB;User=sa;Password=SystemAdministrator;Persist Security Info=true"; 
+          //string connectionString = @"Data Source=tcp:KyotoServer,49172;Initial Catalog=NewProductList1;User=sa;Password=SystemAdministrator;Persist Security Info=true"; 
           connection=new SqlConnection(connectionString);
       }
   }
