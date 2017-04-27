@@ -418,7 +418,7 @@ namespace KyotoSalesManagementSystem.UI
             {
 
                 con = new SqlConnection(cs.DBConn);
-                string cb = "insert into Quotation(TotalPrice,QVat,QAIT,Discount,NetPayable,Validity,Delivery,UserId,Dates,QStatus,ValidityStatus,QType) VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int,SCOPE_IDENTITY())";
+                string cb = "insert into Quotation(TotalPrice,QVat,QAIT,Discount,NetPayable,Validity,Delivery,UserId,Dates,QStatus,ValidityStatus,QType,BrandId) VALUES (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int,SCOPE_IDENTITY())";
                 cmd = new SqlCommand(cb);
                 cmd.Connection = con;
                 cmd.Parameters.AddWithValue("d1", txtTotalPrice.Text);
@@ -433,6 +433,7 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("d10", "Quoted");
                 cmd.Parameters.AddWithValue("d11", "Valid");
                 cmd.Parameters.AddWithValue("d12", "Custom");
+                cmd.Parameters.AddWithValue("d13", 2);
                 con.Open();
                 quotationId = (int) cmd.ExecuteScalar();
                 con.Close();
