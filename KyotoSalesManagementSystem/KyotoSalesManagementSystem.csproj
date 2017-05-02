@@ -180,14 +180,20 @@
     <Compile Include="Reports\DAUI.Designer.cs">
       <DependentUpon>DAUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\DOCAzbil - Copy.cs">
-      <DependentUpon>DOCAzbil - Copy.rpt</DependentUpon>
+    <Compile Include="Reports\DOCAzbil.cs">
+      <DependentUpon>DOCAzbil.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\DOCBusinessAutomation.cs">
       <DependentUpon>DOCBusinessAutomation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOCKawaShima.cs">
+      <DependentUpon>DOCKawaShima.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -216,14 +222,74 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\DOOBusinessAutomation.cs">
+      <DependentUpon>DOOBusinessAutomation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOCAzbill.cs">
+      <DependentUpon>DOOCAzbill.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOCOmron.cs">
+      <DependentUpon>DOOCOmron.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOCIRD.cs">
+      <DependentUpon>DOOCIRD.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOCKawaShima.cs">
+      <DependentUpon>DOOCKawaShima.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOCBusinessAutomation.cs">
+      <DependentUpon>DOOCBusinessAutomation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOKawaShima.cs">
+      <DependentUpon>DOOKawaShima.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOIRD.cs">
+      <DependentUpon>DOOIRD.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOAzbil.cs">
+      <DependentUpon>DOOAzbil.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOWithoutLogo.cs">
+      <DependentUpon>DOOWithoutLogo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\DOWithoutLogo.cs">
       <DependentUpon>DOWithoutLogo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reports\DOKawaShaki.cs">
-      <DependentUpon>DOKawaShaki.rpt</DependentUpon>
+    <Compile Include="Reports\DOKawaShima.cs">
+      <DependentUpon>DOKawaShima.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -246,16 +312,16 @@
       <DependentUpon>DOCOmron.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\DOO.cs">
+    <Compile Include="Reports\DOOOmron.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DOO.rpt</DependentUpon>
+      <DependentUpon>DOOOmron.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\DOOC.cs">
+    <Compile Include="Reports\DOOCWithoutLogo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DOOC.rpt</DependentUpon>
+      <DependentUpon>DOOCWithoutLogo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Invoice.cs">
@@ -264,10 +330,40 @@
       <DependentUpon>Invoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\InvoiceC.cs">
+    <Compile Include="Reports\InvoiceCAzbil.cs">
+      <DependentUpon>InvoiceCAzbil.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\InvoiceCIRD.cs">
+      <DependentUpon>InvoiceCIRD.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\InvoiceCOmron.cs">
+      <DependentUpon>InvoiceCOmron.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\InvoiceCKawaShima.cs">
+      <DependentUpon>InvoiceCKawaShima.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\InvoiceCBusinessAutomation.cs">
+      <DependentUpon>InvoiceCBusinessAutomation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\InvoiceCWithoutLogo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InvoiceC.rpt</DependentUpon>
+      <DependentUpon>InvoiceCWithoutLogo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\IUI.cs">
@@ -464,13 +560,17 @@
     <EmbeddedResource Include="Reports\DAUI.resx">
       <DependentUpon>DAUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DOCAzbil - Copy.rpt">
+    <EmbeddedResource Include="Reports\DOCAzbil.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DOCAzbil - Copy.cs</LastGenOutput>
+      <LastGenOutput>DOCAzbil.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOCBusinessAutomation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOCBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOCKawaShima.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOCKawaShima.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOCWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -488,13 +588,53 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOBusinessAutomation.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOBusinessAutomation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOCAzbill.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOCAzbill.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOCOmron.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOCOmron.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOCIRD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOCIRD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOCKawaShima.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOCKawaShima.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOCBusinessAutomation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOCBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOKawaShima.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOKawaShima.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOIRD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOIRD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOAzbil.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOAzbil.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOWithoutLogo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOWithoutLogo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOWithoutLogo.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DOKawaShaki.rpt">
+    <EmbeddedResource Include="Reports\DOKawaShima.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DOKawaShaki.cs</LastGenOutput>
+      <LastGenOutput>DOKawaShima.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOAzbil.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -508,21 +648,41 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOCOmron.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DOO.rpt">
+    <EmbeddedResource Include="Reports\DOOOmron.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DOO.cs</LastGenOutput>
+      <LastGenOutput>DOOOmron.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DOOC.rpt">
+    <EmbeddedResource Include="Reports\DOOCWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DOOC.cs</LastGenOutput>
+      <LastGenOutput>DOOCWithoutLogo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Invoice.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\InvoiceC.rpt">
+    <EmbeddedResource Include="Reports\InvoiceCAzbil.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>InvoiceC.cs</LastGenOutput>
+      <LastGenOutput>InvoiceCAzbil.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCIRD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCIRD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCOmron.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCOmron.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCKawaShima.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCKawaShima.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCBusinessAutomation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCWithoutLogo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCWithoutLogo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\IUI.resx">
       <DependentUpon>IUI.cs</DependentUpon>
