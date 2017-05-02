@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -18,7 +20,7 @@ using KyotoSalesManagementSystem.Reports;
 
 namespace KyotoSalesManagementSystem.UI
 {
-    
+
     public partial class Quotation : Form
     {
         private SqlConnection con;
@@ -27,7 +29,7 @@ namespace KyotoSalesManagementSystem.UI
         ConnectionString cs = new ConnectionString();
         public string quotationBy;
         public double Tam;
-        public string salesClientId, userId, productId, firstProductId, tAmount;
+        public string salesClientId, userId, productId, firstProductId, tAmount, hostName,email,name,designation,contact;
         public decimal dmaount = 0, lTAmount = 0, subAmount = 0, takeRemovePric = 0, takeRemoveQuantity = 0, takeRemove = 0, takeRemove2 = 0, presentTotalPrice = 0, tPrice = 0, taxPercent = 0, txVatAmount;
         public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
         public string pId, referenceNo, mAdv, pDoc, pOD, rOP, myMobAd, myPAS, myPOD, myROP;
@@ -36,17 +38,17 @@ namespace KyotoSalesManagementSystem.UI
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
         public Nullable<Int64> brandid;
-             
-             
 
 
-       
+
+
+
         public Quotation()
         {
             InitializeComponent();
         }
-       
-       public void GetData()
+
+        public void GetData()
         {
             try
             {
@@ -108,8 +110,8 @@ namespace KyotoSalesManagementSystem.UI
             myPOD1 = Convert.ToDecimal(myPOD);
             myROP1 = Convert.ToDecimal(myROP);
             totalPercent = myMOBAd1 + myPAS1 + myPOD1 + myROP1;
-            
-            
+
+
         }
         private void Quotation_Load(object sender, EventArgs e)
         {
@@ -119,6 +121,11 @@ namespace KyotoSalesManagementSystem.UI
             txtSProductName.Enabled = false;
             //GetData();
             userId = frmLogin.uId.ToString();
+            email = frmLogin.EMail.ToString();
+            name = frmLogin.NAme.ToString();
+            designation = frmLogin.DEsignation.ToString();
+            contact = frmLogin.COntact.ToString();
+           // pass = frmLogin.dbPassword.ToString();
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
             groupBox3.Enabled = false;
@@ -152,12 +159,12 @@ namespace KyotoSalesManagementSystem.UI
 
         private void cmbClientName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void SaveAttention()
         {
-            string  d, c,e;
+            string d, c, e;
             if (txtDesignation.Text != "")
             {
                 d = txtDesignation.Text;
@@ -166,7 +173,7 @@ namespace KyotoSalesManagementSystem.UI
             {
                 d = null;
             }
-            if (txtContactNo.Text!= "")
+            if (txtContactNo.Text != "")
             {
                 c = txtContactNo.Text;
             }
@@ -192,13 +199,13 @@ namespace KyotoSalesManagementSystem.UI
                     cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@d1", quotationId);
                     cmd.Parameters.AddWithValue("@d2", txtAttention.Text);
-                    cmd.Parameters.AddWithValue("@d3", (object)d??DBNull.Value);
+                    cmd.Parameters.AddWithValue("@d3", (object)d ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@d4", (object)c ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@d5", (object)e ?? DBNull.Value);
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -225,7 +232,7 @@ namespace KyotoSalesManagementSystem.UI
         {
             try
             {
-               // GetQuotationId();
+                // GetQuotationId();
 
                 for (int i = 0; i <= listView1.Items.Count - 1; i++)
                 {
@@ -253,10 +260,10 @@ namespace KyotoSalesManagementSystem.UI
 
         private void SavePaymentTerms()
         {
-             mAdv = "Mobilization Advance  " + myMobAd+"%";
-            pDoc = "Payment at Sight Of Chalan/BL/Shipping Document  " + myPAS+"%";
-            pOD = "Payment on Delivery  " + myPOD+"%";
-            rOP = "Rest Of Payment  " + myROP+"%  within" + txtROPDays.Text+"days";
+            mAdv = "Mobilization Advance  " + myMobAd + "%";
+            pDoc = "Payment at Sight Of Chalan/BL/Shipping Document  " + myPAS + "%";
+            pOD = "Payment on Delivery  " + myPOD + "%";
+            rOP = "Rest Of Payment  " + myROP + "%  within" + txtROPDays.Text + "days";
             try
             {
                 if (checkMobAd.Checked)
@@ -332,7 +339,7 @@ namespace KyotoSalesManagementSystem.UI
                         con.Close();
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -346,7 +353,7 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query = "Select SClientId From RefNumForQuotation where SClientId='" + txtClientId.Text+ "'";
+                string query = "Select SClientId From RefNumForQuotation where SClientId='" + txtClientId.Text + "'";
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
@@ -366,7 +373,7 @@ namespace KyotoSalesManagementSystem.UI
                     {
                         sQN = (rdr.GetInt32(0));
                         sQN = sQN + 1;
-                        referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId +"";
+                        referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
                     }
                 }
                 else
@@ -379,7 +386,7 @@ namespace KyotoSalesManagementSystem.UI
                 if (Convert.ToInt32(txtClientId.Text) == sClientIdForRefNum)
                 {
                     con = new SqlConnection(cs.DBConn);
-                    string cb ="insert into RefNumForQuotation(BrandCode,SClientId,SQN,QuotationId,ReferenceNo) VALUES (@d1,@d2,@d3,@d4,@d5)";
+                    string cb = "insert into RefNumForQuotation(BrandCode,SClientId,SQN,QuotationId,ReferenceNo) VALUES (@d1,@d2,@d3,@d4,@d5)";
                     cmd = new SqlCommand(cb);
                     cmd.Connection = con;
                     cmd.Parameters.AddWithValue("d1", "OIA");
@@ -406,26 +413,26 @@ namespace KyotoSalesManagementSystem.UI
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
-                
 
-                
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
+
         }
 
-       
+
         public void GetNetPayable()
         {
             t = decimal.Parse(txtTotalPrice.Text);
 
             if (checkVAT.Checked == true)
             {
-               vatNull =vt = decimal.Parse(txtVATPercent.Text);
+                vatNull = vt = decimal.Parse(txtVATPercent.Text);
 
             }
             else
@@ -437,7 +444,7 @@ namespace KyotoSalesManagementSystem.UI
 
             if (checkAIT.Checked == true)
             {
-                aitNull=ait = decimal.Parse(txtAITPercent.Text);
+                aitNull = ait = decimal.Parse(txtAITPercent.Text);
             }
             else
             {
@@ -447,7 +454,7 @@ namespace KyotoSalesManagementSystem.UI
             }
             if (checkDiscount.Checked == true)
             {
-               disNull= dis = decimal.Parse(txtDiscountPercent.Text);
+                disNull = dis = decimal.Parse(txtDiscountPercent.Text);
             }
             else
             {
@@ -455,16 +462,16 @@ namespace KyotoSalesManagementSystem.UI
                 disNull = null;
                 txtDiscountAmount.Clear();
             }
-            myVAT = (t*vt)/100;
-            myAIT = (t*ait)/100;
-            myDis = (t*dis)/100;
+            myVAT = (t * vt) / 100;
+            myAIT = (t * ait) / 100;
+            myDis = (t * dis) / 100;
 
-            myNetPayable = t + myVAT +  myAIT- myDis;
+            myNetPayable = t + myVAT + myAIT - myDis;
             txtVATAmount.Text = myVAT.ToString();
             txtAITAmount.Text = myAIT.ToString();
             txtDiscountAmount.Text = myDis.ToString();
             txtNetPayable.Text = myNetPayable.ToString();
-           
+
 
         }
 
@@ -486,12 +493,12 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("d7", txtLeadTime.Text);
                 cmd.Parameters.AddWithValue("d8", userId);
                 cmd.Parameters.AddWithValue("d9", dateTimePicker1.Value);
-                cmd.Parameters.AddWithValue("d10","Quoted");
+                cmd.Parameters.AddWithValue("d10", "Quoted");
                 cmd.Parameters.AddWithValue("d11", "Valid");
                 cmd.Parameters.AddWithValue("d12", "Omron");
                 cmd.Parameters.AddWithValue("d13", brandid);
                 con.Open();
-                quotationId = (int) cmd.ExecuteScalar();
+                quotationId = (int)cmd.ExecuteScalar();
                 con.Close();
             }
             catch (Exception ex)
@@ -502,7 +509,21 @@ namespace KyotoSalesManagementSystem.UI
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtOfferValidity.Text))
+            if (string.IsNullOrWhiteSpace(txtContactNo.Text))
+            {
+                MessageBox.Show("Please enter Contact Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtContactNo.Focus();
+
+            }
+
+            else if (string.IsNullOrWhiteSpace(waterMarkTextBox1.Text))
+            {
+                MessageBox.Show("Please enter valid Email Address", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                waterMarkTextBox1.Focus();
+
+            }
+
+            else if (string.IsNullOrWhiteSpace(txtOfferValidity.Text))
             {
                 MessageBox.Show("Please enter offer Validity", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtOfferValidity.Focus();
@@ -546,82 +567,163 @@ namespace KyotoSalesManagementSystem.UI
 
 
             else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROP.Text))
-                {
-                    MessageBox.Show("Insert Rest Of Payment Or Untick Check Box", "Input Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtROP.Focus();
+            {
+                MessageBox.Show("Insert Rest Of Payment Or Untick Check Box", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtROP.Focus();
 
-                }
-                else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROPDays.Text))
-                {
-                    MessageBox.Show("Insert Rest Of Payment Number of Days Or Untick Check Box", "Input Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtROPDays.Focus();
-                }
-            
+            }
+            else if (checkROP.Checked && string.IsNullOrWhiteSpace(txtROPDays.Text))
+            {
+                MessageBox.Show("Insert Rest Of Payment Number of Days Or Untick Check Box", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtROPDays.Focus();
+            }
+
             else
             {
 
-            GetNetPayable();
+                GetNetPayable();
 
+                try
+                {
+
+                    TotalAmountOfTermsAndCondition();
+                    if (totalPercent == 100.00m)
+                    {
+                        SaveQuotation();
+                        SaveProductQuotation();
+                        SaveAttention();
+                        SaveReferenceNumForQuotation();
+                        SavePaymentTerms();
+                        SaveNoteTerms();
+                        MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);                       
+                        Report();
+                        SetSenderPassword();
+                        Reset();
+                        this.Close();
+                        
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your total Percent of Terms  And Coditions Must be equal to 100");
+                        return;
+                    }
+
+                    //if (totalPercent == 0)
+                    // {
+                    //     SaveQuotation();
+                    //     SaveProductQuotation();
+                    //     SaveAttention();
+                    //     SaveReferenceNumForQuotation();
+                    //     SavePaymentTerms();
+                    //     SaveNoteTerms();
+                    //     MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //     Reset();
+                    // }
+                    //if (totalPercent != 100 || totalPercent != 0)
+                    //{
+                    //    MessageBox.Show("Your total Percent of Terms  And Coditions Must be equal to 100");
+                    //    return;
+                    //}
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+        private void NewMailMessage(string pass)
+        {
             try
             {
 
-                TotalAmountOfTermsAndCondition();
-                if (totalPercent == 100.00m)
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress(email,"Kyoto Engineering & Automation Ltd");
+                msg.To.Add(new MailAddress(waterMarkTextBox1.Text));
+                msg.CC.Add(new MailAddress("info@keal.com.bd"));
+                msg.CC.Add(new MailAddress(email));
+                msg.Subject = "Your Quotation is Here";
+                msg.Body = "Dear Patron,<br/><br/>Thank you for your interest in our products and services. In reply to your recent request for a quotation I<br/>am pleased to provide you with the same by this email.<br/><br/>You will find the quotation in the following <b>private and confidential</b> link. This link is password protected.<br/>Soon we will upload the quotation to your folder. You may also upload the work order and other instructions<br/>to this folder using this link as you desire.<br/><br/><br/>" + "<b>Your Link:</b> https://keal.com.bd/FileStoring/index.php <br/>" + "<b>Your User Name:</b> " + waterMarkTextBox1.Text + "<br/> <b>Your Password:</b> " + txtContactNo.Text + "<br/><br/><br/>Please do not hesitate to contact us should you require any clarifications. Wish to conduct fruitful business<br/>with you all the time. We appreciate your continuous support.<br/><br/>Looking forward to receiving a work order soon from you against this quotation.<br/><br/>Best Regards,<br/><br/>" + name + "<br/>" + designation + "<br/>" + contact + "<br/><br/>" + "<b>NB:</b> This is a system generated email. We are a paperless company. We care for environment. Saving a <br/>" + "paper by not taking a printout of this quotation shall be our reward.";
+                
+                msg.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+
+                smtp.Host = "smtp.yandex.com";
+                smtp.Credentials = new NetworkCredential(email, pass);
+                smtp.EnableSsl = true;
+                smtp.Send(msg);
+
+
+                MessageBox.Show("Mail Sending Successfully");
+            }
+
+            catch
+            {
+                MessageBox.Show("Please check your UserName & Password");
+            }
+        }
+
+
+
+
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
                 {
-                    SaveQuotation();
-                    SaveProductQuotation();
-                    SaveAttention();
-                    SaveReferenceNumForQuotation();
-                    SavePaymentTerms();
-                    SaveNoteTerms();
-                    MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Reset();
-                    Report();
-                    this.Close();
+                    using (var stream = client.OpenRead("http://www.google.com"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show(@"There Is  No Internet Connectivity Now." + "\n" + @"Please Try Later", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+       
+        private void SetSenderPassword()
+        {
+            bool x = false;
+            string y = null;
+            while (x == false)
+            {
+                y = Microsoft.VisualBasic.Interaction.InputBox("Please Input Your Mail password Here", "Input Here", "", -1, -1);
+                if (string.IsNullOrWhiteSpace(y))
+                {
+                    x = false;
                 }
                 else
                 {
-                    MessageBox.Show("Your total Percent of Terms  And Coditions Must be equal to 100");
-                    return;
+                    if (CheckForInternetConnection())
+                    {
+                        NewMailMessage(y);
+                        x = true;
+                    }
                 }
-
-                //if (totalPercent == 0)
-                // {
-                //     SaveQuotation();
-                //     SaveProductQuotation();
-                //     SaveAttention();
-                //     SaveReferenceNumForQuotation();
-                //     SavePaymentTerms();
-                //     SaveNoteTerms();
-                //     MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //     Reset();
-                // }
-                //if (totalPercent != 100 || totalPercent != 0)
-                //{
-                //    MessageBox.Show("Your total Percent of Terms  And Coditions Must be equal to 100");
-                //    return;
-                //}
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    }
 
 
         private void CalculateTotalAmount()
         {
             try
             {
-                    dmaount = Convert.ToDecimal(txtTotalAmount.Text);
-                    lTAmount = subAmount + dmaount;
-                    txtTotalPrice.Text = lTAmount.ToString();
-                    subAmount = lTAmount;
- 
+                dmaount = Convert.ToDecimal(txtTotalAmount.Text);
+                lTAmount = subAmount + dmaount;
+                txtTotalPrice.Text = lTAmount.ToString();
+                subAmount = lTAmount;
+
             }
             catch (Exception ex)
             {
@@ -630,7 +732,7 @@ namespace KyotoSalesManagementSystem.UI
         }
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -664,7 +766,7 @@ namespace KyotoSalesManagementSystem.UI
             SalesClientGrid22 frm = new SalesClientGrid22();
             SalesClientGrid22.ftype = 3;
             frm.Show();
-           
+
 
             //this.Visible = false;
             //dynamic frm = new SalesClientRecord();
@@ -672,7 +774,7 @@ namespace KyotoSalesManagementSystem.UI
             //this.Visible = true;
         }
 
-        
+
         private void txtQuotQuantity_TextChanged(object sender, EventArgs e)
         {
             //TotalAmount();
@@ -683,7 +785,7 @@ namespace KyotoSalesManagementSystem.UI
         {
             try
             {
-               con = new SqlConnection(cs.DBConn);
+                con = new SqlConnection(cs.DBConn);
                 con.Open();
                 cmd = con.CreateCommand();
                 cmd.CommandText = "SELECT  RTRIM(MasterStocks.Sl) from  MasterStocks,ProductListSummary  WHERE MasterStocks.Sl=ProductListSummary.Sl and ProductListSummary.ProductGenericDescription = '" + txtProductName.Text + "'";
@@ -691,10 +793,10 @@ namespace KyotoSalesManagementSystem.UI
                 if (rdr.Read())
                 {
                     productId = (rdr.GetString(0));
-                   
+
                 }
-                
-               con.Close();
+
+                con.Close();
             }
             catch (Exception ex)
             {
@@ -709,7 +811,7 @@ namespace KyotoSalesManagementSystem.UI
         private void button3_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            MainUI frm=new MainUI();
+            MainUI frm = new MainUI();
             frm.Show();
         }
 
@@ -756,21 +858,21 @@ namespace KyotoSalesManagementSystem.UI
         {
             try
             {
-               
-            con = new SqlConnection(cs.DBConn);
-            con.Open();
-            cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, N.UnitPrice FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId LEFT JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ItemCode like '" + txtProId.Text + "%' order by N.Sl desc", con);
-            //cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ItemCode like '" + txtProId.Text + "%' order by N.Sl", con);
-            //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from MasterStocks,ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtSProductName.Text + "%' order by ProductListSummary.Sl", con);
-            rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            dataGridView1.Rows.Clear();
-            dataGridView1.ColumnHeadersVisible = false;
-            while (rdr.Read() == true)
-            {
-                dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5]);
-            }
-            con.Close();
-                 con.Close();
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, N.UnitPrice FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId LEFT JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ItemCode like '" + txtProId.Text + "%' order by N.Sl desc", con);
+                //cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ItemCode like '" + txtProId.Text + "%' order by N.Sl", con);
+                //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from MasterStocks,ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtSProductName.Text + "%' order by ProductListSummary.Sl", con);
+                rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                dataGridView1.Rows.Clear();
+                dataGridView1.ColumnHeadersVisible = false;
+                while (rdr.Read() == true)
+                {
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5]);
+                }
+                con.Close();
+                con.Close();
             }
             catch (Exception ex)
             {
@@ -804,11 +906,11 @@ namespace KyotoSalesManagementSystem.UI
 
             ///
             ///  cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from ProductListSummary,MasterStocks where MasterStocks.Sl=ProductListSummary.Sl order by MasterStocks.Sl desc", con);
-                //rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                //dataGridView1.Rows.Clear();
-                //while (rdr.Read() == true)
-                //{
-                //    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3],rdr[4]);
+            //rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            //dataGridView1.Rows.Clear();
+            //while (rdr.Read() == true)
+            //{
+            //    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3],rdr[4]);
 
             ///////////////
 
@@ -854,9 +956,9 @@ namespace KyotoSalesManagementSystem.UI
             decimal I = (val1 * val2);
             txtTotalAmount.Text = I.ToString();
 
-            
+
         }
-        
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (txtQuotQuantity.Text == "")
@@ -970,7 +1072,7 @@ namespace KyotoSalesManagementSystem.UI
                 }
 
             }
-            
+
         }
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
@@ -984,9 +1086,9 @@ namespace KyotoSalesManagementSystem.UI
             if (checkVAT.Checked)
             {
                 txtVATPercent.ReadOnly = false;
-                
-                    //tPrice = Convert.ToDecimal(txtTotalPrice.Text);
-                    txtVATPercent.Text = "5";
+
+                //tPrice = Convert.ToDecimal(txtTotalPrice.Text);
+                txtVATPercent.Text = "5";
                 txtVATPercent.Focus();
 
             }
@@ -998,7 +1100,7 @@ namespace KyotoSalesManagementSystem.UI
             }
 
             GetNetPayable();
-           
+
             ////GetNetPayable();
             //if (txtVATPercent.Text == "")
             //{
@@ -1037,9 +1139,9 @@ namespace KyotoSalesManagementSystem.UI
             if (checkAIT.Checked)
             {
                 txtAITPercent.ReadOnly = false;
-                
-                   
-                    txtAITPercent.Text = "4";
+
+
+                txtAITPercent.Text = "4";
                 txtAITPercent.Focus();
 
             }
@@ -1051,7 +1153,7 @@ namespace KyotoSalesManagementSystem.UI
             }
 
             GetNetPayable();
-           
+
             ////GetNetPayable();
             //if (txtAITPercent.Text == "")
             //{
@@ -1096,7 +1198,7 @@ namespace KyotoSalesManagementSystem.UI
                 txtQuotNote.Focus();
                 return;
             }
-            
+
             try
             {
                 if (listView2.Items.Count == 0)
@@ -1125,7 +1227,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void checkDiscount_CheckedChanged(object sender, EventArgs e)
         {
-    
+
             if (listView1.Items.Count == 0)
             {
                 MessageBox.Show("Please Add item in the list before checked");
@@ -1135,9 +1237,9 @@ namespace KyotoSalesManagementSystem.UI
             if (checkDiscount.Checked)
             {
                 txtDiscountPercent.ReadOnly = false;
-                
 
-                    txtDiscountPercent.Text = "5";
+
+                txtDiscountPercent.Text = "5";
                 txtDiscountPercent.Focus();
 
 
@@ -1252,13 +1354,13 @@ namespace KyotoSalesManagementSystem.UI
             waterMarkTextBox1.Clear();
             dateTimePicker1.ResetText();
 
-            myMOBAd1=myPAS1=myPOD1=myROP1 = 0;
+            myMOBAd1 = myPAS1 = myPOD1 = myROP1 = 0;
             dmaount = lTAmount = subAmount = takeRemove = takeRemove2 = presentTotalPrice = tPrice = taxPercent = 0;
 
             sClientIdForRefNum = sQN = 0;
             totalPercent = myMOBAd1 = myPAS1 = myPOD1 = myROP1 = 0;
             vt = ait = dis = t = 0;
-            
+
 
             checkMobAd.Checked = false;
             checkPASCBS.Checked = false;
@@ -1270,7 +1372,7 @@ namespace KyotoSalesManagementSystem.UI
 
             listView1.Items.Clear();
             listView2.Items.Clear();
-         
+
             txtTotalAmount.Clear();
             txtVATAmount.Clear();
             txtAITAmount.Clear();
@@ -1282,7 +1384,7 @@ namespace KyotoSalesManagementSystem.UI
             txtNetPayable.Clear();
 
             txtTotalPrice.Clear();
-            
+
 
 
 
@@ -1323,7 +1425,7 @@ namespace KyotoSalesManagementSystem.UI
             {
                 e.Handled = true;
                 return;
-                
+
             }
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
@@ -1432,7 +1534,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void checkDiscount_CheckStateChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void checkVAT_MouseClick(object sender, MouseEventArgs e)
@@ -1574,14 +1676,14 @@ namespace KyotoSalesManagementSystem.UI
             //}
             if (e.KeyCode == Keys.Enter)
             {
-                button1_Click_1(this,new EventArgs());
+                button1_Click_1(this, new EventArgs());
             }
         }
 
         private void txtQuotQuantity_Validating(object sender, CancelEventArgs e)
         {
             decimal val1 = 0;
-            decimal  val2 = 0;
+            decimal val2 = 0;
             decimal val3 = 0;
             decimal.TryParse(txtUnitPrice.Text, out val1);
             decimal.TryParse(txtQuotQuantity.Text, out val2);
@@ -1712,13 +1814,13 @@ namespace KyotoSalesManagementSystem.UI
 
             decimal val1 = 100;
             decimal val2 = 0;
-            decimal val3= 0;
+            decimal val3 = 0;
             decimal.TryParse(txtMAPercent.Text, out val2);
-            if (val2==val3)
+            if (val2 == val3)
             {
                 checkMobAd.Checked = false;
             }
-            else if(val2 > val1)
+            else if (val2 > val1)
             {
                 MessageBox.Show("Mobilization Advance must be less Or Equal than 100", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtMAPercent.Clear();
@@ -1794,7 +1896,7 @@ namespace KyotoSalesManagementSystem.UI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button2_Click(this,new EventArgs());
+                button2_Click(this, new EventArgs());
             }
         }
 
@@ -1956,7 +2058,7 @@ namespace KyotoSalesManagementSystem.UI
 
                 if (rdr.Read())
                 {
-                    
+
                     brandid = Convert.ToInt64(rdr["BrandId"]);
                 }
                 con.Close();
@@ -1971,13 +2073,36 @@ namespace KyotoSalesManagementSystem.UI
                 {
                     dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5]);
                 }
-                con.Close();            
+                con.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
         }
+
+       
+
+        //private void test_Click_1(object sender, EventArgs e)
+        //{
+        //    if (string.IsNullOrWhiteSpace(txtContactNo.Text))
+        //    {
+        //        MessageBox.Show("Please enter Contact Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        txtContactNo.Focus();
+
+        //    }
+
+        //    else if (string.IsNullOrWhiteSpace(waterMarkTextBox1.Text))
+        //    {
+        //        MessageBox.Show("Please enter valid Email Address", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        waterMarkTextBox1.Focus();
+
+        //    }
+        //    else
+        //    {
+        //        SetSenderPassword();
+        //    }
+        //}
     }
 }

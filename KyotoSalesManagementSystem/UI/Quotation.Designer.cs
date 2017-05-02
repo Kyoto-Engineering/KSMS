@@ -274,7 +274,7 @@
             this.btnSubmit.BackColor = System.Drawing.Color.Yellow;
             this.btnSubmit.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.Blue;
-            this.btnSubmit.Location = new System.Drawing.Point(327, 90);
+            this.btnSubmit.Location = new System.Drawing.Point(327, 79);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(104, 53);
             this.btnSubmit.TabIndex = 16;
@@ -1256,6 +1256,8 @@
             // 
             // BrandcomboBox
             // 
+            this.BrandcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.BrandcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.BrandcomboBox.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BrandcomboBox.FormattingEnabled = true;
             this.BrandcomboBox.Location = new System.Drawing.Point(867, 38);
@@ -1307,7 +1309,7 @@
             this.waterMarkTextBox1.Size = new System.Drawing.Size(197, 22);
             this.waterMarkTextBox1.TabIndex = 69;
             this.waterMarkTextBox1.WaterMarkColor = System.Drawing.Color.Gray;
-            this.waterMarkTextBox1.WaterMarkText = "if Applicable";
+            this.waterMarkTextBox1.WaterMarkText = "Enter Email Address";
             this.waterMarkTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.waterMarkTextBox1_KeyDown);
             this.waterMarkTextBox1.Validating += new System.ComponentModel.CancelEventHandler(this.waterMarkTextBox1_Validating);
             // 
@@ -1319,7 +1321,7 @@
             this.txtContactNo.Size = new System.Drawing.Size(197, 22);
             this.txtContactNo.TabIndex = 4;
             this.txtContactNo.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtContactNo.WaterMarkText = "eg 01XXXXXXXXX(if any)";
+            this.txtContactNo.WaterMarkText = "Enter Contact Number ";
             this.txtContactNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContactNo_KeyDown);
             this.txtContactNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContactNo_KeyPress);
             // 
