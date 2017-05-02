@@ -180,10 +180,40 @@
     <Compile Include="Reports\DAUI.Designer.cs">
       <DependentUpon>DAUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\DO.cs">
+    <Compile Include="Reports\DOIRD.cs">
+      <DependentUpon>DOIRD.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOBusinessAutomation.cs">
+      <DependentUpon>DOBusinessAutomation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOWithoutLogo.cs">
+      <DependentUpon>DOWithoutLogo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOKawaShaki.cs">
+      <DependentUpon>DOKawaShaki.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOAzbil.cs">
+      <DependentUpon>DOAzbil.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOOmron.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DO.rpt</DependentUpon>
+      <DependentUpon>DOOmron.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DOC.cs">
@@ -410,9 +440,29 @@
     <EmbeddedResource Include="Reports\DAUI.resx">
       <DependentUpon>DAUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DO.rpt">
+    <EmbeddedResource Include="Reports\DOIRD.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DO.cs</LastGenOutput>
+      <LastGenOutput>DOIRD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOBusinessAutomation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOWithoutLogo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOWithoutLogo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOKawaShaki.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOKawaShaki.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOAzbil.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOAzbil.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOmron.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOmron.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOC.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
