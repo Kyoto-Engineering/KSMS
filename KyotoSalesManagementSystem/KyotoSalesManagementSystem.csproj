@@ -180,6 +180,30 @@
     <Compile Include="Reports\DAUI.Designer.cs">
       <DependentUpon>DAUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DOCAzbil - Copy.cs">
+      <DependentUpon>DOCAzbil - Copy.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOCBusinessAutomation.cs">
+      <DependentUpon>DOCBusinessAutomation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOCWithoutLogo.cs">
+      <DependentUpon>DOCWithoutLogo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOCIRD.cs">
+      <DependentUpon>DOCIRD.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\DOIRD.cs">
       <DependentUpon>DOIRD.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -216,10 +240,10 @@
       <DependentUpon>DOOmron.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\DOC.cs">
+    <Compile Include="Reports\DOCOmron.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DOC.rpt</DependentUpon>
+      <DependentUpon>DOCOmron.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DOO.cs">
@@ -440,6 +464,22 @@
     <EmbeddedResource Include="Reports\DAUI.resx">
       <DependentUpon>DAUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOCAzbil - Copy.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOCAzbil - Copy.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOCBusinessAutomation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOCBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOCWithoutLogo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOCWithoutLogo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOCIRD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOCIRD.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOIRD.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOIRD.cs</LastGenOutput>
@@ -464,9 +504,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOOmron.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DOC.rpt">
+    <EmbeddedResource Include="Reports\DOCOmron.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DOC.cs</LastGenOutput>
+      <LastGenOutput>DOCOmron.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOO.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
