@@ -495,7 +495,7 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("d9", dateTimePicker1.Value);
                 cmd.Parameters.AddWithValue("d10", "Quoted");
                 cmd.Parameters.AddWithValue("d11", "Valid");
-                cmd.Parameters.AddWithValue("d12", "Omron");
+                cmd.Parameters.AddWithValue("d12", "General");
                 cmd.Parameters.AddWithValue("d13", brandid);
                 con.Open();
                 quotationId = (int)cmd.ExecuteScalar();
@@ -1617,10 +1617,36 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "NewProductList1";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
-            CrystalReport2 cr = new CrystalReport2();
+            ReportDocument cr =new ReportDocument();
+            if (brandid == 1)
+            {
+                cr = new CrystalReport2();
+            }
+            else if (brandid == 2)
+            {
+                cr = new QuotationKEAL();
+            }
+            else if (brandid == 3)
+            {
+                cr = new QuotationAzbil();
+            }
+            else if (brandid == 4)
+            {
+                cr = new QuotationBusinessAutomation();
+            }
+            else if (brandid == 5)
+            {
+                cr = new QuotationIRD();
+            }
+            else if (brandid == 6)
+            {
+                cr = new QuotationKawasima();
+            }
+         
+        
             tables = cr.Database.Tables;
             foreach (Table table in tables)
             {

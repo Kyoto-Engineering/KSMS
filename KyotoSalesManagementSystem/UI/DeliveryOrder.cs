@@ -116,69 +116,69 @@ namespace KyotoSalesManagementSystem.UI
         {
 
            
-            ParameterField paramField1 = new ParameterField();
+            //ParameterField paramField1 = new ParameterField();
 
 
-            //creating an object of ParameterFields class
-            ParameterFields paramFields1 = new ParameterFields();
+            ////creating an object of ParameterFields class
+            //ParameterFields paramFields1 = new ParameterFields();
 
-            //creating an object of ParameterDiscreteValue class
-            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+            ////creating an object of ParameterDiscreteValue class
+            //ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
 
-            //set the parameter field name
-            paramField1.Name = "id";
+            ////set the parameter field name
+            //paramField1.Name = "id";
 
-            //set the parameter value
-            paramDiscreteValue1.Value = orderId;
+            ////set the parameter value
+            //paramDiscreteValue1.Value = orderId;
 
-            //add the parameter value in the ParameterField object
-            paramField1.CurrentValues.Add(paramDiscreteValue1);
+            ////add the parameter value in the ParameterField object
+            //paramField1.CurrentValues.Add(paramDiscreteValue1);
 
-            //add the parameter in the ParameterFields object
-            paramFields1.Add(paramField1);
-            ReportView f2 = new ReportView();
-            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
-            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
-            ConnectionInfo reportConInfo = new ConnectionInfo();
-            Tables tables = default(Tables);
-            //	Table table = default(Table);
-            var with1 = reportConInfo;
-            with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
-            with1.UserID = "sa";
-            with1.Password = "SystemAdministrator";
-            if (qtype=="Custom")
-            {
-               DOC cr = new DOC();
-               tables = cr.Database.Tables;
-               foreach (Table table in tables)
-               {
-                   reportLogonInfo = table.LogOnInfo;
-                   reportLogonInfo.ConnectionInfo = reportConInfo;
-                   table.ApplyLogOnInfo(reportLogonInfo);
-               }
-               f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-               f2.crystalReportViewer1.ReportSource = cr;
-            }
-            else
-            {
-                DO cr =new DO();
-                tables = cr.Database.Tables;
-                foreach (Table table in tables)
-                {
-                    reportLogonInfo = table.LogOnInfo;
-                    reportLogonInfo.ConnectionInfo = reportConInfo;
-                    table.ApplyLogOnInfo(reportLogonInfo);
-                }
-                f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-                f2.crystalReportViewer1.ReportSource = cr;
-            }
+            ////add the parameter in the ParameterFields object
+            //paramFields1.Add(paramField1);
+            //ReportView f2 = new ReportView();
+            //TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            //TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            //ConnectionInfo reportConInfo = new ConnectionInfo();
+            //Tables tables = default(Tables);
+            ////	Table table = default(Table);
+            //var with1 = reportConInfo;
+            //with1.ServerName = "tcp:KyotoServer,49172";
+            //with1.DatabaseName = "ProductNRelatedDB";
+            //with1.UserID = "sa";
+            //with1.Password = "SystemAdministrator";
+            //if (qtype=="Custom")
+            //{
+            //   DOC cr = new DOC();
+            //   tables = cr.Database.Tables;
+            //   foreach (Table table in tables)
+            //   {
+            //       reportLogonInfo = table.LogOnInfo;
+            //       reportLogonInfo.ConnectionInfo = reportConInfo;
+            //       table.ApplyLogOnInfo(reportLogonInfo);
+            //   }
+            //   f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            //   f2.crystalReportViewer1.ReportSource = cr;
+            //}
+            //else
+            //{
+            //    DO cr =new DO();
+            //    tables = cr.Database.Tables;
+            //    foreach (Table table in tables)
+            //    {
+            //        reportLogonInfo = table.LogOnInfo;
+            //        reportLogonInfo.ConnectionInfo = reportConInfo;
+            //        table.ApplyLogOnInfo(reportLogonInfo);
+            //    }
+            //    f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            //    f2.crystalReportViewer1.ReportSource = cr;
+            //}
             
            
-            this.Visible = false;
+            //this.Visible = false;
 
-            f2.ShowDialog();
-            this.Visible = true;
+            //f2.ShowDialog();
+            //this.Visible = true;
            
             
         }
@@ -186,67 +186,67 @@ namespace KyotoSalesManagementSystem.UI
         {
 
 
-            ParameterField paramField1 = new ParameterField();
+            //ParameterField paramField1 = new ParameterField();
 
 
-            //creating an object of ParameterFields class
-            ParameterFields paramFields1 = new ParameterFields();
+            ////creating an object of ParameterFields class
+            //ParameterFields paramFields1 = new ParameterFields();
 
-            //creating an object of ParameterDiscreteValue class
-            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+            ////creating an object of ParameterDiscreteValue class
+            //ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
 
-            //set the parameter field name
-            paramField1.Name = "id";
+            ////set the parameter field name
+            //paramField1.Name = "id";
 
-            //set the parameter value
-            paramDiscreteValue1.Value = orderId;
+            ////set the parameter value
+            //paramDiscreteValue1.Value = orderId;
 
-            //add the parameter value in the ParameterField object
-            paramField1.CurrentValues.Add(paramDiscreteValue1);
+            ////add the parameter value in the ParameterField object
+            //paramField1.CurrentValues.Add(paramDiscreteValue1);
 
-            //add the parameter in the ParameterFields object
-            paramFields1.Add(paramField1);
-            ReportView f2 = new ReportView();
-            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
-            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
-            ConnectionInfo reportConInfo = new ConnectionInfo();
-            Tables tables = default(Tables);
-            //	Table table = default(Table);
-            var with1 = reportConInfo;
-            with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
-            with1.UserID = "sa";
-            with1.Password = "SystemAdministrator";
-            if (qtype == "Custom")
-            {
-                DOOC cr = new DOOC();
-                tables = cr.Database.Tables;
-                foreach (Table table in tables)
-                {
-                    reportLogonInfo = table.LogOnInfo;
-                    reportLogonInfo.ConnectionInfo = reportConInfo;
-                    table.ApplyLogOnInfo(reportLogonInfo);
-                }
-                f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-                f2.crystalReportViewer1.ReportSource = cr;
-            }
-            else
-            {
-                DOO cr = new DOO();
-                tables = cr.Database.Tables;
-                foreach (Table table in tables)
-                {
-                    reportLogonInfo = table.LogOnInfo;
-                    reportLogonInfo.ConnectionInfo = reportConInfo;
-                    table.ApplyLogOnInfo(reportLogonInfo);
-                }
-                f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-                f2.crystalReportViewer1.ReportSource = cr;
-            }
-            this.Visible = false;
+            ////add the parameter in the ParameterFields object
+            //paramFields1.Add(paramField1);
+            //ReportView f2 = new ReportView();
+            //TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            //TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            //ConnectionInfo reportConInfo = new ConnectionInfo();
+            //Tables tables = default(Tables);
+            ////	Table table = default(Table);
+            //var with1 = reportConInfo;
+            //with1.ServerName = "tcp:KyotoServer,49172";
+            //with1.DatabaseName = "ProductNRelatedDB";
+            //with1.UserID = "sa";
+            //with1.Password = "SystemAdministrator";
+            //if (qtype == "Custom")
+            //{
+            //    DOOC cr = new DOOC();
+            //    tables = cr.Database.Tables;
+            //    foreach (Table table in tables)
+            //    {
+            //        reportLogonInfo = table.LogOnInfo;
+            //        reportLogonInfo.ConnectionInfo = reportConInfo;
+            //        table.ApplyLogOnInfo(reportLogonInfo);
+            //    }
+            //    f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            //    f2.crystalReportViewer1.ReportSource = cr;
+            //}
+            //else
+            //{
+            //    DOO cr = new DOO();
+            //    tables = cr.Database.Tables;
+            //    foreach (Table table in tables)
+            //    {
+            //        reportLogonInfo = table.LogOnInfo;
+            //        reportLogonInfo.ConnectionInfo = reportConInfo;
+            //        table.ApplyLogOnInfo(reportLogonInfo);
+            //    }
+            //    f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            //    f2.crystalReportViewer1.ReportSource = cr;
+            //}
+            //this.Visible = false;
 
-            f2.ShowDialog();
-            this.Visible = true;
+            //f2.ShowDialog();
+            //this.Visible = true;
 
 
         }
