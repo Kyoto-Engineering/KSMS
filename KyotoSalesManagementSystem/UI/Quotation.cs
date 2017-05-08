@@ -32,7 +32,7 @@ namespace KyotoSalesManagementSystem.UI
         public string salesClientId, userId, productId, firstProductId, tAmount, hostName,email,name,designation,contact;
         public decimal dmaount = 0, lTAmount = 0, subAmount = 0, takeRemovePric = 0, takeRemoveQuantity = 0, takeRemove = 0, takeRemove2 = 0, presentTotalPrice = 0, tPrice = 0, taxPercent = 0, txVatAmount;
         public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
-        public string pId, referenceNo, mAdv, pDoc, pOD, rOP, myMobAd, myPAS, myPOD, myROP;
+        public string pId, referenceNo, mAdv, pDoc, pOD, rOP, myMobAd, myPAS, myPOD, myROP,brandCode;
         public int quotationId, sClientIdForRefNum, sQN;
         public decimal totalPercent, myMOBAd1, myPAS1, myPOD1, myROP1;
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
@@ -353,12 +353,24 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query = "Select SClientId From RefNumForQuotation where SClientId='" + txtClientId.Text + "'";
+                string query1 = "Select BrandId,BrandCode From Brand where BrandName='" + BrandcomboBox.Text + "'";
+                cmd = new SqlCommand(query1, con);
+                rdr = cmd.ExecuteReader();
+                if (rdr.Read())
+                {
+                    brandid = (rdr.GetInt32(0));
+                    brandCode = (rdr.GetValue(1).ToString());
+                }
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string query = "Select RefNumForQuotation.SClientId From RefNumForQuotation where SClientId='" + txtClientId.Text + "'";
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
                     sClientIdForRefNum = (rdr.GetInt32(0));
+                    
                 }
 
                 if (sClientIdForRefNum == Convert.ToInt32(txtClientId.Text))
@@ -373,13 +385,65 @@ namespace KyotoSalesManagementSystem.UI
                     {
                         sQN = (rdr.GetInt32(0));
                         sQN = sQN + 1;
-                        referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+
+                        if (brandCode == "OIA")
+                        {
+                            referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                        }
+                        else if (brandCode == "KL")
+                        {
+                            referenceNo = "KL-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                        }
+                        else if (brandCode == "AZ")
+                        {
+                            referenceNo = "AZ-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                        }
+                        else if (brandCode == "KBA")
+                        {
+                            referenceNo = "KBA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                        }
+                        else if (brandCode == "IRD")
+                        {
+                            referenceNo = "IRD-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                        }
+                        else if (brandCode == "KW")
+                        {
+                            referenceNo = "KW-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                        }
+
+                        
                     }
                 }
                 else
                 {
                     sQN = 1;
-                    referenceNo = "OIA-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
+
+                    //referenceNo = "OIA-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
+                    if (brandCode == "OIA")
+                    {
+                        referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                    }
+                    else if (brandCode == "KL")
+                    {
+                        referenceNo = "KL-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                    }
+                    else if (brandCode == "AZ")
+                    {
+                        referenceNo = "AZ-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                    }
+                    else if (brandCode == "KBA")
+                    {
+                        referenceNo = "KBA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                    }
+                    else if (brandCode == "IRD")
+                    {
+                        referenceNo = "IRD-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                    }
+                    else if (brandCode == "KW")
+                    {
+                        referenceNo = "KW-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                    }
+
                 }
 
 
@@ -389,7 +453,7 @@ namespace KyotoSalesManagementSystem.UI
                     string cb = "insert into RefNumForQuotation(BrandCode,SClientId,SQN,QuotationId,ReferenceNo) VALUES (@d1,@d2,@d3,@d4,@d5)";
                     cmd = new SqlCommand(cb);
                     cmd.Connection = con;
-                    cmd.Parameters.AddWithValue("d1", "OIA");
+                    cmd.Parameters.AddWithValue("d1", brandCode);
                     cmd.Parameters.AddWithValue("d2", sClientIdForRefNum);
                     cmd.Parameters.AddWithValue("d3", sQN);
                     cmd.Parameters.AddWithValue("d4", quotationId);
@@ -404,7 +468,7 @@ namespace KyotoSalesManagementSystem.UI
                     string cb = "insert into RefNumForQuotation(BrandCode,SClientId,SQN,QuotationId,ReferenceNo) VALUES (@d1,@d2,@d3,@d4,@d5)";
                     cmd = new SqlCommand(cb);
                     cmd.Connection = con;
-                    cmd.Parameters.AddWithValue("d1", "OIA");
+                    cmd.Parameters.AddWithValue("d1", brandCode);
                     cmd.Parameters.AddWithValue("d2", txtClientId.Text);
                     cmd.Parameters.AddWithValue("d3", sQN);
                     cmd.Parameters.AddWithValue("d4", quotationId);
@@ -856,6 +920,7 @@ namespace KyotoSalesManagementSystem.UI
         }
         private void txtSProductId_TextChanged(object sender, EventArgs e)
         {
+            //txtSProductName.Clear();
             try
             {
 
@@ -883,6 +948,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void txtSProductName_TextChanged(object sender, EventArgs e)
         {
+            //txtProId.Clear();
             try
             {
                 con = new SqlConnection(cs.DBConn);
@@ -2106,6 +2172,16 @@ namespace KyotoSalesManagementSystem.UI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void txtProId_Leave(object sender, EventArgs e)
+        {
+            txtProId.Clear();
+        }
+
+        private void txtSProductName_Leave(object sender, EventArgs e)
+        {
+            txtSProductName.Clear();
         }
 
        

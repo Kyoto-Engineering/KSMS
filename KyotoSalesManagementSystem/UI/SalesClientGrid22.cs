@@ -122,6 +122,10 @@ namespace KyotoSalesManagementSystem.UI
                     frm.Show();
                     frm.txtClientId.Text = dr.Cells[0].Value.ToString();
                     frm.txtClientName.Text = dr.Cells[1].Value.ToString();
+                    frm.BrandcomboBox.Enabled = true;
+                    frm.groupBox3.Enabled = false;
+                    frm.groupBox2.Enabled = false;
+                    frm.groupBox7.Enabled = false;
                     frm.labelm.Text = labeln.Text;
                     frm.dateTimePicker1.Focus();
                     //frm.txtAttention.Focus();

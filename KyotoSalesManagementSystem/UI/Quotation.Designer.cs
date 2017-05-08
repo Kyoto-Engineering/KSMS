@@ -1096,6 +1096,7 @@
             this.txtSProductName.Size = new System.Drawing.Size(161, 26);
             this.txtSProductName.TabIndex = 7;
             this.txtSProductName.TextChanged += new System.EventHandler(this.txtSProductName_TextChanged);
+            this.txtSProductName.Leave += new System.EventHandler(this.txtSProductName_Leave);
             // 
             // label4
             // 
@@ -1168,6 +1169,7 @@
             this.txtProId.Size = new System.Drawing.Size(145, 25);
             this.txtProId.TabIndex = 6;
             this.txtProId.TextChanged += new System.EventHandler(this.txtSProductId_TextChanged);
+            this.txtProId.Leave += new System.EventHandler(this.txtProId_Leave);
             // 
             // dateTimePicker1
             // 
