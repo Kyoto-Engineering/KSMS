@@ -893,9 +893,6 @@
     <None Include="DAO\BArcode.xss">
       <DependentUpon>BArcode.xsd</DependentUpon>
     </None>
-    <None Include="Employees.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="KyotoSalesManagementSystem_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -938,7 +935,6 @@
     <None Include="Resources\Sales Management System.jpg" />
     <None Include="Resources\Sales Management System55.jpg" />
     <None Include="Resources\12.jpg" />
-    <Content Include="Employees.xml" />
     <Content Include="sales_management_system_2_Jpe_icon.ico" />
     <Content Include="sales_management_system_EVN_icon.ico" />
   </ItemGroup>
