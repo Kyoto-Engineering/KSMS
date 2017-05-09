@@ -21,13 +21,30 @@ namespace KyotoSalesManagementSystem.UI
         private SqlCommand cmd;
         ConnectionString cs = new ConnectionString();
         private SqlDataReader rdr;
-        public int userId, orderId;
+        public int userId, orderId, brandid;
         public string qtype;
         public DeliveryOrder()
         {
             InitializeComponent();
         }
 
+        void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Your background task goes here
+            for (int i = 0; i <= 20; i++)
+            {
+                // Report progress to 'UI' thread
+                backgroundWorker1.ReportProgress(i);
+                // Simulate long task
+                System.Threading.Thread.Sleep(100);
+            }
+        }
+        // Back on the 'UI' thread so we can update the progress bar
+        void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            // The progress percentage is a property of e
+            progressBar1.Value = e.ProgressPercentage;
+        }
         private void DeliveryOrder_Load(object sender, EventArgs e)
         {
             userId = frmLogin.uId;
@@ -40,7 +57,7 @@ namespace KyotoSalesManagementSystem.UI
             try
             {
                 con = new SqlConnection(cs.DBConn);
-                string cd = "SELECT QType FROM Quotation where QuotationId='" + comboBox1.Text + "'";
+                string cd = "SELECT QType,BrandId FROM Quotation where QuotationId='" + comboBox1.Text + "'";
                 cmd =new SqlCommand(cd);
                 cmd.Connection = con;
                 con.Open();
@@ -48,6 +65,7 @@ namespace KyotoSalesManagementSystem.UI
                 while (rdr.Read())
                 {
                     qtype = (rdr.GetString(0));
+                    brandid = Convert.ToInt32(rdr["BrandId"]);
                 }
                 con.Close();
                 con = new SqlConnection(cs.DBConn);
@@ -63,8 +81,16 @@ namespace KyotoSalesManagementSystem.UI
                 orderId = (int)cmd.ExecuteScalar();
                 con.Close();
                 MessageBox.Show("Successfully Submitted", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Report1();
-                Report2();
+
+                if (qtype == "General")
+                {
+                    Report1();
+                }
+                else
+                {
+                    Report2();
+                }
+                
                 Reset();
                 
             }
@@ -114,141 +140,193 @@ namespace KyotoSalesManagementSystem.UI
         }
         private void Report1()
         {
+            button1.Enabled = false;
+            backgroundWorker1.RunWorkerAsync();
+            progressBar1.Visible = true;
 
-           
-            //ParameterField paramField1 = new ParameterField();
+            // To report progress from the background worker we need to set this property
+            backgroundWorker1.WorkerReportsProgress = true;
+            // This event will be raised on the worker thread when the worker starts
+            backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
+            // This event will be raised when we call ReportProgress
+            backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
+
+            ParameterField paramField1 = new ParameterField();
 
 
-            ////creating an object of ParameterFields class
-            //ParameterFields paramFields1 = new ParameterFields();
+            //creating an object of ParameterFields class
+            ParameterFields paramFields1 = new ParameterFields();
 
-            ////creating an object of ParameterDiscreteValue class
-            //ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+            //creating an object of ParameterDiscreteValue class
+            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
 
-            ////set the parameter field name
-            //paramField1.Name = "id";
+            //set the parameter field name
+            paramField1.Name = "id";
 
-            ////set the parameter value
-            //paramDiscreteValue1.Value = orderId;
+            //set the parameter value
+            paramDiscreteValue1.Value = orderId;
 
-            ////add the parameter value in the ParameterField object
-            //paramField1.CurrentValues.Add(paramDiscreteValue1);
+            //add the parameter value in the ParameterField object
+            paramField1.CurrentValues.Add(paramDiscreteValue1);
 
-            ////add the parameter in the ParameterFields object
-            //paramFields1.Add(paramField1);
-            //ReportView f2 = new ReportView();
-            //TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
-            //TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
-            //ConnectionInfo reportConInfo = new ConnectionInfo();
-            //Tables tables = default(Tables);
-            ////	Table table = default(Table);
-            //var with1 = reportConInfo;
-            //with1.ServerName = "tcp:KyotoServer,49172";
-            //with1.DatabaseName = "ProductNRelatedDB";
-            //with1.UserID = "sa";
-            //with1.Password = "SystemAdministrator";
-            //if (qtype=="Custom")
-            //{
-            //   DOC cr = new DOC();
-            //   tables = cr.Database.Tables;
-            //   foreach (Table table in tables)
-            //   {
-            //       reportLogonInfo = table.LogOnInfo;
-            //       reportLogonInfo.ConnectionInfo = reportConInfo;
-            //       table.ApplyLogOnInfo(reportLogonInfo);
-            //   }
-            //   f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-            //   f2.crystalReportViewer1.ReportSource = cr;
-            //}
-            //else
-            //{
-            //    DO cr =new DO();
-            //    tables = cr.Database.Tables;
-            //    foreach (Table table in tables)
-            //    {
-            //        reportLogonInfo = table.LogOnInfo;
-            //        reportLogonInfo.ConnectionInfo = reportConInfo;
-            //        table.ApplyLogOnInfo(reportLogonInfo);
-            //    }
-            //    f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-            //    f2.crystalReportViewer1.ReportSource = cr;
-            //}
-            
-           
-            //this.Visible = false;
-
-            //f2.ShowDialog();
-            //this.Visible = true;
-           
+            //add the parameter in the ParameterFields object
+            paramFields1.Add(paramField1);
+            ReportView f2 = new ReportView();
+            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            ConnectionInfo reportConInfo = new ConnectionInfo();
+            Tables tables = default(Tables);
+            //	Table table = default(Table);
+            var with1 = reportConInfo;
+            with1.ServerName = "tcp:KyotoServer,49172";
+            with1.DatabaseName = "ProductNRelatedDB";
+            with1.UserID = "sa";
+            with1.Password = "SystemAdministrator";
+            ReportDocument cr = new ReportDocument();
+            if (brandid == 1)
+            {
+                cr = new DOOmron();
+            }
+            else if (brandid == 2)
+            {
+                cr = new DOWithoutLogo();
+            }
+            else if (brandid == 3)
+            {
+                cr = new DOAzbil();
+            }
+            else if (brandid == 4)
+            {
+                cr = new DOBusinessAutomation();
+            }
+            else if (brandid == 5)
+            {
+                cr = new DOIRD();
+            }
+            else if (brandid == 6)
+            {
+                cr = new DOKawaShima();
+            }
+                
+                tables = cr.Database.Tables;
+                foreach (Table table in tables)
+                {
+                    reportLogonInfo = table.LogOnInfo;
+                    reportLogonInfo.ConnectionInfo = reportConInfo;
+                    table.ApplyLogOnInfo(reportLogonInfo);
+                }
+                f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+                f2.crystalReportViewer1.ReportSource = cr;           
+            this.Visible = false;
+            f2.ShowDialog();
+            this.Visible = true;
+            backgroundWorker1.CancelAsync();
+            backgroundWorker1.Dispose();
+            progressBar1.Visible = false;
+            button1.Enabled = true;
             
         }
         private void Report2()
         {
 
 
-            //ParameterField paramField1 = new ParameterField();
+            ParameterField paramField1 = new ParameterField();
 
 
-            ////creating an object of ParameterFields class
-            //ParameterFields paramFields1 = new ParameterFields();
+            //creating an object of ParameterFields class
+            ParameterFields paramFields1 = new ParameterFields();
 
-            ////creating an object of ParameterDiscreteValue class
-            //ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+            //creating an object of ParameterDiscreteValue class
+            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
 
-            ////set the parameter field name
-            //paramField1.Name = "id";
+            //set the parameter field name
+            paramField1.Name = "id";
 
-            ////set the parameter value
-            //paramDiscreteValue1.Value = orderId;
+            //set the parameter value
+            paramDiscreteValue1.Value = orderId;
 
-            ////add the parameter value in the ParameterField object
-            //paramField1.CurrentValues.Add(paramDiscreteValue1);
+            //add the parameter value in the ParameterField object
+            paramField1.CurrentValues.Add(paramDiscreteValue1);
 
-            ////add the parameter in the ParameterFields object
-            //paramFields1.Add(paramField1);
-            //ReportView f2 = new ReportView();
-            //TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
-            //TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
-            //ConnectionInfo reportConInfo = new ConnectionInfo();
-            //Tables tables = default(Tables);
-            ////	Table table = default(Table);
-            //var with1 = reportConInfo;
-            //with1.ServerName = "tcp:KyotoServer,49172";
-            //with1.DatabaseName = "ProductNRelatedDB";
-            //with1.UserID = "sa";
-            //with1.Password = "SystemAdministrator";
-            //if (qtype == "Custom")
+            //add the parameter in the ParameterFields object
+            paramFields1.Add(paramField1);
+            ReportView f2 = new ReportView();
+            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            ConnectionInfo reportConInfo = new ConnectionInfo();
+            Tables tables = default(Tables);
+            //	Table table = default(Table);
+            var with1 = reportConInfo;
+            with1.ServerName = "tcp:KyotoServer,49172";
+            with1.DatabaseName = "ProductNRelatedDB";
+            with1.UserID = "sa";
+            with1.Password = "SystemAdministrator";
+            ReportDocument cr = new ReportDocument();
+            if (brandid == 1)
+            {
+                cr = new DOCOmron();
+            }
+            else if (brandid == 2)
+            {
+                cr = new DOCWithoutLogo();
+            }
+            else if (brandid == 3)
+            {
+                cr = new DOCAzbil();
+            }
+            else if (brandid == 4)
+            {
+                cr = new DOCBusinessAutomation();
+            }
+            else if (brandid == 5)
+            {
+                cr = new DOCIRD();
+            }
+            else if (brandid == 6)
+            {
+                cr = new DOCKawaShima();
+            }
+
+            tables = cr.Database.Tables;
+            foreach (Table table in tables)
+            {
+                reportLogonInfo = table.LogOnInfo;
+                reportLogonInfo.ConnectionInfo = reportConInfo;
+                table.ApplyLogOnInfo(reportLogonInfo);
+            }
+            f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            f2.crystalReportViewer1.ReportSource = cr;
+            this.Visible = false;
+            f2.ShowDialog();
+            this.Visible = true;
+
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //try
             //{
-            //    DOOC cr = new DOOC();
-            //    tables = cr.Database.Tables;
-            //    foreach (Table table in tables)
+            //    con = new SqlConnection(cs.DBConn);
+            //    con.Open();
+            //    //string ct = "select   T.QuotationId, T.QType, BrandId from  Quotation T JOIN RefNumForQuotation N ON T.QuotationId = N.QuotationId  where N.ReferenceNo='" + comboBox1.Text + "'";
+            //    string ct = "SELECT dbo.Quotation.BrandId FROM dbo.Brand INNER JOIN dbo.Quotation ON dbo.Brand.BrandId = dbo.Quotation.BrandId  where QuotationId='" + comboBox1.Text + "'";
+            //    cmd = new SqlCommand(ct);
+            //    cmd.Connection = con;
+            //    rdr = cmd.ExecuteReader();
+
+            //    if (rdr.Read())
             //    {
-            //        reportLogonInfo = table.LogOnInfo;
-            //        reportLogonInfo.ConnectionInfo = reportConInfo;
-            //        table.ApplyLogOnInfo(reportLogonInfo);
+                    
+            //        brandid = Convert.ToInt32(rdr["BrandId"]);
             //    }
-            //    f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-            //    f2.crystalReportViewer1.ReportSource = cr;
+            //    con.Close();
+
             //}
-            //else
+            //catch (Exception ex)
             //{
-            //    DOO cr = new DOO();
-            //    tables = cr.Database.Tables;
-            //    foreach (Table table in tables)
-            //    {
-            //        reportLogonInfo = table.LogOnInfo;
-            //        reportLogonInfo.ConnectionInfo = reportConInfo;
-            //        table.ApplyLogOnInfo(reportLogonInfo);
-            //    }
-            //    f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-            //    f2.crystalReportViewer1.ReportSource = cr;
+            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //}
-            //this.Visible = false;
-
-            //f2.ShowDialog();
-            //this.Visible = true;
-
-
         }
 
     }

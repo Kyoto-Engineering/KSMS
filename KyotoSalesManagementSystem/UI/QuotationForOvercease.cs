@@ -1265,7 +1265,31 @@ namespace KyotoSalesManagementSystem.UI
             with1.DatabaseName = "ProductNRelatedDB";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
-            CrystalReport2 cr = new CrystalReport2();
+            ReportDocument cr = new ReportDocument();
+            if (brandid == 1)
+            {
+                cr = new Reports.Invoice();
+            }
+            else if (brandid == 2)
+            {
+                cr = new InvoiceKEAL();
+            }
+            else if (brandid == 3)
+            {
+                cr = new InvoiceAzbil();
+            }
+            else if (brandid == 4)
+            {
+                cr = new InvoiceBA();
+            }
+            else if (brandid == 5)
+            {
+                cr = new InvoiceIRD();
+            }
+            else if (brandid == 6)
+            {
+                cr = new InvoiceKawaShima();
+            }
             tables = cr.Database.Tables;
             foreach (Table table in tables)
             {
