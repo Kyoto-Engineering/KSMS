@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>\\KYOTOSERVER\Share\Softwares\Kyoto Sales Management System\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -41,6 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +52,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>97C1B4C3E469D0490BCD68E327D9A0B5F2EA2F97</ManifestCertificateThumbprint>
@@ -79,6 +82,10 @@
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Neodynamic.WinControls.BarcodeProfessional, Version=9.0.2000.0, Culture=neutral, PublicKeyToken=c6b33c3093a0d4cd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Neodynamic.WinControls.BarcodeProfessional.9.0.2017.115\lib\Neodynamic.WinControls.BarcodeProfessional.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -91,8 +98,21 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="zxing, Version=0.15.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.15.0\lib\net40\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.15.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.15.0\lib\net40\zxing.presentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\BArcode.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BArcode.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DBGateway\ConnectionGateway.cs" />
     <Compile Include="DBGateway\ConnectionString.cs" />
     <Compile Include="LoginUI\ChangePassword.cs">
@@ -121,6 +141,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\BarCode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BarCode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\CQWithoutLogo.cs">
       <DependentUpon>CQWithoutLogo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -582,6 +608,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\BarCode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BarCode.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CQWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CQWithoutLogo.cs</LastGenOutput>
@@ -851,7 +881,23 @@
     <EmbeddedResource Include="UI\WorkOrder.resx">
       <DependentUpon>WorkOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="DAO\BArcode.xsc">
+      <DependentUpon>BArcode.xsd</DependentUpon>
+    </None>
+    <None Include="DAO\BArcode.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BArcode.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAO\BArcode.xss">
+      <DependentUpon>BArcode.xsd</DependentUpon>
+    </None>
+    <None Include="Employees.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="KyotoSalesManagementSystem_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -863,7 +909,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAO\" />
     <Folder Include="Gateway\" />
     <Folder Include="Manager\" />
   </ItemGroup>
@@ -893,6 +938,7 @@
     <None Include="Resources\Sales Management System.jpg" />
     <None Include="Resources\Sales Management System55.jpg" />
     <None Include="Resources\12.jpg" />
+    <Content Include="Employees.xml" />
     <Content Include="sales_management_system_2_Jpe_icon.ico" />
     <Content Include="sales_management_system_EVN_icon.ico" />
   </ItemGroup>
