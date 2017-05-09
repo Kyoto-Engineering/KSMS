@@ -124,6 +124,8 @@
             this.txtDesignation = new wmgCMS.WaterMarkTextBox();
             this.txtAttention = new wmgCMS.WaterMarkTextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.BrandcomboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -232,9 +234,9 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox1.Location = new System.Drawing.Point(11, 183);
+            this.groupBox1.Location = new System.Drawing.Point(12, 217);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(377, 466);
+            this.groupBox1.Size = new System.Drawing.Size(376, 442);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General  Terms and Conditions";
@@ -257,7 +259,7 @@
             this.groupBox5.Controls.Add(this.checkPOD);
             this.groupBox5.Controls.Add(this.checkROP);
             this.groupBox5.ForeColor = System.Drawing.Color.Red;
-            this.groupBox5.Location = new System.Drawing.Point(5, 42);
+            this.groupBox5.Location = new System.Drawing.Point(5, 44);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(372, 137);
             this.groupBox5.TabIndex = 1;
@@ -438,7 +440,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(128, 218);
+            this.label9.Location = new System.Drawing.Point(128, 214);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 15);
             this.label9.TabIndex = 81;
@@ -447,16 +449,17 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(11, 452);
+            this.label29.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(11, 421);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(47, 15);
+            this.label29.Size = new System.Drawing.Size(45, 13);
             this.label29.TabIndex = 80;
             this.label29.Text = "label29";
             // 
             // txtQuotNote
             // 
             this.txtQuotNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtQuotNote.Location = new System.Drawing.Point(7, 243);
+            this.txtQuotNote.Location = new System.Drawing.Point(7, 235);
             this.txtQuotNote.Multiline = true;
             this.txtQuotNote.Name = "txtQuotNote";
             this.txtQuotNote.Size = new System.Drawing.Size(292, 53);
@@ -468,7 +471,7 @@
             // txtOfferValidity
             // 
             this.txtOfferValidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtOfferValidity.Location = new System.Drawing.Point(109, 16);
+            this.txtOfferValidity.Location = new System.Drawing.Point(109, 19);
             this.txtOfferValidity.Name = "txtOfferValidity";
             this.txtOfferValidity.Size = new System.Drawing.Size(78, 20);
             this.txtOfferValidity.TabIndex = 0;
@@ -481,7 +484,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label27.Location = new System.Drawing.Point(11, 182);
+            this.label27.Location = new System.Drawing.Point(11, 188);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(79, 15);
             this.label27.TabIndex = 77;
@@ -490,7 +493,7 @@
             // txtLeadTime
             // 
             this.txtLeadTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtLeadTime.Location = new System.Drawing.Point(96, 180);
+            this.txtLeadTime.Location = new System.Drawing.Point(96, 186);
             this.txtLeadTime.Name = "txtLeadTime";
             this.txtLeadTime.Size = new System.Drawing.Size(71, 20);
             this.txtLeadTime.TabIndex = 2;
@@ -507,9 +510,9 @@
             this.columnHeader7});
             this.listView2.FullRowSelect = true;
             this.listView2.GridLines = true;
-            this.listView2.Location = new System.Drawing.Point(7, 304);
+            this.listView2.Location = new System.Drawing.Point(7, 293);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(365, 145);
+            this.listView2.Size = new System.Drawing.Size(365, 123);
             this.listView2.TabIndex = 75;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -528,7 +531,7 @@
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Blue;
-            this.button2.Location = new System.Drawing.Point(305, 240);
+            this.button2.Location = new System.Drawing.Point(305, 232);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(63, 53);
             this.button2.TabIndex = 4;
@@ -540,7 +543,7 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(8, 213);
+            this.label26.Location = new System.Drawing.Point(8, 209);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(114, 22);
             this.label26.TabIndex = 44;
@@ -551,7 +554,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label15.Location = new System.Drawing.Point(8, 18);
+            this.label15.Location = new System.Drawing.Point(8, 21);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(95, 15);
             this.label15.TabIndex = 58;
@@ -1098,7 +1101,7 @@
             this.groupBox6.Controls.Add(this.dateTimePicker1);
             this.groupBox6.Controls.Add(this.label13);
             this.groupBox6.Controls.Add(this.label1);
-            this.groupBox6.Location = new System.Drawing.Point(5, 44);
+            this.groupBox6.Location = new System.Drawing.Point(5, 81);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(312, 133);
             this.groupBox6.TabIndex = 114;
@@ -1177,12 +1180,37 @@
             this.groupBox7.TabIndex = 115;
             this.groupBox7.TabStop = false;
             // 
+            // BrandcomboBox
+            // 
+            this.BrandcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.BrandcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.BrandcomboBox.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrandcomboBox.FormattingEnabled = true;
+            this.BrandcomboBox.Location = new System.Drawing.Point(112, 53);
+            this.BrandcomboBox.Name = "BrandcomboBox";
+            this.BrandcomboBox.Size = new System.Drawing.Size(199, 25);
+            this.BrandcomboBox.TabIndex = 805;
+            this.BrandcomboBox.SelectedIndexChanged += new System.EventHandler(this.BrandcomboBox_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Blue;
+            this.label4.Location = new System.Drawing.Point(56, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 19);
+            this.label4.TabIndex = 806;
+            this.label4.Text = "Brand";
+            // 
             // QuotationForCustom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(1352, 653);
+            this.ClientSize = new System.Drawing.Size(1352, 663);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.BrandcomboBox);
             this.Controls.Add(this.labelm);
             this.Controls.Add(this.labelg);
             this.Controls.Add(this.labelv);
@@ -1242,7 +1270,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.GroupBox groupBox3;
+        public System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtCountryOfOrigin;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label25;
@@ -1258,7 +1286,7 @@
         public System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -1311,10 +1339,12 @@
         private wmgCMS.WaterMarkTextBox waterMarkTextBox1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.RichTextBox txtSpecification;
         private System.Windows.Forms.ColumnHeader columnHeader10;
+        public System.Windows.Forms.ComboBox BrandcomboBox;
+        private System.Windows.Forms.Label label4;
 
 
     }
