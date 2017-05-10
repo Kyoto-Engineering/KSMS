@@ -1730,12 +1730,12 @@ namespace KyotoSalesManagementSystem.UI
             {
                
                 Format = BarcodeFormat.CODE_128,
-            //    Options = new EncodingOptions
-            //    {
-            //    PureBarcode = true,
-            //    //Height = 100,
-            //    //Width = 300
-            //}
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
             };
             var png = writer.Write(content);
             System.IO.MemoryStream ms = new System.IO.MemoryStream();

@@ -9,7 +9,10 @@ using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using KyotoSalesManagementSystem.DAO;
 using KyotoSalesManagementSystem.DBGateway;
+using ZXing;
+using ZXing.Common;
 
 namespace KyotoSalesManagementSystem.Reports
 {
@@ -19,7 +22,7 @@ namespace KyotoSalesManagementSystem.Reports
         private SqlCommand cmd;
         ConnectionString cs = new ConnectionString();
         private SqlDataReader rdr;
-        public int quotationId;
+        public int quotationId, brandid;
         public string qtype;
         public QUI()
         {
@@ -77,14 +80,20 @@ namespace KyotoSalesManagementSystem.Reports
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            if (qtype == "Omron")
+            if (comboBox1.SelectedIndex!=-1)
             {
-                Report1();
+                if (qtype == "General")
+                {
+                    Report1();
+                }
+                else
+                {
+                    Report2();
+                }
             }
             else
             {
-                Report2();
+                MessageBox.Show(@"Select Refrenece No First");
             }
         }
 
@@ -94,7 +103,7 @@ namespace KyotoSalesManagementSystem.Reports
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string ct = "select   T.QuotationId, T.QType from  Quotation T JOIN RefNumForQuotation N ON T.QuotationId = N.QuotationId  where N.ReferenceNo='" + comboBox1.Text  + "'";
+                string ct = "select   T.QuotationId, T.QType, T.BrandId from  Quotation T JOIN RefNumForQuotation N ON T.QuotationId = N.QuotationId  where N.ReferenceNo='" + comboBox1.Text + "'";
                 cmd = new SqlCommand(ct);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();
@@ -104,6 +113,7 @@ namespace KyotoSalesManagementSystem.Reports
                        // txtBalance.Text = (rdr.GetDouble(0).ToString());
                         quotationId = (rdr.GetInt32(0));
                         qtype = (rdr.GetString(1));
+                        brandid = Convert.ToInt32(rdr["BrandId"]);
                     }
                 con.Close();
 
@@ -157,7 +167,33 @@ namespace KyotoSalesManagementSystem.Reports
             with1.DatabaseName = "ProductNRelatedDB";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
-            CrystalReport2 cr = new CrystalReport2();
+            ReportDocument cr = new ReportDocument();
+            if (brandid == 1)
+            {
+                cr = new CrystalReport2();
+            }
+            else if (brandid == 2)
+            {
+                cr = new QuotationKEAL();
+            }
+            else if (brandid == 3)
+            {
+                cr = new QuotationAzbil();
+            }
+            else if (brandid == 4)
+            {
+                cr = new QuotationBusinessAutomation();
+            }
+            else if (brandid == 5)
+            {
+                cr = new QuotationIRD();
+            }
+            else if (brandid == 6)
+            {
+                cr = new QuotationKawasima();
+            }
+
+
             tables = cr.Database.Tables;
             foreach (Table table in tables)
             {
@@ -165,6 +201,30 @@ namespace KyotoSalesManagementSystem.Reports
                 reportLogonInfo.ConnectionInfo = reportConInfo;
                 table.ApplyLogOnInfo(reportLogonInfo);
             }
+            BArcode ds = new BArcode();
+
+            var content = comboBox1.Text;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = false,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = comboBox1.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
             f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
             f2.crystalReportViewer1.ReportSource = cr;
             this.Visible = false;
