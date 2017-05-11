@@ -210,7 +210,7 @@ namespace KyotoSalesManagementSystem.Reports
                 Format = BarcodeFormat.CODE_128,
                 Options = new EncodingOptions
                 {
-                    PureBarcode = false,
+                    PureBarcode = true,
                     Height = 100,
                     Width = 450
                 }

@@ -9,7 +9,10 @@ using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using KyotoSalesManagementSystem.DAO;
 using KyotoSalesManagementSystem.DBGateway;
+using ZXing;
+using ZXing.Common;
 
 namespace KyotoSalesManagementSystem.Reports
 {
@@ -96,84 +99,6 @@ namespace KyotoSalesManagementSystem.Reports
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void Report11()
-        {
-            //button1.Enabled = false;
-            //backgroundWorker1.RunWorkerAsync();
-            //progressBar1.Visible = true;
-
-            //// To report progress from the background worker we need to set this property
-            //backgroundWorker1.WorkerReportsProgress = true;
-            //// This event will be raised on the worker thread when the worker starts
-            //backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
-            //// This event will be raised when we call ReportProgress
-            //backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
-            //ParameterField paramField1 = new ParameterField();
-
-
-            ////creating an object of ParameterFields class
-            //ParameterFields paramFields1 = new ParameterFields();
-
-            ////creating an object of ParameterDiscreteValue class
-            //ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
-
-            ////set the parameter field name
-            //paramField1.Name = "id";
-
-            ////set the parameter value
-            //paramDiscreteValue1.Value = quotationId;
-
-            ////add the parameter value in the ParameterField object
-            //paramField1.CurrentValues.Add(paramDiscreteValue1);
-
-            ////add the parameter in the ParameterFields object
-            //paramFields1.Add(paramField1);
-            //ReportView f2 = new ReportView();
-            //TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
-            //TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
-            //ConnectionInfo reportConInfo = new ConnectionInfo();
-            //Tables tables = default(Tables);
-            ////	Table table = default(Table);
-            //var with1 = reportConInfo;
-            //with1.ServerName = "tcp:KyotoServer,49172";
-            //with1.DatabaseName = "ProductNRelatedDB";
-            //with1.UserID = "sa";
-            //with1.Password = "SystemAdministrator";
-            // if (qtype=="Custom")
-            //{
-            //   DOC cr = new DOC();
-            //   tables = cr.Database.Tables;
-            //   foreach (Table table in tables)
-            //   {
-            //       reportLogonInfo = table.LogOnInfo;
-            //       reportLogonInfo.ConnectionInfo = reportConInfo;
-            //       table.ApplyLogOnInfo(reportLogonInfo);
-            //   }
-            //   f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-            //   f2.crystalReportViewer1.ReportSource = cr;
-            //}
-            //else
-            //{
-            //    DO cr =new DO();
-            //    tables = cr.Database.Tables;
-            //    foreach (Table table in tables)
-            //    {
-            //        reportLogonInfo = table.LogOnInfo;
-            //        reportLogonInfo.ConnectionInfo = reportConInfo;
-            //        table.ApplyLogOnInfo(reportLogonInfo);
-            //    }
-            //    f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
-            //    f2.crystalReportViewer1.ReportSource = cr;
-            //}
-            //this.Visible = false;
-
-            //f2.ShowDialog();
-            //this.Visible = true;
-            //backgroundWorker1.CancelAsync();
-            //backgroundWorker1.Dispose();
-            //progressBar1.Visible = false;
-            //button1.Enabled = true;
-        }
 
         private void Report1()
         {
@@ -251,6 +176,30 @@ namespace KyotoSalesManagementSystem.Reports
                     reportLogonInfo.ConnectionInfo = reportConInfo;
                     table.ApplyLogOnInfo(reportLogonInfo);
                 }
+            BArcode ds = new BArcode();
+
+            var content = comboBox1.Text;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = comboBox1.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
                 f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
                 f2.crystalReportViewer1.ReportSource = cr;
             
@@ -340,6 +289,30 @@ namespace KyotoSalesManagementSystem.Reports
                 reportLogonInfo.ConnectionInfo = reportConInfo;
                 table.ApplyLogOnInfo(reportLogonInfo);
             }
+            BArcode ds = new BArcode();
+
+            var content = comboBox1.Text;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = comboBox1.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
             f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
             f2.crystalReportViewer1.ReportSource = cr;
 
