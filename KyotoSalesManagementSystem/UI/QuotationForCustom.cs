@@ -12,9 +12,12 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using KyotoSalesManagementSystem.DAO;
 using KyotoSalesManagementSystem.DBGateway;
 using KyotoSalesManagementSystem.LoginUI;
 using KyotoSalesManagementSystem.Reports;
+using ZXing;
+using ZXing.Common;
 
 namespace KyotoSalesManagementSystem.UI
 {
@@ -1313,7 +1316,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "NewProductList1";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
@@ -1348,6 +1351,30 @@ namespace KyotoSalesManagementSystem.UI
                 reportLogonInfo.ConnectionInfo = reportConInfo;
                 table.ApplyLogOnInfo(reportLogonInfo);
             }
+            BArcode ds = new BArcode();
+
+            var content = referenceNo;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = referenceNo;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
             f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
             f2.crystalReportViewer1.ReportSource = cr;
             this.Visible = false;

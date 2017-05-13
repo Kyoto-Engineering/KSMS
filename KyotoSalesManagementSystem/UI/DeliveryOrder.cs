@@ -9,9 +9,12 @@ using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using KyotoSalesManagementSystem.DAO;
 using KyotoSalesManagementSystem.DBGateway;
 using KyotoSalesManagementSystem.LoginUI;
 using KyotoSalesManagementSystem.Reports;
+using ZXing;
+using ZXing.Common;
 
 namespace KyotoSalesManagementSystem.UI
 {
@@ -22,7 +25,7 @@ namespace KyotoSalesManagementSystem.UI
         ConnectionString cs = new ConnectionString();
         private SqlDataReader rdr;
         public int userId, orderId, brandid;
-        public string qtype;
+        public string qtype, refid;
         public DeliveryOrder()
         {
             InitializeComponent();
@@ -57,7 +60,7 @@ namespace KyotoSalesManagementSystem.UI
             try
             {
                 con = new SqlConnection(cs.DBConn);
-                string cd = "SELECT QType,BrandId FROM Quotation where QuotationId='" + comboBox1.Text + "'";
+                string cd = "SELECT Quotation.QType, Quotation.BrandId, RefNumForQuotation.ReferenceNo FROM Quotation INNER JOIN RefNumForQuotation ON Quotation.QuotationId = RefNumForQuotation.QuotationId WHERE Quotation.QuotationId = '" + comboBox1.Text + "'";
                 cmd =new SqlCommand(cd);
                 cmd.Connection = con;
                 con.Open();
@@ -66,6 +69,7 @@ namespace KyotoSalesManagementSystem.UI
                 {
                     qtype = (rdr.GetString(0));
                     brandid = Convert.ToInt32(rdr["BrandId"]);
+                    refid = (rdr.GetString(2));
                 }
                 con.Close();
                 con = new SqlConnection(cs.DBConn);
@@ -179,7 +183,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "NewProductList1";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
@@ -215,6 +219,60 @@ namespace KyotoSalesManagementSystem.UI
                     reportLogonInfo.ConnectionInfo = reportConInfo;
                     table.ApplyLogOnInfo(reportLogonInfo);
                 }
+        
+            Sections                              m_boSections;
+            ReportObjects                    m_boReportObjects;
+            SubreportObject                 m_boSubreportObject;
+            //create a new ReportDocument
+      
+     
+            //get all the sections in the report
+            m_boSections =cr.ReportDefinition.Sections;
+            //loop through each section of the report
+            foreach (Section m_boSection in m_boSections)
+            {
+                m_boReportObjects = m_boSection.ReportObjects;
+                //loop through each report object
+                foreach ( ReportObject m_boReportObject in m_boReportObjects)
+                {
+                    if (m_boReportObject.Kind == ReportObjectKind.SubreportObject)
+                    {
+                        //get the actual subreport object
+                        m_boSubreportObject = (SubreportObject) m_boReportObject;
+                   
+                        //set subreport to the dataset e.g.;
+// boReportDocument.SetDataSource(oDataSet);
+// or 
+// boTable.SetDataSource(oDataSet.Tables[tableName]);
+                    }
+                }
+            }
+            //show in reportviewer
+            //crystalReportViewer1.ReportSource = m_boReportDocument;
+            BArcode ds = new BArcode();
+
+            var content = refid.ToString();
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = comboBox1.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
                 f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
                 f2.crystalReportViewer1.ReportSource = cr;           
             this.Visible = false;
@@ -258,7 +316,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "NewProductList1";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
@@ -294,6 +352,30 @@ namespace KyotoSalesManagementSystem.UI
                 reportLogonInfo.ConnectionInfo = reportConInfo;
                 table.ApplyLogOnInfo(reportLogonInfo);
             }
+            BArcode ds = new BArcode();
+
+            var content = refid.ToString();
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = comboBox1.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
             f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
             f2.crystalReportViewer1.ReportSource = cr;
             this.Visible = false;

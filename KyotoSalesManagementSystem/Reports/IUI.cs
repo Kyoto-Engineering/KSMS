@@ -9,7 +9,10 @@ using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using KyotoSalesManagementSystem.DAO;
 using KyotoSalesManagementSystem.DBGateway;
+using ZXing;
+using ZXing.Common;
 
 namespace KyotoSalesManagementSystem.Reports
 {
@@ -180,6 +183,30 @@ namespace KyotoSalesManagementSystem.Reports
                 reportLogonInfo.ConnectionInfo = reportConInfo;
                 table.ApplyLogOnInfo(reportLogonInfo);
             }
+            BArcode ds = new BArcode();
+
+            var content = comboBox1.Text;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = comboBox1.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
             f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
             f2.crystalReportViewer1.ReportSource = cr;
             this.Visible = false;
@@ -267,6 +294,30 @@ namespace KyotoSalesManagementSystem.Reports
                 reportLogonInfo.ConnectionInfo = reportConInfo;
                 table.ApplyLogOnInfo(reportLogonInfo);
             }
+            BArcode ds = new BArcode();
+
+            var content = comboBox1.Text;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 450
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = comboBox1.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
             f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
             f2.crystalReportViewer1.ReportSource = cr;
             this.Visible = false;

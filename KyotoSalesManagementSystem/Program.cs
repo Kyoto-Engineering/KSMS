@@ -19,7 +19,7 @@ namespace KyotoSalesManagementSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new MainUI());
-            Application.Run(new QUI());
+            Application.Run(new frmLogin());
             //Application.Run(new Invoice());
             //Application.Run(new DeliveryOrder());
             //Application.Run(new Quotation());
