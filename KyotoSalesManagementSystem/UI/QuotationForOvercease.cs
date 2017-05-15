@@ -1271,27 +1271,27 @@ namespace KyotoSalesManagementSystem.UI
             ReportDocument cr = new ReportDocument();
             if (brandid == 1)
             {
-                cr = new Reports.Invoice();
+                cr = new CrystalReport2();
             }
             else if (brandid == 2)
             {
-                cr = new InvoiceKEAL();
+                cr = new QuotationKEAL();
             }
             else if (brandid == 3)
             {
-                cr = new InvoiceAzbil();
+                cr = new QuotationAzbil();
             }
             else if (brandid == 4)
             {
-                cr = new InvoiceBA();
+                cr = new QuotationBusinessAutomation();
             }
             else if (brandid == 5)
             {
-                cr = new InvoiceIRD();
+                cr = new QuotationIRD();
             }
             else if (brandid == 6)
             {
-                cr = new InvoiceKawaShima();
+                cr = new QuotationKawasima();
             }
             tables = cr.Database.Tables;
             foreach (Table table in tables)
