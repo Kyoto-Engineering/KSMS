@@ -26,7 +26,7 @@
     <ProductName>Kyoto Sales Management System</ProductName>
     <PublisherName>IT, Department, Kyoto Engineering &amp; Automation Ltd.</PublisherName>
     <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>34</ApplicationRevision>
+    <ApplicationRevision>35</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
