@@ -1121,7 +1121,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void txtProId_TextChanged(object sender, EventArgs e)
         {
-            //txtOSProductName.Clear();
+            txtOSProductName.Clear();
             
             try
             {
@@ -1147,7 +1147,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void txtOSProductName_TextChanged(object sender, EventArgs e)
         {
-            //txtOProductId.Clear();
+            txtOProductId.Clear();
             try
             {
                 con = new SqlConnection(cs.DBConn);

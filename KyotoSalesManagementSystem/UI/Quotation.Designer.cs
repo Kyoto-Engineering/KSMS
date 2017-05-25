@@ -80,7 +80,10 @@
             this.checkPOD = new System.Windows.Forms.CheckBox();
             this.checkROP = new System.Windows.Forms.CheckBox();
             this.label29 = new System.Windows.Forms.Label();
+            this.txtQuotNote = new wmgCMS.WaterMarkTextBox();
+            this.txtOfferValidity = new wmgCMS.WaterMarkTextBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.txtLeadTime = new wmgCMS.WaterMarkTextBox();
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -130,16 +133,13 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.BrandcomboBox = new System.Windows.Forms.ComboBox();
-            this.txtQuotNote = new wmgCMS.WaterMarkTextBox();
-            this.txtOfferValidity = new wmgCMS.WaterMarkTextBox();
-            this.txtLeadTime = new wmgCMS.WaterMarkTextBox();
             this.waterMarkTextBox1 = new wmgCMS.WaterMarkTextBox();
             this.txtContactNo = new wmgCMS.WaterMarkTextBox();
             this.txtDesignation = new wmgCMS.WaterMarkTextBox();
             this.txtAttention = new wmgCMS.WaterMarkTextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.BrandcomboBox = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -669,6 +669,30 @@
             this.label29.TabIndex = 80;
             this.label29.Text = "(if Any)";
             // 
+            // txtQuotNote
+            // 
+            this.txtQuotNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.txtQuotNote.Location = new System.Drawing.Point(6, 233);
+            this.txtQuotNote.Multiline = true;
+            this.txtQuotNote.Name = "txtQuotNote";
+            this.txtQuotNote.Size = new System.Drawing.Size(293, 53);
+            this.txtQuotNote.TabIndex = 3;
+            this.txtQuotNote.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtQuotNote.WaterMarkText = "if Applicable";
+            this.txtQuotNote.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuotNote_KeyDown);
+            // 
+            // txtOfferValidity
+            // 
+            this.txtOfferValidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.txtOfferValidity.Location = new System.Drawing.Point(109, 16);
+            this.txtOfferValidity.Name = "txtOfferValidity";
+            this.txtOfferValidity.Size = new System.Drawing.Size(78, 20);
+            this.txtOfferValidity.TabIndex = 0;
+            this.txtOfferValidity.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtOfferValidity.WaterMarkText = "Num Of Days";
+            this.txtOfferValidity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtOfferValidity_KeyDown);
+            this.txtOfferValidity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOfferValidity_KeyPress);
+            // 
             // label27
             // 
             this.label27.AutoSize = true;
@@ -678,6 +702,17 @@
             this.label27.Size = new System.Drawing.Size(126, 15);
             this.label27.TabIndex = 77;
             this.label27.Text = "C) DeliveryLead Time";
+            // 
+            // txtLeadTime
+            // 
+            this.txtLeadTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.txtLeadTime.Location = new System.Drawing.Point(136, 184);
+            this.txtLeadTime.Name = "txtLeadTime";
+            this.txtLeadTime.Size = new System.Drawing.Size(72, 20);
+            this.txtLeadTime.TabIndex = 2;
+            this.txtLeadTime.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtLeadTime.WaterMarkText = "Num of Days";
+            this.txtLeadTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeadTime_KeyPress);
             // 
             // listView2
             // 
@@ -1096,7 +1131,6 @@
             this.txtSProductName.Size = new System.Drawing.Size(161, 26);
             this.txtSProductName.TabIndex = 7;
             this.txtSProductName.TextChanged += new System.EventHandler(this.txtSProductName_TextChanged);
-            this.txtSProductName.Leave += new System.EventHandler(this.txtSProductName_Leave);
             // 
             // label4
             // 
@@ -1169,7 +1203,6 @@
             this.txtProId.Size = new System.Drawing.Size(145, 25);
             this.txtProId.TabIndex = 6;
             this.txtProId.TextChanged += new System.EventHandler(this.txtSProductId_TextChanged);
-            this.txtProId.Leave += new System.EventHandler(this.txtProId_Leave);
             // 
             // dateTimePicker1
             // 
@@ -1219,6 +1252,52 @@
             this.groupBox6.TabIndex = 801;
             this.groupBox6.TabStop = false;
             // 
+            // waterMarkTextBox1
+            // 
+            this.waterMarkTextBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waterMarkTextBox1.Location = new System.Drawing.Point(96, 101);
+            this.waterMarkTextBox1.Name = "waterMarkTextBox1";
+            this.waterMarkTextBox1.Size = new System.Drawing.Size(197, 22);
+            this.waterMarkTextBox1.TabIndex = 69;
+            this.waterMarkTextBox1.WaterMarkColor = System.Drawing.Color.Gray;
+            this.waterMarkTextBox1.WaterMarkText = "Enter Email Address";
+            this.waterMarkTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.waterMarkTextBox1_KeyDown);
+            this.waterMarkTextBox1.Validating += new System.ComponentModel.CancelEventHandler(this.waterMarkTextBox1_Validating);
+            // 
+            // txtContactNo
+            // 
+            this.txtContactNo.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContactNo.Location = new System.Drawing.Point(95, 79);
+            this.txtContactNo.Name = "txtContactNo";
+            this.txtContactNo.Size = new System.Drawing.Size(197, 22);
+            this.txtContactNo.TabIndex = 4;
+            this.txtContactNo.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtContactNo.WaterMarkText = "Enter Contact Number ";
+            this.txtContactNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContactNo_KeyDown);
+            this.txtContactNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContactNo_KeyPress);
+            // 
+            // txtDesignation
+            // 
+            this.txtDesignation.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDesignation.Location = new System.Drawing.Point(95, 55);
+            this.txtDesignation.Name = "txtDesignation";
+            this.txtDesignation.Size = new System.Drawing.Size(198, 22);
+            this.txtDesignation.TabIndex = 3;
+            this.txtDesignation.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtDesignation.WaterMarkText = "if Applicable";
+            this.txtDesignation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDesignation_KeyDown);
+            // 
+            // txtAttention
+            // 
+            this.txtAttention.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAttention.Location = new System.Drawing.Point(95, 32);
+            this.txtAttention.Name = "txtAttention";
+            this.txtAttention.Size = new System.Drawing.Size(197, 22);
+            this.txtAttention.TabIndex = 2;
+            this.txtAttention.WaterMarkColor = System.Drawing.Color.Gray;
+            this.txtAttention.WaterMarkText = "if Applicable";
+            this.txtAttention.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAttention_KeyDown);
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.label6);
@@ -1267,87 +1346,6 @@
             this.BrandcomboBox.Size = new System.Drawing.Size(121, 25);
             this.BrandcomboBox.TabIndex = 804;
             this.BrandcomboBox.SelectedIndexChanged += new System.EventHandler(this.BrandcomboBox_SelectedIndexChanged);
-            // 
-            // txtQuotNote
-            // 
-            this.txtQuotNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtQuotNote.Location = new System.Drawing.Point(6, 233);
-            this.txtQuotNote.Multiline = true;
-            this.txtQuotNote.Name = "txtQuotNote";
-            this.txtQuotNote.Size = new System.Drawing.Size(293, 53);
-            this.txtQuotNote.TabIndex = 3;
-            this.txtQuotNote.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtQuotNote.WaterMarkText = "if Applicable";
-            this.txtQuotNote.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuotNote_KeyDown);
-            // 
-            // txtOfferValidity
-            // 
-            this.txtOfferValidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtOfferValidity.Location = new System.Drawing.Point(109, 16);
-            this.txtOfferValidity.Name = "txtOfferValidity";
-            this.txtOfferValidity.Size = new System.Drawing.Size(78, 20);
-            this.txtOfferValidity.TabIndex = 0;
-            this.txtOfferValidity.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtOfferValidity.WaterMarkText = "Num Of Days";
-            this.txtOfferValidity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtOfferValidity_KeyDown);
-            this.txtOfferValidity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOfferValidity_KeyPress);
-            // 
-            // txtLeadTime
-            // 
-            this.txtLeadTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtLeadTime.Location = new System.Drawing.Point(136, 184);
-            this.txtLeadTime.Name = "txtLeadTime";
-            this.txtLeadTime.Size = new System.Drawing.Size(72, 20);
-            this.txtLeadTime.TabIndex = 2;
-            this.txtLeadTime.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtLeadTime.WaterMarkText = "Num of Days";
-            this.txtLeadTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLeadTime_KeyPress);
-            // 
-            // waterMarkTextBox1
-            // 
-            this.waterMarkTextBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.waterMarkTextBox1.Location = new System.Drawing.Point(96, 101);
-            this.waterMarkTextBox1.Name = "waterMarkTextBox1";
-            this.waterMarkTextBox1.Size = new System.Drawing.Size(197, 22);
-            this.waterMarkTextBox1.TabIndex = 69;
-            this.waterMarkTextBox1.WaterMarkColor = System.Drawing.Color.Gray;
-            this.waterMarkTextBox1.WaterMarkText = "Enter Email Address";
-            this.waterMarkTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.waterMarkTextBox1_KeyDown);
-            this.waterMarkTextBox1.Validating += new System.ComponentModel.CancelEventHandler(this.waterMarkTextBox1_Validating);
-            // 
-            // txtContactNo
-            // 
-            this.txtContactNo.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContactNo.Location = new System.Drawing.Point(95, 79);
-            this.txtContactNo.Name = "txtContactNo";
-            this.txtContactNo.Size = new System.Drawing.Size(197, 22);
-            this.txtContactNo.TabIndex = 4;
-            this.txtContactNo.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtContactNo.WaterMarkText = "Enter Contact Number ";
-            this.txtContactNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContactNo_KeyDown);
-            this.txtContactNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContactNo_KeyPress);
-            // 
-            // txtDesignation
-            // 
-            this.txtDesignation.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesignation.Location = new System.Drawing.Point(95, 55);
-            this.txtDesignation.Name = "txtDesignation";
-            this.txtDesignation.Size = new System.Drawing.Size(198, 22);
-            this.txtDesignation.TabIndex = 3;
-            this.txtDesignation.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtDesignation.WaterMarkText = "if Applicable";
-            this.txtDesignation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDesignation_KeyDown);
-            // 
-            // txtAttention
-            // 
-            this.txtAttention.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAttention.Location = new System.Drawing.Point(95, 32);
-            this.txtAttention.Name = "txtAttention";
-            this.txtAttention.Size = new System.Drawing.Size(197, 22);
-            this.txtAttention.TabIndex = 2;
-            this.txtAttention.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtAttention.WaterMarkText = "if Applicable";
-            this.txtAttention.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAttention_KeyDown);
             // 
             // Quotation
             // 

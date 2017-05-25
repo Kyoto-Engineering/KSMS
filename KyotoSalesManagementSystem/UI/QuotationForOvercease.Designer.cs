@@ -1043,7 +1043,6 @@
             this.txtOProductId.Size = new System.Drawing.Size(158, 25);
             this.txtOProductId.TabIndex = 6;
             this.txtOProductId.TextChanged += new System.EventHandler(this.txtProId_TextChanged);
-            this.txtOProductId.Leave += new System.EventHandler(this.txtOProductId_Leave);
             // 
             // label5
             // 
@@ -1075,7 +1074,6 @@
             this.txtOSProductName.Size = new System.Drawing.Size(186, 26);
             this.txtOSProductName.TabIndex = 7;
             this.txtOSProductName.TextChanged += new System.EventHandler(this.txtOSProductName_TextChanged);
-            this.txtOSProductName.Leave += new System.EventHandler(this.txtOSProductName_Leave);
             // 
             // groupBox4
             // 
