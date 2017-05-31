@@ -2016,7 +2016,8 @@ namespace KyotoSalesManagementSystem.UI
             if (e.KeyCode == Keys.Enter)
             {
                 button2_Click(this, new EventArgs());
-                txtQuotNote.Text = txtQuotNote.Text.Remove(txtQuotNote.Text.Length - 1, 1);
+                txtQuotNote.Clear();
+                SendKeys.Send("{BS}");
             }
         }
 
