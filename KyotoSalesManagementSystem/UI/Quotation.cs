@@ -1734,7 +1734,7 @@ namespace KyotoSalesManagementSystem.UI
                 {
                     PureBarcode = true,
                     Height = 100,
-                    Width = 450
+                    Width = 465
                 }
             };
             var png = writer.Write(content);
