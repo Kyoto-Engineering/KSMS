@@ -52,7 +52,7 @@ namespace KyotoSalesManagementSystem.Reports
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string ct = "select distinct RTRIM(RefNumForQuotation.ReferenceNo) from RefNumForQuotation";
+                string ct = "SELECT  RefNumForQuotation.ReferenceNo FROM DeleveryOrder INNER JOIN RefNumForQuotation ON DeleveryOrder.QuotationId = RefNumForQuotation.QuotationId";
                 cmd = new SqlCommand(ct);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();
@@ -194,7 +194,7 @@ namespace KyotoSalesManagementSystem.Reports
                 {
                     PureBarcode = true,
                     Height = 100,
-                    Width = 450
+                    Width = 465
                 }
             };
             var png = writer.Write(content);
@@ -305,7 +305,7 @@ namespace KyotoSalesManagementSystem.Reports
                 {
                     PureBarcode = true,
                     Height = 100,
-                    Width = 450
+                    Width = 465
                 }
             };
             var png = writer.Write(content);
