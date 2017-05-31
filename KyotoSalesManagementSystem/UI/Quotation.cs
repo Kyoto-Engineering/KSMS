@@ -1261,7 +1261,7 @@ namespace KyotoSalesManagementSystem.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (txtQuotNote.Text == "")
+            if (string.IsNullOrWhiteSpace(txtQuotNote.Text))
             {
                 MessageBox.Show("Please type your note", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtQuotNote.Focus();
@@ -1273,17 +1273,17 @@ namespace KyotoSalesManagementSystem.UI
                 if (listView2.Items.Count == 0)
                 {
                     ListViewItem lstn = new ListViewItem();
-                    lstn.SubItems.Add(txtQuotNote.Text);
+                    lstn.SubItems.Add(txtQuotNote.Text.Trim(new Char[] { ' ', '\n' }));
                     listView2.Items.Add(lstn);
-                    txtQuotNote.Text = "";
+                    txtQuotNote.Clear();
                     txtQuotNote.Focus();
                     return;
                 }
 
                 ListViewItem lstn1 = new ListViewItem();
-                lstn1.SubItems.Add(txtQuotNote.Text);
+                lstn1.SubItems.Add(txtQuotNote.Text.Trim(new Char[] { ' ', '\n' }));
                 listView2.Items.Add(lstn1);
-                txtQuotNote.Text = "";
+                txtQuotNote.Clear();
                 txtQuotNote.Focus();
                 return;
 
@@ -2016,6 +2016,7 @@ namespace KyotoSalesManagementSystem.UI
             if (e.KeyCode == Keys.Enter)
             {
                 button2_Click(this, new EventArgs());
+                txtQuotNote.Text = txtQuotNote.Text.Remove(txtQuotNote.Text.Length - 1, 1);
             }
         }
 
