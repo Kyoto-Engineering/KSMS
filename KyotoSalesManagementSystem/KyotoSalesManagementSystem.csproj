@@ -453,6 +453,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QuotationChigo.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\QuotationIRD.cs">
       <AutoGen>True</AutoGen>
