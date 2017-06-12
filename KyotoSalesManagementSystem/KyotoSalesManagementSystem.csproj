@@ -449,6 +449,11 @@
       <DependentUpon>QuotationBusinessAutomation.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\QuotationChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuotationChigo.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\QuotationIRD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -810,6 +815,10 @@
     <EmbeddedResource Include="Reports\QuotationBusinessAutomation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>QuotationBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\QuotationChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>QuotationChigo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\QuotationIRD.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
