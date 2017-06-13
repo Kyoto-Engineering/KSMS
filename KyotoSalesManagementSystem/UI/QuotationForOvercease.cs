@@ -1293,6 +1293,14 @@ namespace KyotoSalesManagementSystem.UI
             {
                 cr = new QuotationKawasima();
             }
+            else if (brandid == 7)
+            {
+                cr = new QuotationChigo();
+            }
+            else if (brandid == 8)
+            {
+                cr = new QuotationSamsungDVM();
+            }
             tables = cr.Database.Tables;
             foreach (Table table in tables)
             {

@@ -1344,6 +1344,14 @@ namespace KyotoSalesManagementSystem.UI
             {
                 cr = new CQKawaShima();
             }
+            else if (brandid == 7)
+            {
+                cr = new CQChigo();
+            }
+            else if (brandid == 8)
+            {
+                cr = new CQSamsung_DVM();
+            }
             tables = cr.Database.Tables;
             foreach (Table table in tables)
             {

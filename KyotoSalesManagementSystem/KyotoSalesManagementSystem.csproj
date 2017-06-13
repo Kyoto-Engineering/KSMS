@@ -28,7 +28,7 @@
     <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>40</ApplicationRevision>
+    <ApplicationRevision>42</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -164,6 +164,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CQSamsung-DVM.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\CQWithoutLogo.cs">
       <DependentUpon>CQWithoutLogo.rpt</DependentUpon>
@@ -539,10 +540,11 @@
       <DependentUpon>QuotationKEAL.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\QuotationSamsung-DVM.cs">
+    <Compile Include="Reports\QuotationSamsungDVM.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuotationSamsung-DVM.rpt</DependentUpon>
+      <DependentUpon>QuotationSamsungDVM.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ReportView.cs">
       <SubType>Form</SubType>
@@ -956,9 +958,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>QuotationKEAL.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\QuotationSamsung-DVM.rpt">
+    <EmbeddedResource Include="Reports\QuotationSamsungDVM.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>QuotationSamsung-DVM.cs</LastGenOutput>
+      <LastGenOutput>QuotationSamsungDVM.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportView.resx">
       <DependentUpon>ReportView.cs</DependentUpon>

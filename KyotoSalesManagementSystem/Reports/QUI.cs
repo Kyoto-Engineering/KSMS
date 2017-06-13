@@ -192,7 +192,14 @@ namespace KyotoSalesManagementSystem.Reports
             {
                 cr = new QuotationKawasima();
             }
-
+            else if (brandid == 7)
+            {
+                cr = new QuotationChigo();
+            }
+            else if (brandid == 8)
+            {
+                cr = new QuotationSamsungDVM();
+            }
 
             tables = cr.Database.Tables;
             foreach (Table table in tables)
@@ -304,6 +311,14 @@ namespace KyotoSalesManagementSystem.Reports
             else if (brandid == 6)
             {
                 cr = new CQKawaShima();
+            }
+            else if (brandid == 7)
+            {
+                cr = new CQChigo();
+            }
+            else if (brandid == 8)
+            {
+                cr = new CQSamsung_DVM();
             }
             tables = cr.Database.Tables;
             foreach (Table table in tables)
