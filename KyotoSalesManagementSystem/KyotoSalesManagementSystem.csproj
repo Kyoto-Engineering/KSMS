@@ -149,6 +149,22 @@
       <DependentUpon>BarCode.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\CQChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CQChigo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CQSamsung-DVM-S.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CQSamsung-DVM-S.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CQSamsung-DVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CQSamsung-DVM.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\CQWithoutLogo.cs">
       <DependentUpon>CQWithoutLogo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -221,11 +237,26 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\DOCChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOCChigo.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DOChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOChigo.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DOCKawaShima.cs">
       <DependentUpon>DOCKawaShima.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOCSamsung-DVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOCSamsung-DVM.rpt</DependentUpon>
     </Compile>
     <Compile Include="Reports\DOCWithoutLogo.cs">
       <DependentUpon>DOCWithoutLogo.rpt</DependentUpon>
@@ -263,6 +294,11 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\DOOCChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOOCChigo.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DOOCOmron.cs">
       <DependentUpon>DOOCOmron.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -287,6 +323,11 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\DOOCSamsung-DVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOOCSamsung-DVM.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DOOKawaShima.cs">
       <DependentUpon>DOOKawaShima.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -310,6 +351,11 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DOSamsung-DVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DOSamsung-DVM.rpt</DependentUpon>
     </Compile>
     <Compile Include="Reports\DOWithoutLogo.cs">
       <DependentUpon>DOWithoutLogo.rpt</DependentUpon>
@@ -620,6 +666,18 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BarCode.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CQChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CQChigo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CQSamsung-DVM-S.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CQSamsung-DVM-S.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CQSamsung-DVM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CQSamsung-DVM.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CQWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CQWithoutLogo.cs</LastGenOutput>
@@ -667,9 +725,21 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOCBusinessAutomation.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOCChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOCChigo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOChigo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOCKawaShima.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOCKawaShima.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOCSamsung-DVM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOCSamsung-DVM.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOCWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -695,6 +765,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOOCAzbill.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOCChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOCChigo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOOCOmron.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOOCOmron.cs</LastGenOutput>
@@ -711,6 +785,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOOCBusinessAutomation.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOOCSamsung-DVM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOOCSamsung-DVM.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOOKawaShima.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOOKawaShima.cs</LastGenOutput>
@@ -726,6 +804,10 @@
     <EmbeddedResource Include="Reports\DOOWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DOOWithoutLogo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DOSamsung-DVM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DOSamsung-DVM.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
