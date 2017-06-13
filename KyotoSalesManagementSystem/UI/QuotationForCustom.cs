@@ -643,60 +643,17 @@ namespace KyotoSalesManagementSystem.UI
                         sQN = (rdr.GetInt32(0));
                         sQN = sQN + 1;
                         //referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        if (brandCode == "OIA")
-                        {
-                            referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "KL")
-                        {
-                            referenceNo = "KL-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "AZ")
-                        {
-                            referenceNo = "AZ-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "KBA")
-                        {
-                            referenceNo = "KBA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "IRD")
-                        {
-                            referenceNo = "IRD-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "KW")
-                        {
-                            referenceNo = "KW-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
+                        referenceNo = brandCode + "-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
                     }
                 }
                 else
                 {
                     sQN = 1;
                     //referenceNo = "OIA-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
-                    if (brandCode == "OIA")
-                    {
-                        referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "KL")
-                    {
-                        referenceNo = "KL-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "AZ")
-                    {
-                        referenceNo = "AZ-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "KBA")
-                    {
-                        referenceNo = "KBA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "IRD")
-                    {
-                        referenceNo = "IRD-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "KW")
-                    {
-                        referenceNo = "KW-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
+
+
+                    referenceNo = brandCode + "-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
+                   
                 }
 
 
@@ -749,7 +706,7 @@ namespace KyotoSalesManagementSystem.UI
             mAdv = "Mobilization Advance  " + myMobAd + "%";
             pDoc = "Payment at Sight Of Chalan/BL/Shipping Document  " + myPAS + "%";
             pOD = "Payment on Delivery  " + myPOD + "%";
-            rOP = "Rest Of Payment  " + myROP + "%  within" + txtROPDays.Text + " days";
+            rOP = "Rest Of Payment  " + myROP + "%  within " + txtROPDays.Text + " days";
             try
             {
                 if (checkMobAd.Checked)

@@ -389,30 +389,8 @@ namespace KyotoSalesManagementSystem.UI
                         sQN = (rdr.GetInt32(0));
                         sQN = sQN + 1;
 
-                        if (brandCode == "OIA")
-                        {
-                            referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "KL")
-                        {
-                            referenceNo = "KL-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "AZ")
-                        {
-                            referenceNo = "AZ-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "KBA")
-                        {
-                            referenceNo = "KBA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "IRD")
-                        {
-                            referenceNo = "IRD-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
-                        else if (brandCode == "KW")
-                        {
-                            referenceNo = "KW-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                        }
+                            referenceNo = brandCode+"-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                       
 
                         
                     }
@@ -422,30 +400,7 @@ namespace KyotoSalesManagementSystem.UI
                     sQN = 1;
 
                     //referenceNo = "OIA-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
-                    if (brandCode == "OIA")
-                    {
-                        referenceNo = "OIA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "KL")
-                    {
-                        referenceNo = "KL-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "AZ")
-                    {
-                        referenceNo = "AZ-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "KBA")
-                    {
-                        referenceNo = "KBA-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "IRD")
-                    {
-                        referenceNo = "IRD-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
-                    else if (brandCode == "KW")
-                    {
-                        referenceNo = "KW-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
-                    }
+                    referenceNo = brandCode + "-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
 
                 }
 
