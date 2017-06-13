@@ -423,6 +423,16 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\InvoiceCChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceCChigo.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\InvoiceChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceChigo.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\InvoiceCIRD.cs">
       <DependentUpon>InvoiceCIRD.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -447,6 +457,11 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\InvoiceCSamsung-DVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceCSamsung-DVM.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\InvoiceCWithoutLogo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -470,6 +485,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceKEAL.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\InvoiceSamsung-DVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceSamsung-DVM.rpt</DependentUpon>
     </Compile>
     <Compile Include="Reports\IUI.cs">
       <SubType>Form</SubType>
@@ -518,6 +538,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuotationKEAL.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\QuotationSamsung-DVM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuotationSamsung-DVM.rpt</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReportView.cs">
       <SubType>Form</SubType>
@@ -853,6 +878,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCAzbil.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCChigo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceChigo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\InvoiceCIRD.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCIRD.cs</LastGenOutput>
@@ -869,6 +902,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCBusinessAutomation.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCSamsung-DVM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCSamsung-DVM.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\InvoiceCWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCWithoutLogo.cs</LastGenOutput>
@@ -884,6 +921,10 @@
     <EmbeddedResource Include="Reports\InvoiceKEAL.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceKEAL.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceSamsung-DVM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceSamsung-DVM.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\IUI.resx">
       <DependentUpon>IUI.cs</DependentUpon>
@@ -914,6 +955,10 @@
     <EmbeddedResource Include="Reports\QuotationKEAL.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>QuotationKEAL.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\QuotationSamsung-DVM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>QuotationSamsung-DVM.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportView.resx">
       <DependentUpon>ReportView.cs</DependentUpon>
