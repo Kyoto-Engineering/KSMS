@@ -52,7 +52,7 @@ namespace KyotoSalesManagementSystem.Reports
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string ct = "select distinct RTRIM(RefNumForQuotation.ReferenceNo) from RefNumForQuotation";
+                string ct = "select distinct RTRIM(RefNumForQuotation.ReferenceNo) from RefNumForQuotation INNER JOIN Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId where QType='Custom'";
                 cmd = new SqlCommand(ct);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();

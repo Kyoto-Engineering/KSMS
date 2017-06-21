@@ -60,7 +60,7 @@ namespace KyotoSalesManagementSystem.UI
             try
             {
                 con = new SqlConnection(cs.DBConn);
-                string cd = "SELECT Quotation.QType, Quotation.BrandId, RefNumForQuotation.ReferenceNo FROM Quotation INNER JOIN RefNumForQuotation ON Quotation.QuotationId = RefNumForQuotation.QuotationId WHERE Quotation.QuotationId = '" + comboBox1.Text + "'";
+                string cd = "SELECT Quotation.QType, Quotation.BrandId, RefNumForQuotation.ReferenceNo FROM Quotation INNER JOIN RefNumForQuotation ON Quotation.QuotationId = RefNumForQuotation.QuotationId WHERE Quotation.QuotationId = '" + comboBox1.Text + "' and QType='Custom'";
                 cmd =new SqlCommand(cd);
                 cmd.Connection = con;
                 con.Open();

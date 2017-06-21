@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.txtlblUser = new System.Windows.Forms.TextBox();
             this.logOut = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button8);
@@ -73,23 +75,33 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(169, 565);
+            this.groupBox1.Size = new System.Drawing.Size(327, 565);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(158, 416);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(109, 23);
+            this.button10.TabIndex = 20;
+            this.button10.Text = "Mix Quotation Local";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(23, 382);
+            this.button9.Location = new System.Drawing.Point(148, 218);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(119, 58);
             this.button9.TabIndex = 19;
-            this.button9.Text = "Delivery Acknowledgement Report";
+            this.button9.Text = "Delivery Acknowledgement Report (Cus)";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(6, 446);
+            this.button8.Location = new System.Drawing.Point(6, 224);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(67, 46);
             this.button8.TabIndex = 18;
@@ -102,7 +114,7 @@
             this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button7.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.Blue;
-            this.button7.Location = new System.Drawing.Point(23, 156);
+            this.button7.Location = new System.Drawing.Point(148, 11);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(119, 54);
             this.button7.TabIndex = 6;
@@ -112,17 +124,17 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(23, 352);
+            this.button6.Location = new System.Drawing.Point(148, 156);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(109, 24);
+            this.button6.Size = new System.Drawing.Size(107, 42);
             this.button6.TabIndex = 5;
-            this.button6.Text = "Delivery Order";
+            this.button6.Text = "Delivery Order \r\n  Custom";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(100, 446);
+            this.button5.Location = new System.Drawing.Point(79, 224);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(63, 46);
             this.button5.TabIndex = 4;
@@ -135,7 +147,7 @@
             this.btnRegistration.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegistration.Location = new System.Drawing.Point(6, 498);
             this.btnRegistration.Name = "btnRegistration";
-            this.btnRegistration.Size = new System.Drawing.Size(109, 61);
+            this.btnRegistration.Size = new System.Drawing.Size(100, 61);
             this.btnRegistration.TabIndex = 3;
             this.btnRegistration.Text = "Registration";
             this.btnRegistration.UseVisualStyleBackColor = true;
@@ -146,7 +158,7 @@
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Blue;
-            this.button3.Location = new System.Drawing.Point(23, 293);
+            this.button3.Location = new System.Drawing.Point(158, 74);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(109, 53);
             this.button3.TabIndex = 2;
@@ -216,15 +228,15 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button10
+            // button11
             // 
-            this.button10.Location = new System.Drawing.Point(23, 216);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(109, 23);
-            this.button10.TabIndex = 20;
-            this.button10.Text = "Mix Quotation Local";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button11.Location = new System.Drawing.Point(23, 156);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(109, 42);
+            this.button11.TabIndex = 21;
+            this.button11.Text = "Delivery Order\r\n  Regular";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // MainUI
             // 
@@ -266,5 +278,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }
