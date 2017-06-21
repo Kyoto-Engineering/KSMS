@@ -552,6 +552,12 @@
     <Compile Include="Reports\ReportView.Designer.cs">
       <DependentUpon>ReportView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Delivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Delivery.Designer.cs">
+      <DependentUpon>Delivery.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DeliveryOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -964,6 +970,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportView.resx">
       <DependentUpon>ReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Delivery.resx">
+      <DependentUpon>Delivery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DeliveryOrder.resx">
       <DependentUpon>DeliveryOrder.cs</DependentUpon>

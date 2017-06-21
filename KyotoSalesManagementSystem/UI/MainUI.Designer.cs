@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.txtlblUser = new System.Windows.Forms.TextBox();
             this.logOut = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button8);
@@ -76,6 +78,16 @@
             this.groupBox1.Size = new System.Drawing.Size(169, 565);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(23, 216);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(109, 23);
+            this.button10.TabIndex = 20;
+            this.button10.Text = "Mix Quotation Local";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button9
             // 
@@ -216,15 +228,15 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button10
+            // button11
             // 
-            this.button10.Location = new System.Drawing.Point(23, 216);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(109, 23);
-            this.button10.TabIndex = 20;
-            this.button10.Text = "Mix Quotation Local";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button11.Location = new System.Drawing.Point(23, 263);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(109, 24);
+            this.button11.TabIndex = 21;
+            this.button11.Text = "Delivery";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // MainUI
             // 
@@ -266,5 +278,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }

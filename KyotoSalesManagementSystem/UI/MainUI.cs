@@ -114,5 +114,13 @@ namespace KyotoSalesManagementSystem.UI
             QuotationMMix frm = new QuotationMMix();
             frm.Show();
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+Delivery f2=new Delivery();
+            this.Visible = false;
+            f2.ShowDialog();
+            this.Visible = true;
+        }
     }
 }
