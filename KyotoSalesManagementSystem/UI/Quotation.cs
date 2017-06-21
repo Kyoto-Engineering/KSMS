@@ -240,7 +240,7 @@ namespace KyotoSalesManagementSystem.UI
                 for (int i = 0; i <= listView1.Items.Count - 1; i++)
                 {
                     con = new SqlConnection(cs.DBConn);
-                    string cb = "insert into ProductQuotation(QuotationId,Sl,UnitPrice,Quantity,MOQ,Specification,CountryOfOrigin) VALUES(@d1,@d2,@d3,@d4,@d5,@d6,@d7)";
+                    string cb = "insert into ProductQuotation(QuotationId,Sl,UnitPrice,Quantity,MOQ,Specification,CountryOfOrigin,BacklogQuantity) VALUES(@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8)";
                     cmd = new SqlCommand(cb);
                     cmd.Connection = con;
                     cmd.Parameters.AddWithValue("d1", quotationId);
@@ -250,6 +250,7 @@ namespace KyotoSalesManagementSystem.UI
                     cmd.Parameters.AddWithValue("d5", listView1.Items[i].SubItems[4].Text);
                     cmd.Parameters.AddWithValue("d6", listView1.Items[i].SubItems[5].Text);
                     cmd.Parameters.AddWithValue("d7", listView1.Items[i].SubItems[6].Text);
+                    cmd.Parameters.AddWithValue("d8", listView1.Items[i].SubItems[3].Text);
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();

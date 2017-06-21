@@ -226,6 +226,88 @@
     <Compile Include="Reports\DAUI.Designer.cs">
       <DependentUpon>DAUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DeliOAckAzbil.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckAzbil.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOAckBusinessAutomation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckBusinessAutomation.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOAckChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckChigo.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOAckIRD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckIRD.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOAckKawashima.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckKawashima.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOAckOmron.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckOmron.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DeliOAckSamsung.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckSamsung.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOAckWithoutLogo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOAckWithoutLogo.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOrderAzbil.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderAzbil.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOrderBusinessAuto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderBusinessAuto.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOrderChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderChigo.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOrderIRD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderIRD.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOrderKawashima.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderKawashima.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOrderOmron.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderOmron.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DeliOrderSamsung.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderSamsung.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DeliOrderWithoutLogo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliOrderWithoutLogo.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DOCAzbil.cs">
       <DependentUpon>DOCAzbil.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -552,12 +634,6 @@
     <Compile Include="Reports\ReportView.Designer.cs">
       <DependentUpon>ReportView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Delivery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Delivery.Designer.cs">
-      <DependentUpon>Delivery.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\DeliveryOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -749,6 +825,70 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DAUI.resx">
       <DependentUpon>DAUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckAzbil.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckAzbil.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckBusinessAutomation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckChigo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckIRD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckIRD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckKawashima.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckKawashima.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckOmron.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckOmron.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckSamsung.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckSamsung.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOAckWithoutLogo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOAckWithoutLogo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderAzbil.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderAzbil.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderBusinessAuto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderBusinessAuto.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderChigo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderIRD.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderIRD.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderKawashima.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderKawashima.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderOmron.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderOmron.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderSamsung.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderSamsung.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliOrderWithoutLogo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliOrderWithoutLogo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DOCAzbil.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -970,9 +1110,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportView.resx">
       <DependentUpon>ReportView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Delivery.resx">
-      <DependentUpon>Delivery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DeliveryOrder.resx">
       <DependentUpon>DeliveryOrder.cs</DependentUpon>
