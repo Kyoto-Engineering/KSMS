@@ -228,7 +228,7 @@ namespace KyotoSalesManagementSystem.UI
                     string query3 =
                         "UPDATE Delivery SET RefNo = @d1 WHERE(DeliveryId = @d2)";
                     cmd = new SqlCommand(query3, con);
-                    cmd.Parameters.AddWithValue("@d1", shipmentOrderNo);
+                    cmd.Parameters.AddWithValue("@d1", shipmentOrderNo+"-"+ShID);
                     cmd.Parameters.AddWithValue("@d2", ShID);
                     string debugSQL = cmd.CommandText;
 
