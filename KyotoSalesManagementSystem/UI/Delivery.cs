@@ -22,7 +22,7 @@ namespace KyotoSalesManagementSystem.UI
         private SqlDataReader rdr;
         private string impOd;
         private DataGridViewRow dr;
-        private int checkvalue,smId;
+        private int checkvalue,smId,available;
         private int SupplierId;
         private int Sio;
         private string shipmentOrderNo,clientId,quotationId,brandCode;
@@ -43,15 +43,14 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(Cs.DBConn);
                 string qry =
-                    "SELECT        ProductQuotation.PQId, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemCode, ProductListSummary.ItemDescription, ProductQuotation.Quantity, ProductQuotation.BacklogQuantity,ProductQuotation.MOQ FROM ProductListSummary INNER JOIN ProductQuotation ON ProductListSummary.Sl = ProductQuotation.Sl INNER JOIN RefNumForQuotation ON ProductQuotation.QuotationId = RefNumForQuotation.QuotationId where ReferenceNo='" +
-                    comboBox1.Text + "' And ProductQuotation.BacklogQuantity>0";
+                    "SELECT ProductQuotation.PQId, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemCode, ProductListSummary.ItemDescription, ProductQuotation.Quantity, ProductQuotation.BacklogQuantity,ProductQuotation.MOQ,MasterStocks.MQuantity FROM ProductListSummary INNER JOIN ProductQuotation ON ProductListSummary.Sl = ProductQuotation.Sl INNER JOIN RefNumForQuotation ON ProductQuotation.QuotationId = RefNumForQuotation.QuotationId inner join MasterStocks on ProductListSummary.Sl=MasterStocks.Sl  where ReferenceNo='"+comboBox1.Text+"' And ProductQuotation.BacklogQuantity>0  and MQuantity>0";
                 cmd = new SqlCommand(qry, con);
                 dataGridView1.Rows.Clear();
                 con.Open();
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6]);
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6],rdr[7]);
                 }
                 con.Close();
                 string[] splitter = comboBox1.Text.Split('-');
@@ -132,6 +131,7 @@ namespace KyotoSalesManagementSystem.UI
                 textBox4.Text = dr.Cells[1].Value.ToString();
                 textBox3.Text = dr.Cells[3].Value.ToString();
                 checkvalue =Convert.ToInt32( dr.Cells[5].Value.ToString());
+                available = Convert.ToInt32(dr.Cells[7].Value.ToString());
             }
             else
             {
@@ -153,6 +153,10 @@ namespace KyotoSalesManagementSystem.UI
                 else if (Convert.ToInt32(textBox2.Text) > checkvalue)
                 {
                     MessageBox.Show("Delivery Quantity Cannot Be greater Than the Backloq Quantity");
+                }
+                else if (Convert.ToInt32(textBox2.Text) > available)
+                {
+                    MessageBox.Show("Delivery Quantity Cannot Be greater Than the Available Quantity");
                 }
                 else
                 {

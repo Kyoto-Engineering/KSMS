@@ -62,6 +62,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -104,9 +105,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(82, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Select Supplier";
+            this.label1.Text = "Select Quotation";
             // 
             // comboBox1
             // 
@@ -255,7 +256,8 @@
             this.Column4,
             this.Column5,
             this.Column6,
-            this.Column7});
+            this.Column7,
+            this.Column8});
             this.dataGridView1.Location = new System.Drawing.Point(6, 15);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -363,6 +365,12 @@
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader5.Width = 100;
             // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Available Qty";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
             // Delivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -421,5 +429,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
     }
 }
