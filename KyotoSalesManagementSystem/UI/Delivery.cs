@@ -108,7 +108,7 @@ namespace KyotoSalesManagementSystem.UI
         {
             con = new SqlConnection(Cs.DBConn);
             string qry =
-                "SELECT  RefNumForQuotation.ReferenceNo FROM RefNumForQuotation INNER JOIN  Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId WHERE        (Quotation.QStatus = N'Accepted') And  Quotation.QuotationId  not in (SELECT QuotationId FROM Quantity where orderQty=DeliveredQuantity)";
+                "SELECT  RefNumForQuotation.ReferenceNo FROM RefNumForQuotation INNER JOIN  Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId WHERE        (Quotation.QStatus = N'Accepted')and QType<>'Custom' And  Quotation.QuotationId  not in (SELECT QuotationId FROM Quantity where orderQty=DeliveredQuantity)";
             cmd = new SqlCommand(qry, con);
             con.Open();
             rdr = cmd.ExecuteReader();
