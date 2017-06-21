@@ -245,11 +245,12 @@ namespace KyotoSalesManagementSystem.UI
                         string imprno = listView1.Items[i].Text;
                         string qty = listView1.Items[i].SubItems[4].Text;
                         string query =
-                            "INSERT INTO DeliveryProduct (DeliveryId,PQId,DPQty)Values(@d1,@d2,@d3)";
+                            "INSERT INTO DeliveryProduct (DeliveryId,PQId,DPQty,BacklogQty)Values(@d1,@d2,@d3,d4)";
                         cmd = new SqlCommand(query, con);
                         cmd.Parameters.AddWithValue("@d1", ShID);
                         cmd.Parameters.AddWithValue("@d2", imprno);
                         cmd.Parameters.AddWithValue("@d3", qty);
+                        cmd.Parameters.AddWithValue("@d4", qty);
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
