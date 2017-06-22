@@ -4,13 +4,19 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using KyotoSalesManagementSystem.DAO;
 using KyotoSalesManagementSystem.LoginUI;
 using KyotoSalesManagementSystem.DBGateway;
+using KyotoSalesManagementSystem.Reports;
+using ZXing;
+using ZXing.Common;
 
 namespace KyotoSalesManagementSystem.UI
 {
@@ -25,7 +31,9 @@ namespace KyotoSalesManagementSystem.UI
         private int checkvalue,smId,available;
         private int SupplierId;
         private int Sio;
+        public string ShID;
         private string shipmentOrderNo,clientId,quotationId,brandCode;
+        public Nullable<Int64> brandid;
 
         public Delivery()
         {
@@ -35,8 +43,25 @@ namespace KyotoSalesManagementSystem.UI
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetReferences();
+            GetBrand();
         }
 
+        private void GetBrand()
+        {
+            con = new SqlConnection(Cs.DBConn);
+            con.Open();
+            string ct = "SELECT Brand.BrandId FROM  Quotation INNER JOIN RefNumForQuotation ON Quotation.QuotationId = RefNumForQuotation.QuotationId INNER JOIN Brand ON Quotation.BrandId = Brand.BrandId where RefNumForQuotation.ReferenceNo='" + comboBox1.Text + "' ";
+            cmd = new SqlCommand(ct);
+            cmd.Connection = con;
+            rdr = cmd.ExecuteReader();
+
+            if (rdr.Read())
+            {
+
+                brandid = Convert.ToInt64(rdr["BrandId"]);
+            }
+            con.Close();
+        }
         private void GetReferences()
         {
             if (comboBox1.SelectedIndex != -1)
@@ -223,7 +248,7 @@ namespace KyotoSalesManagementSystem.UI
                     cmd.Parameters.AddWithValue("@d4", frmLogin.uId.ToString());
                     cmd.Parameters.AddWithValue("@d5", DateTime.UtcNow.ToLocalTime());
                     con.Open();
-                    string ShID = cmd.ExecuteScalar().ToString();
+                     ShID = cmd.ExecuteScalar().ToString();
                     con.Close();
                     string query3 =
                         "UPDATE Delivery SET RefNo = @d1 WHERE(DeliveryId = @d2)";
@@ -245,7 +270,7 @@ namespace KyotoSalesManagementSystem.UI
                         string imprno = listView1.Items[i].Text;
                         string qty = listView1.Items[i].SubItems[4].Text;
                         string query =
-                            "INSERT INTO DeliveryProduct (DeliveryId,PQId,DPQty,BacklogQty)Values(@d1,@d2,@d3,d4)";
+                            "INSERT INTO DeliveryProduct (DeliveryId,PQId,DPQty,BacklogQty)Values(@d1,@d2,@d3,@d4)";
                         cmd = new SqlCommand(query, con);
                         cmd.Parameters.AddWithValue("@d1", ShID);
                         cmd.Parameters.AddWithValue("@d2", imprno);
@@ -264,6 +289,7 @@ namespace KyotoSalesManagementSystem.UI
                         con.Close();
                     }
                     MessageBox.Show("Delivery Order Done");
+                    Report1();
                 }
                 else
                 {
@@ -277,7 +303,118 @@ namespace KyotoSalesManagementSystem.UI
             }
         }
 
+        private void Report1()
+        {
+            //button1.Enabled = false;
+            //backgroundWorker1.RunWorkerAsync();
+            //progressBar1.Visible = true;
 
+            //// To report progress from the background worker we need to set this property
+            //backgroundWorker1.WorkerReportsProgress = true;
+            //// This event will be raised on the worker thread when the worker starts
+            //backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
+            //// This event will be raised when we call ReportProgress
+            //backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
+            ParameterField paramField1 = new ParameterField();
+
+
+            //creating an object of ParameterFields class
+            ParameterFields paramFields1 = new ParameterFields();
+
+            //creating an object of ParameterDiscreteValue class
+            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+
+            //set the parameter field name
+            paramField1.Name = "id";
+
+            //set the parameter value
+            paramDiscreteValue1.Value = ShID;
+
+            //add the parameter value in the ParameterField object
+            paramField1.CurrentValues.Add(paramDiscreteValue1);
+
+            //add the parameter in the ParameterFields object
+            paramFields1.Add(paramField1);
+            ReportView f2 = new ReportView();
+            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            ConnectionInfo reportConInfo = new ConnectionInfo();
+            Tables tables = default(Tables);
+            //	Table table = default(Table);
+            var with1 = reportConInfo;
+            with1.ServerName = "tcp:KyotoServer,49172";
+            with1.DatabaseName = "ProductNRelatedDB";
+            with1.UserID = "sa";
+            with1.Password = "SystemAdministrator";
+
+            ReportDocument cr = new ReportDocument();
+            if (brandid == 1)
+            {
+                cr = new DeliOrderOmron();
+            }
+            else if (brandid == 2)
+            {
+                cr = new DeliOrderWithoutLogo();
+            }
+            else if (brandid == 3)
+            {
+                cr = new DeliOrderAzbil();
+            }
+            else if (brandid == 4)
+            {
+                cr = new DeliOrderBusinessAuto();
+            }
+            else if (brandid == 5)
+            {
+                cr = new DeliOrderIRD();
+            }
+            else if (brandid == 6)
+            {
+                cr = new DeliOrderKawashima();
+            }
+            tables = cr.Database.Tables;
+            foreach (Table table in tables)
+            {
+                reportLogonInfo = table.LogOnInfo;
+                reportLogonInfo.ConnectionInfo = reportConInfo;
+                table.ApplyLogOnInfo(reportLogonInfo);
+            }
+            BArcode ds = new BArcode();
+
+            var content = shipmentOrderNo + "-" + ShID;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 465
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = shipmentOrderNo + "-" + ShID;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
+            f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            f2.crystalReportViewer1.ReportSource = cr;
+
+            this.Visible = false;
+
+            f2.ShowDialog();
+            this.Visible = true;
+            //backgroundWorker1.CancelAsync();
+            //backgroundWorker1.Dispose();
+            //progressBar1.Visible = false;
+            //button1.Enabled = true;
+        }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
