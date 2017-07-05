@@ -885,7 +885,7 @@ namespace KyotoSalesManagementSystem.UI
 
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, N.UnitPrice FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId INNER JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ItemCode like '" + txtProId.Text + "%' order by N.Sl desc", con);
+                cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, T.Price FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId INNER JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ItemCode like '" + txtProId.Text + "%' order by N.Sl desc", con);
                 //cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ItemCode like '" + txtProId.Text + "%' order by N.Sl", con);
                 //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from MasterStocks,ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtSProductName.Text + "%' order by ProductListSummary.Sl", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -912,7 +912,7 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, N.UnitPrice FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId INNER JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ProductGenericDescription like '" + txtSProductName.Text + "%' order by N.Sl desc", con);
+                cmd = new SqlCommand("SELECT T.Sl, T.ProductGenericDescription , T.ItemDescription , T.ItemCode, N.MQuantity, T.Price FROM Brand b INNER JOIN ProductListSummary T  ON b.BrandId=T.BrandId INNER JOIN MasterStocks N ON T.Sl = N.Sl where b.BrandName='" + BrandcomboBox.Text + "' and T.ProductGenericDescription like '" + txtSProductName.Text + "%' order by N.Sl desc", con);
                 //cmd = new SqlCommand("SELECT RTRIM(T.Sl),RTRIM(T.ProductGenericDescription),RTRIM(T.ItemDescription),RTRIM(T.ItemCode),RTRIM(N.MQuantity),RTRIM(N.UnitPrice) FROM ProductListSummary T JOIN MasterStocks N ON T.Sl = N.Sl  where T.ProductGenericDescription like '" + txtSProductName.Text + "%' order by N.Sl", con);
                 //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from MasterStocks,ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtSProductName.Text + "%' order by ProductListSummary.Sl", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
