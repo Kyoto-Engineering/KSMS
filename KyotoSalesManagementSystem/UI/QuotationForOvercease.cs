@@ -613,7 +613,7 @@ namespace KyotoSalesManagementSystem.UI
                 {
                     sQN = 1;
                     //referenceNo = "OIA-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
-                    referenceNo = brandCode + "-" + sClientIdForRefNum + "-" + sQN + "-" + quotationId + "";
+                    referenceNo = brandCode + "-" + txtClientId.Text + "-" + sQN + "-" + quotationId + "";
 
                 }
 
