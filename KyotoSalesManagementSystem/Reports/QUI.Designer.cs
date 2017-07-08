@@ -38,6 +38,8 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(286, 75);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
