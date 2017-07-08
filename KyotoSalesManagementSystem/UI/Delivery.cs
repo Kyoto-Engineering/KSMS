@@ -244,13 +244,17 @@ namespace KyotoSalesManagementSystem.UI
 
                     con = new SqlConnection(Cs.DBConn);
                     string q1 =
-                        "INSERT INTO Delivery (QuotationId, SClientId, DS, UserId, EntryDate)VALUES(@d1,@d2,@d3,@d4,@d5)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                        "INSERT INTO Delivery (QuotationId, SClientId, DS, Deli_Date, UserId, EntryDate,ClientOrderNo)VALUES(@d1,@d2,@d3,@d4,@d5,@d6,@d7)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                     cmd = new SqlCommand(q1, con);
                     cmd.Parameters.AddWithValue("@d1", quotationId);
                     cmd.Parameters.AddWithValue("@d2", clientId);
                     cmd.Parameters.AddWithValue("@d3", Sio);
-                    cmd.Parameters.AddWithValue("@d4", frmLogin.uId.ToString());
-                    cmd.Parameters.AddWithValue("@d5", DateTime.UtcNow.ToLocalTime());
+                    
+                    cmd.Parameters.AddWithValue("@d4",dateTimePicker1.Value.Date);
+                    cmd.Parameters.AddWithValue("@d5", frmLogin.uId.ToString());
+                    cmd.Parameters.AddWithValue("@d6", DateTime.UtcNow.ToLocalTime());
+                    cmd.Parameters.Add(new SqlParameter("@d7",
+                        string.IsNullOrEmpty(clientsOrderNotextBox.Text) ? (object)DBNull.Value : clientsOrderNotextBox.Text));
                     con.Open();
                      ShID = cmd.ExecuteScalar().ToString();
                     con.Close();
