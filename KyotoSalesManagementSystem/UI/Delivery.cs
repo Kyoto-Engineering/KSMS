@@ -307,7 +307,7 @@ namespace KyotoSalesManagementSystem.UI
                 }
                 else
                 {
-                    MessageBox.Show("No Pruduct Added");
+                    MessageBox.Show("No Prouduct Added");
                 }
 
             }

@@ -281,6 +281,12 @@
       <DependentUpon>DeliOrderWithoutLogo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\DeliUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\DeliUI.Designer.cs">
+      <DependentUpon>DeliUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DelOAckAzbil.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -892,6 +898,9 @@
     <EmbeddedResource Include="Reports\DeliOrderWithoutLogo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DeliOrderWithoutLogo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DeliUI.resx">
+      <DependentUpon>DeliUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DelOAckAzbil.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
