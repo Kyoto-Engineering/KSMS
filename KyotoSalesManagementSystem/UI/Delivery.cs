@@ -130,6 +130,13 @@ namespace KyotoSalesManagementSystem.UI
 
         private void Delivery_Load(object sender, EventArgs e)
         {
+            ComboLoad();
+
+
+        }
+
+        private void ComboLoad()
+        {
             con = new SqlConnection(Cs.DBConn);
             string qry =
                 "SELECT  RefNumForQuotation.ReferenceNo FROM RefNumForQuotation INNER JOIN  Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId WHERE        (Quotation.QStatus = N'Accepted')and QType<>'Custom' And  Quotation.QuotationId  not in (SELECT QuotationId FROM Quantity where orderQty=DeliveredQuantity)";
@@ -141,10 +148,7 @@ namespace KyotoSalesManagementSystem.UI
                 comboBox1.Items.Add(rdr[0]);
             }
             con.Close();
-        
-           
         }
-
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -290,10 +294,20 @@ namespace KyotoSalesManagementSystem.UI
                     }
                     MessageBox.Show("Delivery Order Done");
                     Report1();
+                    Report3();
+                    listView1.Items.Clear();
+                    dataGridView1.Rows.Clear();
+                    textBox5.Clear();
+                    comboBox1.Items.Clear();
+                    comboBox1.SelectedIndex = -1;
+                    ComboLoad();
+                    button1.Enabled = true;
+                    button3.Enabled = true;
+
                 }
                 else
                 {
-                    MessageBox.Show("No Pruduct Added");
+                    MessageBox.Show("No Prouduct Added");
                 }
 
             }
@@ -372,6 +386,14 @@ namespace KyotoSalesManagementSystem.UI
             {
                 cr = new DeliOrderKawashima();
             }
+            else if (brandid == 7)
+            {
+                cr = new DeliOrderChigo();
+            }
+            else if (brandid == 8)
+            {
+                cr = new DeliOrderSamsung();
+            }
             tables = cr.Database.Tables;
             foreach (Table table in tables)
             {
@@ -416,7 +438,161 @@ namespace KyotoSalesManagementSystem.UI
             //button1.Enabled = true;
         }
 
+        private void Report3()
+        {
+            //button1.Enabled = false;
+            //backgroundWorker1.RunWorkerAsync();
+            //progressBar1.Visible = true;
+
+            //// To report progress from the background worker we need to set this property
+            //backgroundWorker1.WorkerReportsProgress = true;
+            //// This event will be raised on the worker thread when the worker starts
+            //backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
+            //// This event will be raised when we call ReportProgress
+            //backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
+
+            ParameterField paramField1 = new ParameterField();
+
+
+            //creating an object of ParameterFields class
+            ParameterFields paramFields1 = new ParameterFields();
+
+            //creating an object of ParameterDiscreteValue class
+            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+
+            //set the parameter field name
+            paramField1.Name = "id";
+
+            //set the parameter value
+            paramDiscreteValue1.Value = ShID;
+
+            //add the parameter value in the ParameterField object
+            paramField1.CurrentValues.Add(paramDiscreteValue1);
+
+            //add the parameter in the ParameterFields object
+            paramFields1.Add(paramField1);
+            ReportView f2 = new ReportView();
+            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            ConnectionInfo reportConInfo = new ConnectionInfo();
+            Tables tables = default(Tables);
+            //	Table table = default(Table);
+            var with1 = reportConInfo;
+            with1.ServerName = "tcp:KyotoServer,49172";
+            with1.DatabaseName = "ProductNRelatedDB";
+            with1.UserID = "sa";
+            with1.Password = "SystemAdministrator";
+            ReportDocument cr = new ReportDocument();
+            if (brandid == 1)
+            {
+                cr = new DeliOAckOmron();
+            }
+            else if (brandid == 2)
+            {
+                cr = new DelOAckWithoutLogo();
+            }
+            else if (brandid == 3)
+            {
+                cr = new DelOAckAzbil();
+            }
+            else if (brandid == 4)
+            {
+                cr = new DelOAckBusinessAutomation();
+            }
+            else if (brandid == 5)
+            {
+                cr = new DelOAckIRD();
+            }
+            else if (brandid == 6)
+            {
+                cr = new DelOAckKawashima();
+            }
+            else if (brandid == 7)
+            {
+                cr = new DelOAckChigo();
+            }
+            else if (brandid == 8)
+            {
+                cr = new DelOAckSamsung();
+            }
+            tables = cr.Database.Tables;
+            foreach (Table table in tables)
+            {
+                reportLogonInfo = table.LogOnInfo;
+                reportLogonInfo.ConnectionInfo = reportConInfo;
+                table.ApplyLogOnInfo(reportLogonInfo);
+            }
+
+            Sections m_boSections;
+            ReportObjects m_boReportObjects;
+            SubreportObject m_boSubreportObject;
+            //create a new ReportDocument
+
+
+            //get all the sections in the report
+            m_boSections = cr.ReportDefinition.Sections;
+            //loop through each section of the report
+            foreach (Section m_boSection in m_boSections)
+            {
+                m_boReportObjects = m_boSection.ReportObjects;
+                //loop through each report object
+                foreach (ReportObject m_boReportObject in m_boReportObjects)
+                {
+                    if (m_boReportObject.Kind == ReportObjectKind.SubreportObject)
+                    {
+                        //get the actual subreport object
+                        m_boSubreportObject = (SubreportObject)m_boReportObject;
+
+                        //set subreport to the dataset e.g.;
+                        // boReportDocument.SetDataSource(oDataSet);
+                        // or 
+                        // boTable.SetDataSource(oDataSet.Tables[tableName]);
+                    }
+                }
+            }
+            //show in reportviewer
+            //crystalReportViewer1.ReportSource = m_boReportDocument;
+            BArcode ds = new BArcode();
+
+            var content = shipmentOrderNo + "-" + ShID;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 465
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = shipmentOrderNo + "-" + ShID;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
+            f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            f2.crystalReportViewer1.ReportSource = cr;
+            this.Visible = false;
+            f2.ShowDialog();
+            this.Visible = true;
+            //backgroundWorker1.CancelAsync();
+            //backgroundWorker1.Dispose();
+            //progressBar1.Visible = false;
+            
+        }
+
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }

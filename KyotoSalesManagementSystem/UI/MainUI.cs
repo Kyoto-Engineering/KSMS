@@ -122,5 +122,14 @@ Delivery f2=new Delivery();
             f2.ShowDialog();
             this.Visible = true;
         }
+
+        private void PrintDeliverybutton_Click(object sender, EventArgs e)
+        {
+            DeliUI f11 = new DeliUI();
+            this.Visible = false;
+
+            f11.ShowDialog();
+            this.Visible = true;
+        }
     }
 }
