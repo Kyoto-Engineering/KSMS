@@ -241,7 +241,7 @@ namespace KyotoSalesManagementSystem.UI
             {
                 if (listView1.Items.Count > 0)
                 {
-
+                    button3.Enabled = false;
                     con = new SqlConnection(Cs.DBConn);
                     string q1 =
                         "INSERT INTO Delivery (QuotationId, SClientId, DS, Deli_Date, UserId, EntryDate,ClientOrderNo)VALUES(@d1,@d2,@d3,@d4,@d5,@d6,@d7)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
@@ -296,12 +296,16 @@ namespace KyotoSalesManagementSystem.UI
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
+                    
                     MessageBox.Show("Delivery Order Done");
+                    
                     Report1();
                     Report3();
                     listView1.Items.Clear();
-                    dataGridView1.Rows.Clear();
+                    dataGridView1.Rows.Clear();                    
                     textBox5.Clear();
+                    clientsOrderNotextBox.Clear();
+                    dateTimePicker1.ResetText();
                     comboBox1.Items.Clear();
                     comboBox1.SelectedIndex = -1;
                     ComboLoad();
@@ -312,6 +316,7 @@ namespace KyotoSalesManagementSystem.UI
                 else
                 {
                     MessageBox.Show("No Prouduct Added");
+                    
                 }
 
             }
@@ -361,7 +366,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDBDemo";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
 
@@ -483,7 +488,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDBDemo";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
