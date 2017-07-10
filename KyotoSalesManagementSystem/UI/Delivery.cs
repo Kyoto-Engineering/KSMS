@@ -68,7 +68,7 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(Cs.DBConn);
                 string qry =
-                    "SELECT ProductQuotation.PQId, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemCode, ProductListSummary.ItemDescription, ProductQuotation.Quantity, ProductQuotation.BacklogQuantity,ProductQuotation.MOQ,MasterStocks.MQuantity FROM ProductListSummary INNER JOIN ProductQuotation ON ProductListSummary.Sl = ProductQuotation.Sl INNER JOIN RefNumForQuotation ON ProductQuotation.QuotationId = RefNumForQuotation.QuotationId inner join MasterStocks on ProductListSummary.Sl=MasterStocks.Sl  where ReferenceNo='"+comboBox1.Text+"' And ProductQuotation.BacklogQuantity>0  and MQuantity>0";
+                    "SELECT ProductQuotation.PQId, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemCode, ProductListSummary.ItemDescription, ProductQuotation.Quantity, ProductQuotation.BacklogQuantity,ProductQuotation.MOQ,MasterStocks1.MQuantity FROM ProductListSummary INNER JOIN ProductQuotation ON ProductListSummary.Sl = ProductQuotation.Sl INNER JOIN RefNumForQuotation ON ProductQuotation.QuotationId = RefNumForQuotation.QuotationId inner join MasterStocks1 on ProductListSummary.Sl=MasterStocks1.Sl  where ReferenceNo='"+comboBox1.Text+"' And ProductQuotation.BacklogQuantity>0  and MQuantity>0";
                 cmd = new SqlCommand(qry, con);
                 dataGridView1.Rows.Clear();
                 con.Open();
