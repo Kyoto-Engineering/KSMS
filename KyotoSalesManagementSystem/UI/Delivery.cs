@@ -241,7 +241,7 @@ namespace KyotoSalesManagementSystem.UI
             {
                 if (listView1.Items.Count > 0)
                 {
-
+                    button3.Enabled = false;
                     con = new SqlConnection(Cs.DBConn);
                     string q1 =
                         "INSERT INTO Delivery (QuotationId, SClientId, DS, Deli_Date, UserId, EntryDate,ClientOrderNo)VALUES(@d1,@d2,@d3,@d4,@d5,@d6,@d7)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
@@ -296,7 +296,7 @@ namespace KyotoSalesManagementSystem.UI
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
-                    button3.Enabled = false;
+                    
                     MessageBox.Show("Delivery Order Done");
                     
                     Report1();
@@ -316,6 +316,7 @@ namespace KyotoSalesManagementSystem.UI
                 else
                 {
                     MessageBox.Show("No Prouduct Added");
+                    
                 }
 
             }
