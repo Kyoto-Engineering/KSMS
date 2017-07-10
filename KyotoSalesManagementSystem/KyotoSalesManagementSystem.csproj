@@ -141,6 +141,12 @@
     <Compile Include="LoginUI\UserDataGrid.Designer.cs">
       <DependentUpon>UserDataGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginUI\UserUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginUI\UserUpdate.Designer.cs">
+      <DependentUpon>UserUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\BarCode.cs">
@@ -797,6 +803,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginUI\UserDataGrid.resx">
       <DependentUpon>UserDataGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginUI\UserUpdate.resx">
+      <DependentUpon>UserUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
