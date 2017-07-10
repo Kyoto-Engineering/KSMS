@@ -48,18 +48,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.getDataButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.registerInlineButton = new System.Windows.Forms.Button();
             this.newButton = new System.Windows.Forms.Button();
             this.browseButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtPictureBox = new System.Windows.Forms.PictureBox();
             this.labelk = new System.Windows.Forms.Label();
             this.labelg = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label10 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.txtPictureBox = new System.Windows.Forms.PictureBox();
             this.UserRegistrationForm.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPictureBox)).BeginInit();
@@ -67,6 +70,10 @@
             // 
             // UserRegistrationForm
             // 
+            this.UserRegistrationForm.Controls.Add(this.checkBox2);
+            this.UserRegistrationForm.Controls.Add(this.checkBox1);
+            this.UserRegistrationForm.Controls.Add(this.label11);
+            this.UserRegistrationForm.Controls.Add(this.textBox1);
             this.UserRegistrationForm.Controls.Add(this.departmentTextBox);
             this.UserRegistrationForm.Controls.Add(this.label8);
             this.UserRegistrationForm.Controls.Add(this.designationTextBox);
@@ -86,14 +93,14 @@
             this.UserRegistrationForm.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserRegistrationForm.Location = new System.Drawing.Point(26, 36);
             this.UserRegistrationForm.Name = "UserRegistrationForm";
-            this.UserRegistrationForm.Size = new System.Drawing.Size(456, 334);
+            this.UserRegistrationForm.Size = new System.Drawing.Size(506, 411);
             this.UserRegistrationForm.TabIndex = 0;
             this.UserRegistrationForm.TabStop = false;
             this.UserRegistrationForm.Text = "UserRegistrationForm";
             // 
             // departmentTextBox
             // 
-            this.departmentTextBox.Location = new System.Drawing.Point(157, 231);
+            this.departmentTextBox.Location = new System.Drawing.Point(157, 275);
             this.departmentTextBox.Name = "departmentTextBox";
             this.departmentTextBox.Size = new System.Drawing.Size(281, 29);
             this.departmentTextBox.TabIndex = 5;
@@ -101,7 +108,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 236);
+            this.label8.Location = new System.Drawing.Point(15, 280);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(129, 21);
             this.label8.TabIndex = 15;
@@ -109,7 +116,7 @@
             // 
             // designationTextBox
             // 
-            this.designationTextBox.Location = new System.Drawing.Point(159, 190);
+            this.designationTextBox.Location = new System.Drawing.Point(159, 234);
             this.designationTextBox.Name = "designationTextBox";
             this.designationTextBox.Size = new System.Drawing.Size(281, 29);
             this.designationTextBox.TabIndex = 4;
@@ -117,7 +124,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 193);
+            this.label7.Location = new System.Drawing.Point(18, 237);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(135, 21);
             this.label7.TabIndex = 13;
@@ -139,15 +146,16 @@
             // txtEmail_Address
             // 
             this.txtEmail_Address.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail_Address.Location = new System.Drawing.Point(157, 303);
+            this.txtEmail_Address.Location = new System.Drawing.Point(157, 347);
             this.txtEmail_Address.Name = "txtEmail_Address";
             this.txtEmail_Address.Size = new System.Drawing.Size(281, 26);
             this.txtEmail_Address.TabIndex = 7;
+            this.txtEmail_Address.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Address_Validating);
             // 
             // txtContact_no
             // 
             this.txtContact_no.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContact_no.Location = new System.Drawing.Point(157, 267);
+            this.txtContact_no.Location = new System.Drawing.Point(157, 311);
             this.txtContact_no.Name = "txtContact_no";
             this.txtContact_no.Size = new System.Drawing.Size(281, 26);
             this.txtContact_no.TabIndex = 6;
@@ -155,7 +163,7 @@
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(157, 153);
+            this.txtName.Location = new System.Drawing.Point(157, 197);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(281, 26);
             this.txtName.TabIndex = 3;
@@ -165,9 +173,9 @@
             this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(157, 117);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(281, 26);
             this.txtPassword.TabIndex = 2;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtUserName
             // 
@@ -176,13 +184,12 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(281, 26);
             this.txtUserName.TabIndex = 0;
-            this.txtUserName.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(40, 303);
+            this.label6.Location = new System.Drawing.Point(40, 347);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 19);
             this.label6.TabIndex = 5;
@@ -192,7 +199,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(21, 273);
+            this.label5.Location = new System.Drawing.Point(21, 317);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 19);
             this.label5.TabIndex = 4;
@@ -202,7 +209,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(26, 157);
+            this.label4.Location = new System.Drawing.Point(26, 201);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 19);
             this.label4.TabIndex = 3;
@@ -240,25 +247,14 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.getDataButton);
             this.groupBox2.Controls.Add(this.updateButton);
             this.groupBox2.Controls.Add(this.registerInlineButton);
             this.groupBox2.Controls.Add(this.newButton);
-            this.groupBox2.Location = new System.Drawing.Point(26, 384);
+            this.groupBox2.Location = new System.Drawing.Point(26, 453);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(456, 79);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
-            // 
-            // getDataButton
-            // 
-            this.getDataButton.Location = new System.Drawing.Point(30, 15);
-            this.getDataButton.Name = "getDataButton";
-            this.getDataButton.Size = new System.Drawing.Size(100, 50);
-            this.getDataButton.TabIndex = 4;
-            this.getDataButton.Text = "GetData";
-            this.getDataButton.UseVisualStyleBackColor = true;
-            this.getDataButton.Click += new System.EventHandler(this.getDataButton_Click);
             // 
             // updateButton
             // 
@@ -310,20 +306,10 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // txtPictureBox
-            // 
-            this.txtPictureBox.BackgroundImage = global::KyotoSalesManagementSystem.Properties.Resources._12;
-            this.txtPictureBox.Location = new System.Drawing.Point(538, 66);
-            this.txtPictureBox.Name = "txtPictureBox";
-            this.txtPictureBox.Size = new System.Drawing.Size(296, 292);
-            this.txtPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.txtPictureBox.TabIndex = 23;
-            this.txtPictureBox.TabStop = false;
-            // 
             // labelk
             // 
             this.labelk.AutoSize = true;
-            this.labelk.Location = new System.Drawing.Point(26, 473);
+            this.labelk.Location = new System.Drawing.Point(26, 542);
             this.labelk.Name = "labelk";
             this.labelk.Size = new System.Drawing.Size(35, 13);
             this.labelk.TabIndex = 25;
@@ -333,7 +319,7 @@
             // labelg
             // 
             this.labelg.AutoSize = true;
-            this.labelg.Location = new System.Drawing.Point(70, 473);
+            this.labelg.Location = new System.Drawing.Point(70, 542);
             this.labelg.Name = "labelg";
             this.labelg.Size = new System.Drawing.Size(41, 13);
             this.labelg.TabIndex = 26;
@@ -365,12 +351,65 @@
             this.label10.TabIndex = 28;
             this.label10.Text = "QR Code";
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(157, 149);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(281, 26);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.UseSystemPasswordChar = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(26, 156);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(116, 19);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Retype Password";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(444, 114);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 25);
+            this.checkBox1.TabIndex = 18;
+            this.checkBox1.Text = "Show";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.Leave += new System.EventHandler(this.checkBox1_Leave);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(444, 153);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(72, 25);
+            this.checkBox2.TabIndex = 19;
+            this.checkBox2.Text = "Show";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox2.Leave += new System.EventHandler(this.checkBox2_Leave);
+            // 
+            // txtPictureBox
+            // 
+            this.txtPictureBox.BackgroundImage = global::KyotoSalesManagementSystem.Properties.Resources._12;
+            this.txtPictureBox.Location = new System.Drawing.Point(538, 66);
+            this.txtPictureBox.Name = "txtPictureBox";
+            this.txtPictureBox.Size = new System.Drawing.Size(296, 292);
+            this.txtPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.txtPictureBox.TabIndex = 23;
+            this.txtPictureBox.TabStop = false;
+            // 
             // frmRegistration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(894, 498);
+            this.ClientSize = new System.Drawing.Size(894, 564);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.labelg);
@@ -419,11 +458,14 @@
         public System.Windows.Forms.Button browseButton;
         public System.Windows.Forms.PictureBox txtPictureBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button getDataButton;
         public  System.Windows.Forms.Label labelk;
         public  System.Windows.Forms.Label labelg;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
