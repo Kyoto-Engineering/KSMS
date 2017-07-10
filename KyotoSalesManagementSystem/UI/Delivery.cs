@@ -296,12 +296,16 @@ namespace KyotoSalesManagementSystem.UI
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
+                    button3.Enabled = false;
                     MessageBox.Show("Delivery Order Done");
+                    
                     Report1();
                     Report3();
                     listView1.Items.Clear();
-                    dataGridView1.Rows.Clear();
+                    dataGridView1.Rows.Clear();                    
                     textBox5.Clear();
+                    clientsOrderNotextBox.Clear();
+                    dateTimePicker1.ResetText();
                     comboBox1.Items.Clear();
                     comboBox1.SelectedIndex = -1;
                     ComboLoad();
@@ -361,7 +365,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDBDemo";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
 
@@ -483,7 +487,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDBDemo";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
