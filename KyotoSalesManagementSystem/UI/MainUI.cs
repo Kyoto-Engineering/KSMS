@@ -50,8 +50,10 @@ namespace KyotoSalesManagementSystem.UI
         private void btnRegistration_Click(object sender, EventArgs e)
         {
             //this.Dispose();
-            frmRegistration frm =new frmRegistration();
-            frm.Show();
+            frmRegistration frm = new frmRegistration();
+            this.Visible = false;
+            frm.ShowDialog();
+            this.Visible = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
