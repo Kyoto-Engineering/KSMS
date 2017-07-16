@@ -190,7 +190,7 @@ namespace KyotoSalesManagementSystem.UI
                 else
                 {
 
-
+                    groupBox1.Enabled = false;
                     if (listView1.Items.Count < 1)
                     {
                         ListViewItem l1 = new ListViewItem();
@@ -204,7 +204,7 @@ namespace KyotoSalesManagementSystem.UI
                     }
                     else
                     {
-                        if (listView1.FindItemWithText(impOd) == null)
+                        if (GetValue())
                         {
                             ListViewItem l2 = new ListViewItem();
                             l2.Text = impOd;
@@ -225,7 +225,19 @@ namespace KyotoSalesManagementSystem.UI
             }
             
         }
-
+        private bool GetValue()
+        {
+            bool x = true;
+            foreach (ListViewItem z in listView1.Items)
+            {
+                if (z.Text == impOd)
+                {
+                    x = false;
+                    break;
+                }
+            }
+            return x;
+        }
         private void ClearselectedProduct()
         {
             impOd = null;
@@ -311,6 +323,7 @@ namespace KyotoSalesManagementSystem.UI
                     ComboLoad();
                     button1.Enabled = true;
                     button3.Enabled = true;
+                    groupBox1.Enabled = true;
 
                 }
                 else
@@ -604,6 +617,33 @@ namespace KyotoSalesManagementSystem.UI
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count < 1)
+            {
+                MessageBox.Show("Please Select a row from the list which you  want to remove", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                ListViewItem x = listView1.SelectedItems[0];
+                ////x.Text;
+                //    con = new SqlConnection(Cs.DBConn);
+                //string qry =
+                //    "SELECT ProductQuotation.PQId, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemCode, ProductListSummary.ItemDescription, ProductQuotation.Quantity, ProductQuotation.BacklogQuantity,ProductQuotation.MOQ,MasterStocks1.MQuantity FROM ProductListSummary INNER JOIN ProductQuotation ON ProductListSummary.Sl = ProductQuotation.Sl INNER JOIN RefNumForQuotation ON ProductQuotation.QuotationId = RefNumForQuotation.QuotationId inner join MasterStocks1 on ProductListSummary.Sl=MasterStocks1.Sl  where ProductQuotation.PQId='" + x.Text + "' And ProductQuotation.BacklogQuantity>0  and MQuantity>0";
+                //cmd = new SqlCommand(qry, con);
+                //dataGridView1.Rows.Clear();
+                //con.Open();
+                //rdr = cmd.ExecuteReader();
+                //while (rdr.Read())
+                //{
+                //    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6], rdr[7]);
+                //}
+                //con.Close();
+                listView1.Items.Remove(x);
+            }
         }
     }
 }
