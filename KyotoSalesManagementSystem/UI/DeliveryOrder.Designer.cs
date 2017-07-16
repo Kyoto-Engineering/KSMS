@@ -64,6 +64,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(287, 141);
             this.textBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.textBox1.MaxLength = 50;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(199, 29);
             this.textBox1.TabIndex = 2;

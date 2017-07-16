@@ -104,6 +104,7 @@
             // clientsOrderNotextBox
             // 
             this.clientsOrderNotextBox.Location = new System.Drawing.Point(188, 93);
+            this.clientsOrderNotextBox.MaxLength = 50;
             this.clientsOrderNotextBox.Name = "clientsOrderNotextBox";
             this.clientsOrderNotextBox.Size = new System.Drawing.Size(198, 20);
             this.clientsOrderNotextBox.TabIndex = 12;

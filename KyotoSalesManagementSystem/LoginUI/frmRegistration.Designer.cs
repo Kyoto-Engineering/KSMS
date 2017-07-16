@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistration));
             this.UserRegistrationForm = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.departmentTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.designationTextBox = new System.Windows.Forms.TextBox();
@@ -58,10 +62,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.txtPictureBox = new System.Windows.Forms.PictureBox();
             this.UserRegistrationForm.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -98,9 +98,54 @@
             this.UserRegistrationForm.TabStop = false;
             this.UserRegistrationForm.Text = "UserRegistrationForm";
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(444, 153);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(72, 25);
+            this.checkBox2.TabIndex = 19;
+            this.checkBox2.Text = "Show";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox2.Leave += new System.EventHandler(this.checkBox2_Leave);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(444, 114);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 25);
+            this.checkBox1.TabIndex = 18;
+            this.checkBox1.Text = "Show";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.Leave += new System.EventHandler(this.checkBox1_Leave);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(26, 156);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(116, 19);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Retype Password";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(157, 149);
+            this.textBox1.MaxLength = 50;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(281, 26);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.UseSystemPasswordChar = true;
+            // 
             // departmentTextBox
             // 
             this.departmentTextBox.Location = new System.Drawing.Point(157, 275);
+            this.departmentTextBox.MaxLength = 50;
             this.departmentTextBox.Name = "departmentTextBox";
             this.departmentTextBox.Size = new System.Drawing.Size(281, 29);
             this.departmentTextBox.TabIndex = 5;
@@ -117,6 +162,7 @@
             // designationTextBox
             // 
             this.designationTextBox.Location = new System.Drawing.Point(159, 234);
+            this.designationTextBox.MaxLength = 50;
             this.designationTextBox.Name = "designationTextBox";
             this.designationTextBox.Size = new System.Drawing.Size(281, 29);
             this.designationTextBox.TabIndex = 4;
@@ -147,6 +193,7 @@
             // 
             this.txtEmail_Address.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail_Address.Location = new System.Drawing.Point(157, 347);
+            this.txtEmail_Address.MaxLength = 50;
             this.txtEmail_Address.Name = "txtEmail_Address";
             this.txtEmail_Address.Size = new System.Drawing.Size(281, 26);
             this.txtEmail_Address.TabIndex = 7;
@@ -156,6 +203,7 @@
             // 
             this.txtContact_no.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContact_no.Location = new System.Drawing.Point(157, 311);
+            this.txtContact_no.MaxLength = 11;
             this.txtContact_no.Name = "txtContact_no";
             this.txtContact_no.Size = new System.Drawing.Size(281, 26);
             this.txtContact_no.TabIndex = 6;
@@ -164,6 +212,7 @@
             // 
             this.txtName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(157, 197);
+            this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(281, 26);
             this.txtName.TabIndex = 3;
@@ -172,6 +221,7 @@
             // 
             this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(157, 117);
+            this.txtPassword.MaxLength = 50;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(281, 26);
             this.txtPassword.TabIndex = 2;
@@ -181,6 +231,7 @@
             // 
             this.txtUserName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserName.Location = new System.Drawing.Point(157, 44);
+            this.txtUserName.MaxLength = 50;
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(281, 26);
             this.txtUserName.TabIndex = 0;
@@ -350,49 +401,6 @@
             this.label10.Size = new System.Drawing.Size(58, 13);
             this.label10.TabIndex = 28;
             this.label10.Text = "QR Code";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(157, 149);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(281, 26);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.UseSystemPasswordChar = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(26, 156);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(116, 19);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Retype Password";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(444, 114);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 25);
-            this.checkBox1.TabIndex = 18;
-            this.checkBox1.Text = "Show";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            this.checkBox1.Leave += new System.EventHandler(this.checkBox1_Leave);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(444, 153);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 25);
-            this.checkBox2.TabIndex = 19;
-            this.checkBox2.Text = "Show";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            this.checkBox2.Leave += new System.EventHandler(this.checkBox2_Leave);
             // 
             // txtPictureBox
             // 

@@ -89,6 +89,7 @@
             // departmentTextBox
             // 
             this.departmentTextBox.Location = new System.Drawing.Point(157, 201);
+            this.departmentTextBox.MaxLength = 50;
             this.departmentTextBox.Name = "departmentTextBox";
             this.departmentTextBox.Size = new System.Drawing.Size(281, 29);
             this.departmentTextBox.TabIndex = 5;
@@ -105,6 +106,7 @@
             // designationTextBox
             // 
             this.designationTextBox.Location = new System.Drawing.Point(159, 160);
+            this.designationTextBox.MaxLength = 50;
             this.designationTextBox.Name = "designationTextBox";
             this.designationTextBox.Size = new System.Drawing.Size(281, 29);
             this.designationTextBox.TabIndex = 4;
@@ -135,6 +137,7 @@
             // 
             this.txtEmail_Address.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail_Address.Location = new System.Drawing.Point(157, 273);
+            this.txtEmail_Address.MaxLength = 50;
             this.txtEmail_Address.Name = "txtEmail_Address";
             this.txtEmail_Address.Size = new System.Drawing.Size(281, 26);
             this.txtEmail_Address.TabIndex = 7;
@@ -144,6 +147,7 @@
             // 
             this.txtContact_no.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContact_no.Location = new System.Drawing.Point(157, 237);
+            this.txtContact_no.MaxLength = 11;
             this.txtContact_no.Name = "txtContact_no";
             this.txtContact_no.Size = new System.Drawing.Size(281, 26);
             this.txtContact_no.TabIndex = 6;
@@ -152,6 +156,7 @@
             // 
             this.txtName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(157, 123);
+            this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(281, 26);
             this.txtName.TabIndex = 3;
@@ -160,6 +165,7 @@
             // 
             this.txtUserName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserName.Location = new System.Drawing.Point(157, 44);
+            this.txtUserName.MaxLength = 50;
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(281, 26);
             this.txtUserName.TabIndex = 0;

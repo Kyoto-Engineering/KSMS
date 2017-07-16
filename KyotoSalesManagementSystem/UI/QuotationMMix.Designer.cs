@@ -692,6 +692,7 @@
             // 
             this.txtQuotNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.txtQuotNote.Location = new System.Drawing.Point(6, 233);
+            this.txtQuotNote.MaxLength = 500;
             this.txtQuotNote.Multiline = true;
             this.txtQuotNote.Name = "txtQuotNote";
             this.txtQuotNote.Size = new System.Drawing.Size(293, 53);
@@ -872,6 +873,7 @@
             // 
             this.txtCountryOfOrigin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCountryOfOrigin.Location = new System.Drawing.Point(68, 90);
+            this.txtCountryOfOrigin.MaxLength = 50;
             this.txtCountryOfOrigin.Name = "txtCountryOfOrigin";
             this.txtCountryOfOrigin.Size = new System.Drawing.Size(138, 20);
             this.txtCountryOfOrigin.TabIndex = 3;
@@ -892,6 +894,7 @@
             // 
             this.txtSpecification.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSpecification.Location = new System.Drawing.Point(61, 66);
+            this.txtSpecification.MaxLength = 500;
             this.txtSpecification.Name = "txtSpecification";
             this.txtSpecification.Size = new System.Drawing.Size(347, 20);
             this.txtSpecification.TabIndex = 2;
@@ -1280,6 +1283,7 @@
             // 
             this.waterMarkTextBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.waterMarkTextBox1.Location = new System.Drawing.Point(96, 101);
+            this.waterMarkTextBox1.MaxLength = 50;
             this.waterMarkTextBox1.Name = "waterMarkTextBox1";
             this.waterMarkTextBox1.Size = new System.Drawing.Size(197, 22);
             this.waterMarkTextBox1.TabIndex = 69;
@@ -1292,6 +1296,7 @@
             // 
             this.txtContactNo.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContactNo.Location = new System.Drawing.Point(95, 79);
+            this.txtContactNo.MaxLength = 11;
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Size = new System.Drawing.Size(197, 22);
             this.txtContactNo.TabIndex = 4;
@@ -1304,6 +1309,7 @@
             // 
             this.txtDesignation.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesignation.Location = new System.Drawing.Point(95, 55);
+            this.txtDesignation.MaxLength = 50;
             this.txtDesignation.Name = "txtDesignation";
             this.txtDesignation.Size = new System.Drawing.Size(198, 22);
             this.txtDesignation.TabIndex = 3;
@@ -1315,6 +1321,7 @@
             // 
             this.txtAttention.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAttention.Location = new System.Drawing.Point(95, 32);
+            this.txtAttention.MaxLength = 50;
             this.txtAttention.Name = "txtAttention";
             this.txtAttention.Size = new System.Drawing.Size(197, 22);
             this.txtAttention.TabIndex = 2;
