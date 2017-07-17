@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.PrintDeliverybutton = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -45,7 +46,7 @@
             this.txtlblUser = new System.Windows.Forms.TextBox();
             this.logOut = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.PrintDeliverybutton = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.PrintDeliverybutton);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button10);
@@ -80,6 +82,16 @@
             this.groupBox1.Size = new System.Drawing.Size(327, 565);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // PrintDeliverybutton
+            // 
+            this.PrintDeliverybutton.Location = new System.Drawing.Point(6, 286);
+            this.PrintDeliverybutton.Name = "PrintDeliverybutton";
+            this.PrintDeliverybutton.Size = new System.Drawing.Size(63, 46);
+            this.PrintDeliverybutton.TabIndex = 22;
+            this.PrintDeliverybutton.Text = "Print Delivery";
+            this.PrintDeliverybutton.UseVisualStyleBackColor = true;
+            this.PrintDeliverybutton.Click += new System.EventHandler(this.PrintDeliverybutton_Click);
             // 
             // button11
             // 
@@ -240,15 +252,14 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // PrintDeliverybutton
+            // button12
             // 
-            this.PrintDeliverybutton.Location = new System.Drawing.Point(6, 286);
-            this.PrintDeliverybutton.Name = "PrintDeliverybutton";
-            this.PrintDeliverybutton.Size = new System.Drawing.Size(63, 46);
-            this.PrintDeliverybutton.TabIndex = 22;
-            this.PrintDeliverybutton.Text = "Print Delivery";
-            this.PrintDeliverybutton.UseVisualStyleBackColor = true;
-            this.PrintDeliverybutton.Click += new System.EventHandler(this.PrintDeliverybutton_Click);
+            this.button12.Location = new System.Drawing.Point(75, 286);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(63, 46);
+            this.button12.TabIndex = 23;
+            this.button12.Text = "Return Request";
+            this.button12.UseVisualStyleBackColor = true;
             // 
             // MainUI
             // 
@@ -292,5 +303,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button PrintDeliverybutton;
+        private System.Windows.Forms.Button button12;
     }
 }

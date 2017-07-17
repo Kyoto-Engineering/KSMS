@@ -755,6 +755,12 @@
     <Compile Include="UI\QuotoSUI.Designer.cs">
       <DependentUpon>QuotoSUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ReturnRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ReturnRequest.Designer.cs">
+      <DependentUpon>ReturnRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SalesClientGrid22.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1201,6 +1207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\QuotoSUI.resx">
       <DependentUpon>QuotoSUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ReturnRequest.resx">
+      <DependentUpon>ReturnRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SalesClientGrid22.resx">
       <DependentUpon>SalesClientGrid22.cs</DependentUpon>
