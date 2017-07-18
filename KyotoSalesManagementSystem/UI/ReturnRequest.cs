@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,11 +31,12 @@ namespace KyotoSalesManagementSystem.UI
         private DataGridViewRow dr;
         private int checkvalue,smId,available;
         private int SupplierId;
-        private int Sio,OI;
+        private int Sio,OI,CI,CR;
         public string ShID;
         private string shipmentOrderNo,clientId,quotationId,brandCode;
         public Nullable<Int64> brandid;
         private Dictionary<int,string> orderList=new Dictionary<int, string>();
+        List< Tuple<int,string,int> > refList=new List<Tuple<int, string, int>>();
 
         public ReturnRequest()
         {
@@ -43,10 +45,51 @@ namespace KyotoSalesManagementSystem.UI
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var x = from entry in orderList
-                where entry.Value == comboBox1.Text
-                select entry.Key;
-            OI=x.FirstOrDefault();
+            //var x = from entry in orderList
+            //    where entry.Value == comboBox1.Text
+            //    select entry.Key;
+            //OI=x.FirstOrDefault();
+            //var y =( from entry in refList
+            //    where entry.Item2 == comboBox1.Text
+            //    select new {Id = entry.Item1, CLId = entry.Item3});
+            var z = refList.Where(entry => entry.Item2 == comboBox1.Text)
+                .Select(entry => new {oi=entry.Item1,ci=entry.Item3});
+
+            System.Type getType = z.GetType();
+            OI= (int)getType.GetProperty("oi").GetValue(z, null);
+            CI = (int)getType.GetProperty("ci").GetValue(z, null);
+
+            con = new SqlConnection(Cs.DBConn);
+            string qry =
+                "SELECT        ReturnRequest.* FROM  Delivery INNER JOIN  OutTable ON Delivery.DeliveryId = OutTable.DeliveryId INNER JOIN  ReturnRequest ON OutTable.OutId = ReturnRequest.OutId INNER JOIN  SalesClient ON Delivery.SClientId = SalesClient.SClientId WHERE (SalesClient.SClientId ="+CI+" )";
+            cmd = new SqlCommand(qry, con);
+            con.Open();
+            rdr = cmd.ExecuteReader();
+            if (rdr.HasRows)
+            {
+                con.Close();
+                string qry2 =
+                    "SELECT        MAX(ReturnRequest.SlOfClient) AS Expr1 FROM  ReturnRequest INNER JOIN OutTable ON ReturnRequest.OutId = OutTable.OutId INNER JOIN  Delivery ON OutTable.DeliveryId = Delivery.DeliveryId INNER JOIN  SalesClient ON Delivery.SClientId = SalesClient.SClientId GROUP BY SalesClient.SClientId HAVING (SalesClient.SClientId = " + CI + " )";
+                cmd = new SqlCommand(qry, con);
+                con.Open();
+                if (rdr.Read())
+                {
+
+                    CR = rdr.GetInt32(0) + 1;
+                    con.Close();
+                }
+                else
+                {
+                    con.Close();
+                }
+            }
+           
+            else
+            {
+                con.Close();
+                CR = 1;
+            }
+            
         }
 
 
@@ -63,21 +106,29 @@ namespace KyotoSalesManagementSystem.UI
         {
             con = new SqlConnection(Cs.DBConn);
             string qry =
-                "SELECT OutTable.OutId,Delivery.RefNo FROM  Delivery INNER JOIN OutTable ON Delivery.DeliveryId = OutTable.DeliveryId where OutTable.OutId not in (SELECT  ReturnRequest.OutId FROM  ReturnRequest INNER JOIN ReturnApproval ON ReturnRequest.RRid = ReturnApproval.RRId)";
+                "SELECT OutTable.OutId,Delivery.RefNo, Delivery.SClientId FROM  Delivery INNER JOIN OutTable ON Delivery.DeliveryId = OutTable.DeliveryId where OutTable.OutId not in (SELECT  ReturnRequest.OutId FROM  ReturnRequest INNER JOIN ReturnApproval ON ReturnRequest.RRid = ReturnApproval.RRId)";
             cmd = new SqlCommand(qry, con);
             con.Open();
             rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
+                
                 int OutId = rdr.GetInt32(0);
                 string reff =rdr.GetString(1);
-                orderList.Add(OutId,reff);
+                int CId = rdr.GetInt32(2);
+                Tuple<int, string, int> refTuple = new Tuple<int, string, int>(OutId,reff,CId);
+                //orderList.Add(OutId,reff);
+                refList.Add(refTuple);
             }
             con.Close();
-            foreach (KeyValuePair<int,string> refPair in orderList)
+            foreach (Tuple<int,string,int> x in refList)
             {
-                comboBox1.Items.Add(refPair.Value);
+                comboBox1.Items.Add(x.Item2);
             }
+            //foreach (KeyValuePair<int,string> refPair in orderList)
+            //{
+            //    comboBox1.Items.Add(refPair.Value);
+            //}
         }
 
         private void ClearselectedProduct()
@@ -97,18 +148,19 @@ namespace KyotoSalesManagementSystem.UI
         {
             if (!string.IsNullOrWhiteSpace(comboBox1.Text))
             {
-            if (string.IsNullOrEmpty(textBox1.Text))
+            if (!string.IsNullOrEmpty(textBox1.Text))
             {
 
                     button1.Enabled = false;
                     con = new SqlConnection(Cs.DBConn);
                     string q1 =
-                    "INSERT INTO ReturnRequest (OutId, EntryDate, CauseOfReturn, UserId)VALUES        ("+OI+","+DateTime.UtcNow.ToLocalTime()+",@d1,"+frmLogin.uId+")";
+                    "INSERT INTO ReturnRequest (OutId, EntryDate, CauseOfReturn, UserId,SlOfClient)VALUES        (" + OI + ",@d2,@d1," + frmLogin.uId + ","+CR+")";
                     cmd = new SqlCommand(q1, con);
                     cmd.Parameters.AddWithValue("@d1", textBox1.Text);
+                cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
                     
                     con.Open();
-                    ShID = cmd.ExecuteScalar().ToString();
+                cmd.ExecuteNonQuery();
                     con.Close();
                     
                     
