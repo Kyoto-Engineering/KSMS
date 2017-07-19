@@ -148,7 +148,16 @@ namespace KyotoSalesManagementSystem.UI
 
         }
 
-
+        private void ClearFields() 
+        {
+            comboBox1.Items.Clear();
+            textBox1.Clear();
+            refList.Clear();
+ 
+        }
+        
+        
+        
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(comboBox1.Text))
@@ -170,6 +179,8 @@ namespace KyotoSalesManagementSystem.UI
                     
                     
                     MessageBox.Show("Delivery Order Done");
+                    
+                    ClearFields();
                     ComboLoad();
                     button1.Enabled = true;
 
