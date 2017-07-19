@@ -671,6 +671,12 @@
     <Compile Include="Reports\ReportView.Designer.cs">
       <DependentUpon>ReportView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ReturnRequest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReturnRequest.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Delivery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1165,6 +1171,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportView.resx">
       <DependentUpon>ReportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReturnRequest.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReturnRequest.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Delivery.resx">
       <DependentUpon>Delivery.cs</DependentUpon>
