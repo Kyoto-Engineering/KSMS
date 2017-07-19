@@ -111,7 +111,7 @@ namespace KyotoSalesManagementSystem.UI
         {
             con = new SqlConnection(Cs.DBConn);
             string qry =
-                "SELECT OutTable.OutId,Delivery.RefNo, Delivery.SClientId FROM  Delivery INNER JOIN OutTable ON Delivery.DeliveryId = OutTable.DeliveryId where OutTable.OutId not in (SELECT  ReturnRequest.OutId FROM  ReturnRequest INNER JOIN ReturnApproval ON ReturnRequest.RRid = ReturnApproval.RRId)";
+                "SELECT OutTable.OutId,Delivery.RefNo, Delivery.SClientId FROM  Delivery INNER JOIN OutTable ON Delivery.DeliveryId = OutTable.DeliveryId where OutTable.OutId not in (SELECT  ReturnRequest.OutId FROM  ReturnRequest INNER JOIN ReturnApproval ON ReturnRequest.RRid = ReturnApproval.RRId union SELECT  ReturnRequest.OutId FROM  ReturnRequest )";
             cmd = new SqlCommand(qry, con);
             con.Open();
             rdr = cmd.ExecuteReader();
