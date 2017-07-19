@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,15 +50,18 @@ namespace KyotoSalesManagementSystem.UI
             //    where entry.Value == comboBox1.Text
             //    select entry.Key;
             //OI=x.FirstOrDefault();
-            //var y =( from entry in refList
-            //    where entry.Item2 == comboBox1.Text
-            //    select new {Id = entry.Item1, CLId = entry.Item3});
-            var z = refList.Where(entry => entry.Item2 == comboBox1.Text)
-                .Select(entry => new {oi=entry.Item1,ci=entry.Item3});
+           var y = (from entry in refList
+                     where entry.Item2 == comboBox1.Text
+                     select new { Id = entry.Item1, CLId = entry.Item3 });
+            //var z = refList.Where(entry => entry.Item2 == comboBox1.Text)
+            //    .Select(entry => new {oi=Convert.ToInt32(entry.Item1),ci=Convert.ToInt32(entry.Item3)});
+            OI=y.FirstOrDefault().Id;
+            CI = y.FirstOrDefault().CLId;
+            Type type = y.GetType();
+            //PropertyInfo p = type.GetProperty("Id");
 
-            System.Type getType = z.GetType();
-            OI= (int)getType.GetProperty("oi").GetValue(z, null);
-            CI = (int)getType.GetProperty("ci").GetValue(z, null);
+            //object OI = p.GetValue(y, null);
+            //object CI = (int)type.GetProperty("CLId").GetValue(y, null);
 
             con = new SqlConnection(Cs.DBConn);
             string qry =
@@ -70,8 +74,9 @@ namespace KyotoSalesManagementSystem.UI
                 con.Close();
                 string qry2 =
                     "SELECT        MAX(ReturnRequest.SlOfClient) AS Expr1 FROM  ReturnRequest INNER JOIN OutTable ON ReturnRequest.OutId = OutTable.OutId INNER JOIN  Delivery ON OutTable.DeliveryId = Delivery.DeliveryId INNER JOIN  SalesClient ON Delivery.SClientId = SalesClient.SClientId GROUP BY SalesClient.SClientId HAVING (SalesClient.SClientId = " + CI + " )";
-                cmd = new SqlCommand(qry, con);
+                cmd = new SqlCommand(qry2, con);
                 con.Open();
+                rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
 

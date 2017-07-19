@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.PrintDeliverybutton = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@
             this.txtlblUser = new System.Windows.Forms.TextBox();
             this.logOut = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,6 +82,16 @@
             this.groupBox1.Size = new System.Drawing.Size(327, 565);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(75, 286);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(63, 46);
+            this.button12.TabIndex = 23;
+            this.button12.Text = "Return Request";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // PrintDeliverybutton
             // 
@@ -251,15 +261,6 @@
             this.button4.Text = "Min";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(75, 286);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(63, 46);
-            this.button12.TabIndex = 23;
-            this.button12.Text = "Return Request";
-            this.button12.UseVisualStyleBackColor = true;
             // 
             // MainUI
             // 

@@ -133,5 +133,14 @@ Delivery f2=new Delivery();
             f11.ShowDialog();
             this.Visible = true;
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            ReturnRequest f11 = new ReturnRequest();
+            this.Visible = false;
+
+            f11.ShowDialog();
+            this.Visible = true;
+        }
     }
 }
