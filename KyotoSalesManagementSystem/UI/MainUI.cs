@@ -141,5 +141,13 @@ Delivery f2=new Delivery();
             f11.ShowDialog();
             this.Visible = true;
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            Invoice frm=new Invoice();
+            this.Visible = false;
+            frm.ShowDialog();
+            this.Visible = true;
+        }
     }
 }

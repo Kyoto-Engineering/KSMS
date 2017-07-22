@@ -17,7 +17,7 @@ namespace KyotoSalesManagementSystem.UI
         private SqlCommand cmd;
         private SqlDataReader rdr;
         private ConnectionString cs = new ConnectionString();
-        public int refId, quotationId, sclientId, sQN, invoiceId, user_id;
+        public int refId, quotationId, sclientId, sQN, invoiceId, user_id,BrandId;
         public string referenceNo;
         public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
@@ -115,11 +115,11 @@ namespace KyotoSalesManagementSystem.UI
                 con.Open();
                 cmd = con.CreateCommand();
 
-                cmd.CommandText = "select TotalPrice,QVat,QAIT,Discount,NetPayable from Quotation where QuotationId='" + quotationId + "'";
+                cmd.CommandText = "select TotalPrice,QVat,QAIT,Discount,NetPayable,BrandId FROM  Quotation  where QuotationId='" + quotationId + "'";
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
-
+                    BrandId =Convert.ToInt32(rdr["BrandId"]);
 
                     txtTotalPrice.Text = rdr["TotalPrice"].ToString();
                     if (!rdr.IsDBNull(1))
@@ -145,7 +145,7 @@ namespace KyotoSalesManagementSystem.UI
                     txtDiscountPercent.Text = rdr["Discount"].ToString();
                     txtNetPayable.Text = rdr["NetPayable"].ToString();
 
-                    if (txtVATPercent.Text == "")
+                    if (string.IsNullOrWhiteSpace(txtVATPercent.Text))
                     {
                         txtVATAmount.Text = 0.ToString();
                     }
@@ -155,7 +155,7 @@ namespace KyotoSalesManagementSystem.UI
                     }
 
 
-                    if (txtAITPercent.Text == "")
+                    if (string.IsNullOrWhiteSpace(txtAITPercent.Text))
                     {
                         txtAITAmount.Text = 0.ToString();
                     }
@@ -164,7 +164,7 @@ namespace KyotoSalesManagementSystem.UI
                         txtAITAmount.Text = ((Convert.ToDecimal(txtTotalPrice.Text) * Convert.ToDecimal(txtAITPercent.Text)) / 100).ToString();
                     }
 
-                    if (txtDiscountPercent.Text == "")
+                    if (string.IsNullOrWhiteSpace(txtDiscountPercent.Text))
                     {
                         txtDiscountAmount.Text = 0.ToString();
                     }
@@ -173,17 +173,17 @@ namespace KyotoSalesManagementSystem.UI
                         txtDiscountAmount.Text = ((Convert.ToDecimal(txtTotalPrice.Text) * Convert.ToDecimal(txtDiscountPercent.Text)) / 100).ToString();
                     }
 
-                    if (txtAdditionalDiscount.Text == "")
-                    {
-                        txtAdditionalDiscount.Text = 0.ToString();
+                    //if (string.IsNullOrWhiteSpace(txtAdditionalDiscount.Text))
+                    //{
+                    //    txtAdditionalDiscount.Text = 0.ToString();
 
-                    }
+                    //}
 
-                    if (txtAdvancePayment.Text == "")
-                    {
-                        txtAdvancePayment.Text = 0.ToString();
+                    //if (string.IsNullOrWhiteSpace(txtAdvancePayment.Text))
+                    //{
+                    //    txtAdvancePayment.Text = 0.ToString();
 
-                    }
+                    //}
                 }
                 if ((rdr != null))
                 {
@@ -422,17 +422,17 @@ namespace KyotoSalesManagementSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into Invoice(InvoiceDate, DueDate, InvVAT, InvAIT, AdditionalDiscount, AdvancePayment, NETPayable, PromisedDate,QuotationId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into Invoice(InvoiceDate, DueDate, InvVAT, InvAIT, AdditionalDiscount, AdvancePayment, NETPayable, PromisedDate) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", dtpInvoiceDate.Value);
                 cmd.Parameters.AddWithValue("@d2", dtpDueDate.Value);
-                cmd.Parameters.AddWithValue("@d3", Convert.ToDecimal(txtVATPercent.Text));
-                cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAITPercent.Text));
-                cmd.Parameters.AddWithValue("@d5", Convert.ToDecimal(txtAdditionalDiscount.Text));
-                cmd.Parameters.AddWithValue("@d6", Convert.ToDecimal(txtAdvancePayment.Text));
+                cmd.Parameters.AddWithValue("@d3", string.IsNullOrWhiteSpace(txtVATPercent.Text) ? (object)DBNull.Value : Convert.ToDecimal(txtVATPercent.Text));
+                cmd.Parameters.AddWithValue("@d4", string.IsNullOrWhiteSpace(txtAITPercent.Text) ? (object)DBNull.Value : Convert.ToDecimal(txtAITPercent.Text));
+                cmd.Parameters.AddWithValue("@d5", string.IsNullOrWhiteSpace(txtAdditionalDiscount.Text) ? (object)DBNull.Value : Convert.ToDecimal(txtAdditionalDiscount.Text));
+                cmd.Parameters.AddWithValue("@d6", string.IsNullOrWhiteSpace(txtAdvancePayment.Text) ? (object)DBNull.Value : Convert.ToDecimal(txtAdvancePayment.Text));
                 cmd.Parameters.AddWithValue("@d7", Convert.ToDecimal(txtNetPayable.Text));
                 cmd.Parameters.AddWithValue("@d8", dtpPromisedDate.Value);
-                cmd.Parameters.AddWithValue("@d9", quotationId);
+
                 invoiceId = (int)cmd.ExecuteScalar();
                 con.Close();
 
@@ -455,20 +455,38 @@ namespace KyotoSalesManagementSystem.UI
                 if (rdr.Read())
                 {
                     sclientId = (rdr.GetInt32(0));
-                    sQN = (rdr.GetInt32(1));
+                    
 
-                    referenceNo = "OIA-INV-" + sclientId + "-" + sQN + "-" + quotationId + "-" + invoiceId + "";
+                }
+                con.Close();
+                con.Open();
+                string qry="SELECT        RefNumForInvoice.* FROM            RefNumForInvoice WHERE        SClientId =" +
+                    sclientId;
+                cmd = new SqlCommand(qry, con);
+                rdr = cmd.ExecuteReader();
+                if (rdr.HasRows)
+                {
+                    con.Close();
+                    string qry2 = "SELECT        MAX(SIN) AS Expr1 FROM RefNumForInvoice HAVING   SClientId =" +
+                                 sclientId;
+                    cmd = new SqlCommand(qry2, con);
+                    rdr = cmd.ExecuteReader();
+                    sQN = (rdr.GetInt32(0))+1;
+                    con.Close();
+                }
+                else
+                {
+                    con.Close();
+                    sQN = 1;
                 }
                 con = new SqlConnection(cs.DBConn);
-                string cb = "insert into RefNumForInvoice(Code,SClientId,SIN,QuotationId,InvoiceId,RefInvoiceNo) VALUES (@d1,@d2,@d3,@d4,@d5,@d6)";
+                string cb = "insert into RefNumForInvoice(SClientId,SIN,QuotationId,InvoiceId) VALUES (@d2,@d3,@d4,@d5)";
                 cmd = new SqlCommand(cb);
                 cmd.Connection = con;
-                cmd.Parameters.AddWithValue("d1", "OIA-INV");
                 cmd.Parameters.AddWithValue("d2", sclientId);
                 cmd.Parameters.AddWithValue("d3", sQN);
                 cmd.Parameters.AddWithValue("d4", quotationId);
                 cmd.Parameters.AddWithValue("d5", invoiceId);
-                cmd.Parameters.AddWithValue("d6", referenceNo);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -490,8 +508,8 @@ namespace KyotoSalesManagementSystem.UI
             else
             {
                 SaveInvoice();
-                MessageBox.Show("Successfully Generated", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SaveReferenceNumForInvoice();
+                MessageBox.Show("Successfully Generated", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearData();
                 QuotationIdLoad();
                 cmbQuotation.ResetText();

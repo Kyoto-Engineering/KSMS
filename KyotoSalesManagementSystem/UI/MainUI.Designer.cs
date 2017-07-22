@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.PrintDeliverybutton = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -64,6 +65,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button13);
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.PrintDeliverybutton);
             this.groupBox1.Controls.Add(this.button11);
@@ -82,6 +84,16 @@
             this.groupBox1.Size = new System.Drawing.Size(327, 565);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(168, 286);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(67, 46);
+            this.button13.TabIndex = 24;
+            this.button13.Text = "Invoice";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button12
             // 
@@ -305,5 +317,6 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button PrintDeliverybutton;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
     }
 }

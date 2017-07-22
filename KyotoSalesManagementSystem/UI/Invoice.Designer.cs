@@ -446,7 +446,7 @@
             // txtAdvancePayment
             // 
             this.txtAdvancePayment.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAdvancePayment.Location = new System.Drawing.Point(740, 287);
+            this.txtAdvancePayment.Location = new System.Drawing.Point(740, 288);
             this.txtAdvancePayment.Name = "txtAdvancePayment";
             this.txtAdvancePayment.Size = new System.Drawing.Size(94, 26);
             this.txtAdvancePayment.TabIndex = 196;
