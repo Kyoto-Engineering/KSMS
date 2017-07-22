@@ -178,7 +178,7 @@ namespace KyotoSalesManagementSystem.UI
                     con.Close();
                     
                     
-                    MessageBox.Show("Delivery Order Done");
+                    MessageBox.Show("Return Request Done");
                     
                     ClearFields();
                     ComboLoad();
