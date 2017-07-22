@@ -418,12 +418,15 @@ namespace KyotoSalesManagementSystem.UI
 
         private void SaveInvoice()
         {
+           
+                con = new SqlConnection(cs.DBConn);
+                SqlTransaction trnas;
+                con.Open();
+                trnas = con.BeginTransaction();
             try
             {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
                 String query = "insert into Invoice(InvoiceDate, DueDate, InvVAT, InvAIT, AdditionalDiscount, AdvancePayment, NETPayable, PromisedDate) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
-                cmd = new SqlCommand(query, con);
+                cmd = new SqlCommand(query, con,trnas);
                 cmd.Parameters.AddWithValue("@d1", dtpInvoiceDate.Value);
                 cmd.Parameters.AddWithValue("@d2", dtpDueDate.Value);
                 cmd.Parameters.AddWithValue("@d3", string.IsNullOrWhiteSpace(txtVATPercent.Text) ? (object)DBNull.Value : Convert.ToDecimal(txtVATPercent.Text));
@@ -434,69 +437,68 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("@d8", dtpPromisedDate.Value);
 
                 invoiceId = (int)cmd.ExecuteScalar();
-                con.Close();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void SaveReferenceNumForInvoice()
-        {
-            try
-            {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
+               SqlConnection con2 = new SqlConnection(cs.DBConn);
                 string qr2 = "SELECT SClientId,SQN FROM RefNumForQuotation WHERE ReferenceNo= '" + cmbQuotation.Text + "'";
-                cmd = new SqlCommand(qr2, con);
+                cmd = new SqlCommand(qr2, con2);
+                con2.Open();
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
                     sclientId = (rdr.GetInt32(0));
-                    
+                    con2.Close();
 
                 }
-                con.Close();
-                con.Open();
-                string qry="SELECT        RefNumForInvoice.* FROM            RefNumForInvoice WHERE        SClientId =" +
-                    sclientId;
-                cmd = new SqlCommand(qry, con);
+                con2.Close();
+                con2.Open();
+                string qry = "SELECT        RefNumForInvoice.* FROM            RefNumForInvoice WHERE        SClientId =" +
+                             sclientId;
+                cmd = new SqlCommand(qry, con2);
                 rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    con.Close();
-                    con.Open();
+                    con2.Close();
+                    con2.Open();
                     string qry2 = "SELECT        MAX(SIN) AS Expr1 FROM RefNumForInvoice  GROUP BY SClientId  HAVING   SClientId =" +
-                                 sclientId;
-                    cmd = new SqlCommand(qry2, con);
+                                  sclientId;
+                    cmd = new SqlCommand(qry2, con2);
                     rdr = cmd.ExecuteReader();
-                    sQN = (rdr.GetInt32(0))+1;
-                    con.Close();
+                    if (rdr.Read())
+                    {
+                        sQN = (rdr.GetInt32(0)) + 1;
+                    }
+                    con2.Close();
+
                 }
                 else
                 {
-                    con.Close();
+                    con2.Close();
                     sQN = 1;
                 }
-                con = new SqlConnection(cs.DBConn);
+                
                 string cb = "insert into RefNumForInvoice(SClientId,SIN,QuotationId,InvoiceId) VALUES (@d2,@d3,@d4,@d5)";
-                cmd = new SqlCommand(cb);
-                cmd.Connection = con;
+                cmd = new SqlCommand(cb, con, trnas);
+         
                 cmd.Parameters.AddWithValue("d2", sclientId);
                 cmd.Parameters.AddWithValue("d3", sQN);
                 cmd.Parameters.AddWithValue("d4", quotationId);
                 cmd.Parameters.AddWithValue("d5", invoiceId);
-                con.Open();
+
                 cmd.ExecuteNonQuery();
-                con.Close();
+                cmd.Transaction.Commit();
+                MessageBox.Show(@"Successfully Generated", @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearData();
+                QuotationIdLoad();
+                cmbQuotation.ResetText();
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, @"Error But We Are Rle Backing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmd.Transaction.Rollback();
             }
         }
+
+
         
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -509,11 +511,7 @@ namespace KyotoSalesManagementSystem.UI
             else
             {
                 SaveInvoice();
-                SaveReferenceNumForInvoice();
-                MessageBox.Show("Successfully Generated", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearData();
-                QuotationIdLoad();
-                cmbQuotation.ResetText();
+               
             }
         }
 
