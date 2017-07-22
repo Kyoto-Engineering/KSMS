@@ -468,7 +468,7 @@ namespace KyotoSalesManagementSystem.UI
                 {
                     con.Close();
                     con.Open();
-                    string qry2 = "SELECT        MAX(SIN) AS Expr1 FROM RefNumForInvoice HAVING   SClientId =" +
+                    string qry2 = "SELECT        MAX(SIN) AS Expr1 FROM RefNumForInvoice  GROUP BY SClientId  HAVING   SClientId =" +
                                  sclientId;
                     cmd = new SqlCommand(qry2, con);
                     rdr = cmd.ExecuteReader();
