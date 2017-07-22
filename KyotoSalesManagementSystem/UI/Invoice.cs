@@ -207,7 +207,7 @@ namespace KyotoSalesManagementSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 string query =
-                    "SELECT RefNumForQuotation.ReferenceNo FROM RefNumForQuotation INNER JOIN Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId where Quotation.QStatus='Accepted' except SELECT RefNumForQuotation.ReferenceNo FROM RefNumForQuotation INNER JOIN Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId INNER JOIN Invoice ON RefNumForQuotation.QuotationId = Invoice.QuotationId";
+                    "SELECT RefNumForQuotation.ReferenceNo FROM RefNumForQuotation INNER JOIN Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId where Quotation.QStatus='Accepted' except SELECT RefNumForQuotation.ReferenceNo FROM RefNumForQuotation INNER JOIN Quotation ON RefNumForQuotation.QuotationId = Quotation.QuotationId INNER JOIN RefNumForInvoice ON RefNumForQuotation.QuotationId = RefNumForInvoice.QuotationId";
 
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
