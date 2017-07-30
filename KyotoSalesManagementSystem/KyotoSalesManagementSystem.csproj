@@ -527,11 +527,6 @@
       <DependentUpon>InvoiceAzbil.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\InvoiceAZBIL1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InvoiceAZBIL1.rpt</DependentUpon>
-    </Compile>
     <Compile Include="Reports\InvoiceBA.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -539,15 +534,15 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\InvoiceCAzbil.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceCAzbil.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reports\InvoiceCChigo.cs">
+    <Compile Include="Reports\InvoiceCBusinessAutomation.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InvoiceCChigo.rpt</DependentUpon>
+      <DependentUpon>InvoiceCBusinessAutomation.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\InvoiceChigo.cs">
@@ -557,28 +552,22 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\InvoiceCIRD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceCIRD.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reports\InvoiceCOmron.cs">
-      <DependentUpon>InvoiceCOmron.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\InvoiceCKawaShima.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceCKawaShima.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reports\InvoiceCBusinessAutomation.cs">
-      <DependentUpon>InvoiceCBusinessAutomation.rpt</DependentUpon>
+    <Compile Include="Reports\InvoiceCOmron.cs">
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceCOmron.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\InvoiceCSamsung-DVM.cs">
       <AutoGen>True</AutoGen>
@@ -1084,10 +1073,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceAzbil.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\InvoiceAZBIL1.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>InvoiceAZBIL1.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\InvoiceBA.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceBA.cs</LastGenOutput>
@@ -1096,9 +1081,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCAzbil.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\InvoiceCChigo.rpt">
+    <EmbeddedResource Include="Reports\InvoiceCBusinessAutomation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>InvoiceCChigo.cs</LastGenOutput>
+      <LastGenOutput>InvoiceCBusinessAutomation.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\InvoiceChigo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1108,17 +1093,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCIRD.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\InvoiceCOmron.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>InvoiceCOmron.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\InvoiceCKawaShima.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCKawaShima.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\InvoiceCBusinessAutomation.rpt">
+    <EmbeddedResource Include="Reports\InvoiceCOmron.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>InvoiceCBusinessAutomation.cs</LastGenOutput>
+      <LastGenOutput>InvoiceCOmron.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\InvoiceCSamsung-DVM.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
