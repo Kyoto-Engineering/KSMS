@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using KyotoSalesManagementSystem.DBGateway;
+using KyotoSalesManagementSystem.LoginUI;
 
 namespace KyotoSalesManagementSystem.UI
 {
@@ -425,7 +426,7 @@ namespace KyotoSalesManagementSystem.UI
                 trnas = con.BeginTransaction();
             try
             {
-                String query = "insert into Invoice(InvoiceDate, DueDate, InvVAT, InvAIT, AdditionalDiscount, AdvancePayment, NETPayable, PromisedDate) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into Invoice(InvoiceDate, DueDate, InvVAT, InvAIT, AdditionalDiscount, AdvancePayment, NETPayable, PromisedDate,UserId,EntryDate) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con,trnas);
                 cmd.Parameters.AddWithValue("@d1", dtpInvoiceDate.Value);
                 cmd.Parameters.AddWithValue("@d2", dtpDueDate.Value);
@@ -435,7 +436,8 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("@d6", string.IsNullOrWhiteSpace(txtAdvancePayment.Text) ? (object)DBNull.Value : Convert.ToDecimal(txtAdvancePayment.Text));
                 cmd.Parameters.AddWithValue("@d7", Convert.ToDecimal(txtNetPayable.Text));
                 cmd.Parameters.AddWithValue("@d8", dtpPromisedDate.Value);
-
+                cmd.Parameters.AddWithValue("@d9", frmLogin.uId);
+                cmd.Parameters.AddWithValue("@d10", DateTime.UtcNow.ToLocalTime());
                 invoiceId = (int)cmd.ExecuteScalar();
                SqlConnection con2 = new SqlConnection(cs.DBConn);
                 string qr2 = "SELECT SClientId,SQN FROM RefNumForQuotation WHERE ReferenceNo= '" + cmbQuotation.Text + "'";
