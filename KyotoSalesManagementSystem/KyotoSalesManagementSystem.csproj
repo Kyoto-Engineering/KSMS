@@ -545,6 +545,12 @@
       <DependentUpon>InvoiceCBusinessAutomation.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\InvoiceCChigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceCChigo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\InvoiceChigo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1084,6 +1090,10 @@
     <EmbeddedResource Include="Reports\InvoiceCBusinessAutomation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceCBusinessAutomation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceCChigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceCChigo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\InvoiceChigo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
