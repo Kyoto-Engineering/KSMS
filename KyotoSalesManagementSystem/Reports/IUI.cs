@@ -77,19 +77,31 @@ namespace KyotoSalesManagementSystem.Reports
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (qtype == "General")
+            button1.Enabled = false;
+            if (!string.IsNullOrWhiteSpace(comboBox1.Text))
             {
-                Report1();
+                if (qtype == "General")
+                {
+                    Report1();
+                }
+                else
+                {
+                    Report2();
+                }
             }
             else
             {
-                Report2();
+                MessageBox.Show(@"Please Select a Reference no", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            button1.Enabled = true;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           if(!string.IsNullOrWhiteSpace(comboBox1.Text)){ try
+           if(!string.IsNullOrWhiteSpace(comboBox1.Text))
+           { 
+               try
             {
               
             string[] deStrings = comboBox1.Text.Split('-');
@@ -106,7 +118,9 @@ namespace KyotoSalesManagementSystem.Reports
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }}
+            }
+
+           }
         }
         private void Report1()
         {
