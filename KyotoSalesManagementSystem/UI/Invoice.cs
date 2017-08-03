@@ -9,6 +9,12 @@ using System.Text;
 using System.Windows.Forms;
 using KyotoSalesManagementSystem.DBGateway;
 using KyotoSalesManagementSystem.LoginUI;
+using KyotoSalesManagementSystem.Reports;
+using CrystalDecisions.Shared;
+using CrystalDecisions.CrystalReports.Engine;
+using KyotoSalesManagementSystem.DAO;
+using ZXing;
+using ZXing.Common;
 
 namespace KyotoSalesManagementSystem.UI
 {
@@ -489,6 +495,8 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.ExecuteNonQuery();
                 trnas.Commit();
                 MessageBox.Show(@"Successfully Generated", @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Report1();
+                Report2();
                 ClearData();
                 QuotationIdLoad();
                 cmbQuotation.ResetText();
@@ -503,14 +511,13 @@ namespace KyotoSalesManagementSystem.UI
             con.Close();
         }
 
-
-        
-        private void btnSave_Click(object sender, EventArgs e)
+       private void btnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(cmbQuotation.Text))
             {
                 MessageBox.Show("Please select Quotation Id/Ref/Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbQuotation);
+               
             }
 
             else
@@ -518,6 +525,210 @@ namespace KyotoSalesManagementSystem.UI
                 SaveInvoice();
                
             }
+        }
+
+        private void Report1()
+        {
+            btnSave.Enabled = false;
+            ParameterField paramField1 = new ParameterField();
+
+
+            //creating an object of ParameterFields class
+            ParameterFields paramFields1 = new ParameterFields();
+
+            //creating an object of ParameterDiscreteValue class
+            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+
+            //set the parameter field name
+            paramField1.Name = "id";
+
+            //set the parameter value
+            paramDiscreteValue1.Value = quotationId;
+
+            //add the parameter value in the ParameterField object
+            paramField1.CurrentValues.Add(paramDiscreteValue1);
+
+            //add the parameter in the ParameterFields object
+            paramFields1.Add(paramField1);
+            ReportView f2 = new ReportView();
+            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            ConnectionInfo reportConInfo = new ConnectionInfo();
+            Tables tables = default(Tables);
+            //	Table table = default(Table);
+            var with1 = reportConInfo;
+            with1.ServerName = "tcp:KyotoServer,49172";
+            with1.DatabaseName = "ProductNRelatedDB";
+            with1.UserID = "sa";
+            with1.Password = "SystemAdministrator";
+            ReportDocument cr = new ReportDocument();
+            if (BrandId == 1)
+            {
+                cr = new Reports.Invoice();
+            }
+            else if (BrandId == 2)
+            {
+                cr = new InvoiceKEAL();
+            }
+            else if (BrandId == 3)
+            {
+                cr = new InvoiceAzbil();
+            }
+            else if (BrandId == 4)
+            {
+                cr = new InvoiceBA();
+            }
+            else if (BrandId == 5)
+            {
+                cr = new InvoiceIRD();
+            }
+            else if (BrandId == 6)
+            {
+                cr = new InvoiceKawaShima();
+            }
+            tables = cr.Database.Tables;
+            foreach (Table table in tables)
+            {
+                reportLogonInfo = table.LogOnInfo;
+                reportLogonInfo.ConnectionInfo = reportConInfo;
+                table.ApplyLogOnInfo(reportLogonInfo);
+            }
+            BArcode ds = new BArcode();
+
+            var content = cmbQuotation.Text;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 465
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = cmbQuotation.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
+            f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            f2.crystalReportViewer1.ReportSource = cr;
+            this.Visible = false;
+
+            f2.ShowDialog();
+            this.Visible = true;
+            //backgroundWorker1.CancelAsync();
+            //backgroundWorker1.Dispose();
+            //progressBar1.Visible = false;
+            btnSave.Enabled = true;
+        }
+
+        private void Report2()
+        {
+            btnSave.Enabled = false;
+            ParameterField paramField1 = new ParameterField();
+
+
+            //creating an object of ParameterFields class
+            ParameterFields paramFields1 = new ParameterFields();
+
+            //creating an object of ParameterDiscreteValue class
+            ParameterDiscreteValue paramDiscreteValue1 = new ParameterDiscreteValue();
+
+            //set the parameter field name
+            paramField1.Name = "id";
+
+            //set the parameter value
+            paramDiscreteValue1.Value = quotationId;
+
+            //add the parameter value in the ParameterField object
+            paramField1.CurrentValues.Add(paramDiscreteValue1);
+
+            //add the parameter in the ParameterFields object
+            paramFields1.Add(paramField1);
+            ReportView f2 = new ReportView();
+            TableLogOnInfos reportLogonInfos = new TableLogOnInfos();
+            TableLogOnInfo reportLogonInfo = new TableLogOnInfo();
+            ConnectionInfo reportConInfo = new ConnectionInfo();
+            Tables tables = default(Tables);
+            //	Table table = default(Table);
+            var with1 = reportConInfo;
+            with1.ServerName = "tcp:KyotoServer,49172";
+            with1.DatabaseName = "ProductNRelatedDB";
+            with1.UserID = "sa";
+            with1.Password = "SystemAdministrator";
+            ReportDocument cr = new ReportDocument();
+            if (BrandId == 1)
+            {
+                cr = new InvoiceCOmron();
+            }
+            else if (BrandId == 2)
+            {
+                cr = new InvoiceCWithoutLogo();
+            }
+            else if (BrandId == 3)
+            {
+                cr = new InvoiceCAzbil();
+            }
+            else if (BrandId == 4)
+            {
+                cr = new InvoiceCBusinessAutomation();
+            }
+            else if (BrandId == 5)
+            {
+                cr = new InvoiceCIRD();
+            }
+            else if (BrandId == 6)
+            {
+                cr = new InvoiceCKawaShima();
+            }
+            tables = cr.Database.Tables;
+            foreach (Table table in tables)
+            {
+                reportLogonInfo = table.LogOnInfo;
+                reportLogonInfo.ConnectionInfo = reportConInfo;
+                table.ApplyLogOnInfo(reportLogonInfo);
+            }
+            BArcode ds = new BArcode();
+
+            var content = cmbQuotation.Text;
+            var writer = new BarcodeWriter
+            {
+
+                Format = BarcodeFormat.CODE_128,
+                Options = new EncodingOptions
+                {
+                    PureBarcode = true,
+                    Height = 100,
+                    Width = 465
+                }
+            };
+            var png = writer.Write(content);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            png.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            DataRow dtr = ds.Tables[0].NewRow();
+            dtr["REF"] = cmbQuotation.Text;
+            dtr["BarcodeImage"] = ms.ToArray();
+            ds.Tables[0].Rows.Add(dtr);
+            cr.Subreports["BarCode.rpt"].DataSourceConnections.Clear();
+            cr.Subreports["BarCode.rpt"].SetDataSource(ds);
+            f2.crystalReportViewer1.ParameterFieldInfo = paramFields1;
+            f2.crystalReportViewer1.ReportSource = cr;
+            this.Visible = false;
+
+            f2.ShowDialog();
+            this.Visible = true;
+            //backgroundWorker1.CancelAsync();
+            //backgroundWorker1.Dispose();
+            //progressBar1.Visible = false;
+            btnSave.Enabled = true;
         }
 
         private void ClearData()
