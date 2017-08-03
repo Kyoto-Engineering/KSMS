@@ -25,7 +25,7 @@ namespace KyotoSalesManagementSystem.UI
         private SqlDataReader rdr;
         private ConnectionString cs = new ConnectionString();
         public int refId, quotationId, sclientId, sQN, invoiceId, user_id,BrandId;
-        public string referenceNo;
+        public string referenceNo, qtype;
         public decimal aitPercent = 0, aitAmount = 0, netPayable = 0, discount = 0, discountPercent = 0, myNetPayable = 0, myVAT = 0, myAIT = 0, myDis = 0;
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
@@ -123,12 +123,12 @@ namespace KyotoSalesManagementSystem.UI
                 con.Open();
                 cmd = con.CreateCommand();
 
-                cmd.CommandText = "select TotalPrice,QVat,QAIT,Discount,NetPayable,BrandId FROM  Quotation  where QuotationId='" + quotationId + "'";
+                cmd.CommandText = "select TotalPrice,QVat,QAIT,Discount,NetPayable,BrandId,QType FROM  Quotation  where QuotationId='" + quotationId + "'";
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
                     BrandId =Convert.ToInt32(rdr["BrandId"]);
-
+                    qtype = rdr["QType"].ToString();
                     txtTotalPrice.Text = rdr["TotalPrice"].ToString();
                     if (!rdr.IsDBNull(1))
                     {
@@ -495,8 +495,16 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.ExecuteNonQuery();
                 trnas.Commit();
                 MessageBox.Show(@"Successfully Generated", @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Report1();
-                Report2();
+               
+                    if (qtype == "General")
+                    {
+                        Report1();
+                    }
+                    else
+                    {
+                        Report2();
+                    }
+                
                 ClearData();
                 QuotationIdLoad();
                 cmbQuotation.ResetText();
@@ -543,7 +551,7 @@ namespace KyotoSalesManagementSystem.UI
             paramField1.Name = "id";
 
             //set the parameter value
-            paramDiscreteValue1.Value = quotationId;
+            paramDiscreteValue1.Value = invoiceId;
 
             //add the parameter value in the ParameterField object
             paramField1.CurrentValues.Add(paramDiscreteValue1);
@@ -645,7 +653,7 @@ namespace KyotoSalesManagementSystem.UI
             paramField1.Name = "id";
 
             //set the parameter value
-            paramDiscreteValue1.Value = quotationId;
+            paramDiscreteValue1.Value = invoiceId;
 
             //add the parameter value in the ParameterField object
             paramField1.CurrentValues.Add(paramDiscreteValue1);
