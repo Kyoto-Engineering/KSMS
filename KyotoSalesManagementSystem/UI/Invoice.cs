@@ -24,6 +24,7 @@ namespace KyotoSalesManagementSystem.UI
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
         private delegate void ChangeFocusDelegate(Control ctl);
+        SqlTransaction trnas;
 
         public Invoice()
         {
@@ -421,7 +422,7 @@ namespace KyotoSalesManagementSystem.UI
         {
            
                 con = new SqlConnection(cs.DBConn);
-                SqlTransaction trnas;
+                
                 con.Open();
                 trnas = con.BeginTransaction();
             try
@@ -486,18 +487,20 @@ namespace KyotoSalesManagementSystem.UI
                 cmd.Parameters.AddWithValue("d5", invoiceId);
 
                 cmd.ExecuteNonQuery();
-                cmd.Transaction.Commit();
+                trnas.Commit();
                 MessageBox.Show(@"Successfully Generated", @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearData();
                 QuotationIdLoad();
                 cmbQuotation.ResetText();
+                con.Close();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, @"Error But We Are Rle Backing", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmd.Transaction.Rollback();
+                trnas.Rollback();
             }
+            con.Close();
         }
 
 

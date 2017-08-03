@@ -24,6 +24,7 @@ namespace KyotoSalesManagementSystem.Reports
         private SqlDataReader rdr;
         public int quotationId, brandid;
         public string qtype;
+        List<Tuple<string, int, string>> listOfInvoice = new List<Tuple<string, int, string>>();
         public IUI()
         {
             InitializeComponent();
@@ -52,17 +53,21 @@ namespace KyotoSalesManagementSystem.Reports
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string ct = "SELECT  RefNumForQuotation.ReferenceNo FROM DeleveryOrder INNER JOIN RefNumForQuotation ON DeleveryOrder.QuotationId = RefNumForQuotation.QuotationId";
+                string ct = "SELECT  Brand.BrandCode+'-INV-'+Convert(varchar(12),RefNumForInvoice.SClientId)+'-'+Convert(varchar(12), RefNumForInvoice.SIN)+'-'+Convert(varchar(12),RefNumForInvoice.InvoiceId),Quotation.BrandId ,Quotation.QType FROM  RefNumForInvoice INNER JOIN Quotation ON RefNumForInvoice.QuotationId = Quotation.QuotationId INNER JOIN Brand ON Quotation.BrandId = Brand.BrandId";
                 cmd = new SqlCommand(ct);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    comboBox1.Items.Add(rdr[0]);
+                    Tuple<string, int, string> xTuple = new Tuple<string, int, string>(rdr.GetString(0), rdr.GetInt32(1),rdr.GetString(2));
+                    listOfInvoice.Add(xTuple);
                 }
                 con.Close();
-
+                foreach (Tuple<string,int,string> yTuple in listOfInvoice)
+                {
+                    comboBox1.Items.Add(yTuple.Item1);
+                }
             }
             catch (Exception ex)
             {
@@ -84,29 +89,24 @@ namespace KyotoSalesManagementSystem.Reports
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+           if(!string.IsNullOrWhiteSpace(comboBox1.Text)){ try
             {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
-                string ct = "select   T.QuotationId, T.QType, BrandId from  Quotation T JOIN RefNumForQuotation N ON T.QuotationId = N.QuotationId  where N.ReferenceNo='" + comboBox1.Text + "'";
-                cmd = new SqlCommand(ct);
-                cmd.Connection = con;
-                rdr = cmd.ExecuteReader();
+              
+            string[] deStrings = comboBox1.Text.Split('-');
+            quotationId =Convert.ToInt32( deStrings[4]);
+            var z = from entry in listOfInvoice
+                where entry.Item1 == comboBox1.Text
+                select new {brandid = entry.Item2, qtype = entry.Item3};
 
-                if (rdr.Read())
-                {
-                    // txtBalance.Text = (rdr.GetDouble(0).ToString());
-                    quotationId = (rdr.GetInt32(0));
-                    qtype = (rdr.GetString(1));
-                    brandid = Convert.ToInt32(rdr["BrandId"]);
-                }
-                con.Close();
+            brandid = z.FirstOrDefault().brandid;
+            qtype = z.FirstOrDefault().qtype;
+
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }}
         }
         private void Report1()
         {

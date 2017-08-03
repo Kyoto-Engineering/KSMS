@@ -312,7 +312,7 @@ namespace KyotoSalesManagementSystem.UI
                     MessageBox.Show("Delivery Order Done");
                     
                     Report1();
-                    Report3();
+                    //Report3();
                     listView1.Items.Clear();
                     dataGridView1.Rows.Clear();                    
                     textBox5.Clear();
