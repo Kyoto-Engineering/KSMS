@@ -48,6 +48,9 @@
             this.txtlblUser = new System.Windows.Forms.TextBox();
             this.logOut = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.AllSalesbutton = new System.Windows.Forms.Button();
+            this.DateWiseSalesReportbutton = new System.Windows.Forms.Button();
+            this.WiseSalesReportbuttonbutton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +68,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.WiseSalesReportbuttonbutton);
+            this.groupBox1.Controls.Add(this.DateWiseSalesReportbutton);
+            this.groupBox1.Controls.Add(this.AllSalesbutton);
             this.groupBox1.Controls.Add(this.button13);
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.PrintDeliverybutton);
@@ -274,6 +280,36 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // AllSalesbutton
+            // 
+            this.AllSalesbutton.Location = new System.Drawing.Point(6, 351);
+            this.AllSalesbutton.Name = "AllSalesbutton";
+            this.AllSalesbutton.Size = new System.Drawing.Size(75, 46);
+            this.AllSalesbutton.TabIndex = 26;
+            this.AllSalesbutton.Text = "All Sales Report";
+            this.AllSalesbutton.UseVisualStyleBackColor = true;
+            this.AllSalesbutton.Click += new System.EventHandler(this.AllSalesbutton_Click);
+            // 
+            // DateWiseSalesReportbutton
+            // 
+            this.DateWiseSalesReportbutton.Location = new System.Drawing.Point(101, 351);
+            this.DateWiseSalesReportbutton.Name = "DateWiseSalesReportbutton";
+            this.DateWiseSalesReportbutton.Size = new System.Drawing.Size(84, 46);
+            this.DateWiseSalesReportbutton.TabIndex = 27;
+            this.DateWiseSalesReportbutton.Text = "Date Wise Sales Report";
+            this.DateWiseSalesReportbutton.UseVisualStyleBackColor = true;
+            this.DateWiseSalesReportbutton.Click += new System.EventHandler(this.DateWiseSalesReportbutton_Click);
+            // 
+            // WiseSalesReportbuttonbutton
+            // 
+            this.WiseSalesReportbuttonbutton.Location = new System.Drawing.Point(202, 351);
+            this.WiseSalesReportbuttonbutton.Name = "WiseSalesReportbuttonbutton";
+            this.WiseSalesReportbuttonbutton.Size = new System.Drawing.Size(94, 46);
+            this.WiseSalesReportbuttonbutton.TabIndex = 28;
+            this.WiseSalesReportbuttonbutton.Text = "Company Wise Sales Report";
+            this.WiseSalesReportbuttonbutton.UseVisualStyleBackColor = true;
+            this.WiseSalesReportbuttonbutton.Click += new System.EventHandler(this.WiseSalesReportbuttonbutton_Click);
+            // 
             // MainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,5 +354,8 @@
         private System.Windows.Forms.Button PrintDeliverybutton;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button WiseSalesReportbuttonbutton;
+        private System.Windows.Forms.Button DateWiseSalesReportbutton;
+        private System.Windows.Forms.Button AllSalesbutton;
     }
 }

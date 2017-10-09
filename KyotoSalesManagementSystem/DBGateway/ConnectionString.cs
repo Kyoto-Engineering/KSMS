@@ -7,7 +7,7 @@ namespace KyotoSalesManagementSystem.DBGateway
 {
   public   class ConnectionString
     {
-      public string DBConn = @"Data Source=tcp:KyotoServer,49172;Initial Catalog=ProductNRelatedDBDemo;User=sa;Password=SystemAdministrator;Persist Security Info=true";
+      public string DBConn = @"Data Source=tcp:KyotoServer,49172;Initial Catalog=ProductNRelatedDB;User=sa;Password=SystemAdministrator;Persist Security Info=true";
       //public string DBConn = @"Data Source=tcp:KyotoServer,49172;Initial Catalog=NewProductList1;User=sa;Password=SystemAdministrator;Persist Security Info=true";
         // public string DBConn = @"Data Source=tcp:KyotoServer,49172;Initial Catalog=NewProductList;User=sa;Password=SystemAdministrator;Persist Security Info=True;";
     }
