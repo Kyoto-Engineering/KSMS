@@ -919,13 +919,13 @@ namespace KyotoSalesManagementSystem.UI
                 msg.To.Add(new MailAddress(waterMarkTextBox1.Text));
                 msg.CC.Add(new MailAddress("info@keal.com.bd"));
                 msg.CC.Add(new MailAddress(email));
-                msg.Subject = "Your Quotation is Here";
+                msg.Subject = "Your Quotation # Quote_"+ referenceNo +" is Here"; 
                 msg.Body =
                     "Dear Patron,<br/><br/>Thank you for your interest in our products and services. In reply to your recent request for a quotation I<br/>am pleased to provide you with the same by this email.<br/><br/>You will find the quotation in the following <b>private and confidential</b> link. This link is password protected.<br/>Soon we will upload the quotation to your folder. You may also upload the work order and other instructions<br/>to this folder using this link as you desire.<br/><br/><br/>" +
                     "<b>Your Link:</b> https://keal.com.bd/FileStoring/index.php <br/>" + "<b>Your User Name:</b> " +
                     waterMarkTextBox1.Text + "<br/> <b>Your Password:</b> " + txtContactNo.Text +
                     "<br/><br/><br/>Please do not hesitate to contact us should you require any clarifications. Wish to conduct fruitful business<br/>with you all the time. We appreciate your continuous support.<br/><br/>Looking forward to receiving a work order soon from you against this quotation.<br/><br/>Best Regards,<br/><br/>" +
-                    name + "<br/>" + designation + "<br/>" + contact + "<br/><br/>" +
+                    name + "<br/>" + designation + "<br/>" + contact + "<br/><b>Your Quotation #Quote_</b>" + referenceNo + "<br/><br/>" +
                     "<b>NB:</b> This is a system generated email. We are a paperless company. We care for environment. Saving a <br/>" +
                     "paper by not taking a printout of this quotation shall be our reward.";
 
