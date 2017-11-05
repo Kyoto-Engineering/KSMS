@@ -173,5 +173,10 @@ namespace KyotoSalesManagementSystem.LoginUI
         {
             System.Windows.Forms.Application.Exit();
         }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

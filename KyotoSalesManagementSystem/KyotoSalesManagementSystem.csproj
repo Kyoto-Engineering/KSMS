@@ -28,7 +28,7 @@
     <MinimumRequiredVersion>1.0.0.1</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>54</ApplicationRevision>
+    <ApplicationRevision>58</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -69,7 +69,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>sales_management_system_EVN_icon.ico</ApplicationIcon>
+    <ApplicationIcon>Sales_Management_edited_1.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -1333,6 +1333,11 @@
     <None Include="Resources\Sales Management System.jpg" />
     <None Include="Resources\Sales Management System55.jpg" />
     <None Include="Resources\12.jpg" />
+    <None Include="Resources\SalesManagementedited.png" />
+    <None Include="Resources\Logowithoutnamarked.png" />
+    <None Include="Resources\banner.png" />
+    <None Include="Resources\whiteyglossyrectanglebuttonmd.png" />
+    <Content Include="Sales_Management_edited_1.ico" />
     <Content Include="sales_management_system_2_Jpe_icon.ico" />
     <Content Include="sales_management_system_EVN_icon.ico" />
   </ItemGroup>

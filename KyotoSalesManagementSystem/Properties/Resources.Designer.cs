@@ -73,6 +73,26 @@ namespace KyotoSalesManagementSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap banner {
+            get {
+                object obj = ResourceManager.GetObject("banner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logowithoutnamarked {
+            get {
+                object obj = ResourceManager.GetObject("Logowithoutnamarked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Sales_Management_System {
             get {
                 object obj = ResourceManager.GetObject("Sales Management System", resourceCulture);
@@ -86,6 +106,26 @@ namespace KyotoSalesManagementSystem.Properties {
         internal static System.Drawing.Bitmap Sales_Management_System55 {
             get {
                 object obj = ResourceManager.GetObject("Sales Management System55", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SalesManagementedited {
+            get {
+                object obj = ResourceManager.GetObject("SalesManagementedited", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap whiteyglossyrectanglebuttonmd {
+            get {
+                object obj = ResourceManager.GetObject("whiteyglossyrectanglebuttonmd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
