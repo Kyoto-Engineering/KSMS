@@ -1757,7 +1757,7 @@ namespace KyotoSalesManagementSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 //cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, MasterStocks.UnitPrice FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
-                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode  FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId where Brand.BrandName='" + BrandcomboBox.Text + "' order by ProductListSummary.Sl desc", con);
+                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode,   FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId where Brand.BrandName='" + BrandcomboBox.Text + "' order by ProductListSummary.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)

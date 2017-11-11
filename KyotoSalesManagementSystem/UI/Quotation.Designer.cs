@@ -140,6 +140,9 @@
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label33 = new System.Windows.Forms.Label();
             this.BrandcomboBox = new System.Windows.Forms.ComboBox();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -1067,7 +1070,10 @@
             this.Column5,
             this.Column6,
             this.Column3,
-            this.Column4});
+            this.Column4,
+            this.Column7,
+            this.Column8,
+            this.Column9});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1353,6 +1359,21 @@
             this.BrandcomboBox.TabIndex = 804;
             this.BrandcomboBox.SelectedIndexChanged += new System.EventHandler(this.BrandcomboBox_SelectedIndexChanged);
             // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Specification";
+            this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "COO";
+            this.Column8.Name = "Column8";
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "DLT";
+            this.Column9.Name = "Column9";
+            // 
             // Quotation
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1512,5 +1533,8 @@
         public System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label33;
         public System.Windows.Forms.ComboBox BrandcomboBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     }
 }
