@@ -38,7 +38,9 @@ namespace KyotoSalesManagementSystem.UI
         public decimal vt = 0, ait = 0, dis = 0, t = 0;
         public Nullable<decimal> vatNull, aitNull, disNull;
         public Nullable<Int64> brandid;
-
+        public int bla;
+        public decimal prc;
+        public string dltno;
         public QuotationForOvercease()
         {
             InitializeComponent();
@@ -1058,10 +1060,89 @@ namespace KyotoSalesManagementSystem.UI
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewRow dr = dataGridView1.SelectedRows[0];
-            txtProductName.Text = dr.Cells[1].Value.ToString();
-            pId = dr.Cells[0].Value.ToString();
-            labelv.Text = labelg.Text;
+            DataGridViewRow dr = dataGridView1.CurrentRow;
+            if (dr.Cells[8].Value.ToString() == "Obsolete")
+            {
+                //pId = dr.Cells[0].Value.ToString();
+                DialogResult res = MessageBox.Show("This is an Obsolete Product. Do You want to Continue ? ","Attention",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation);
+                if (res == DialogResult.Yes)
+                {
+                    txtProductName.Text = dr.Cells[1].Value.ToString();
+                    pId = dr.Cells[0].Value.ToString();
+                    labelv.Text = labelg.Text;
+                    txtUnitPrice.Text = dr.Cells[4].Value.ToString();
+                    txtSpecification.Text = dr.Cells[5].Value.ToString();
+                    txtCountryOfOrigin.Text = dr.Cells[6].Value.ToString();
+                    txtLeadTime.Text = dr.Cells[7].Value.ToString();
+                }
+                if (res == DialogResult.No)
+                {
+                    pId = dr.Cells[0].Value.ToString();
+                   
+                    DialogResult res1 = MessageBox.Show("Do You Want to Continue with the replaced product of that Obsolete Product?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    
+                    if (res1 == DialogResult.Yes)
+                    {
+                        con = new SqlConnection(cs.DBConn);
+                        con.Open();
+                       
+                        string qq3 =
+                            "select [ProductListSummary].[Sl], [ProductListSummary].[ProductGenericDescription],[ProductListSummary].[CountryOfOrigin],[ProductListSummary].[Price], [ProductListSummary].[DLT],[ProductListSummary].[Specification]  from [dbo].[ProductListSummary] inner join ReplacementofObsoleteProduct on ProductListSummary.Sl = ReplacementofObsoleteProduct.Sl inner join [dbo].[ObsoleteProduct] on [ObsoleteProduct].ObproductId = [dbo].[ReplacementofObsoleteProduct].ObproductId where [ObsoleteProduct].ObproductId  IN  (select [ObsoleteProduct].ObproductId from [ObsoleteProduct] inner join [ProductListSummary] on  [ObsoleteProduct].Sl = [ProductListSummary].Sl where [ProductListSummary].Sl= '"+pId+"'  )";
+                       
+                        cmd = new SqlCommand(qq3, con);
+                        
+                        rdr = cmd.ExecuteReader();
+                       
+                        if (rdr.Read() )
+                        {
+                            bla = rdr.GetInt32(0);
+                            pId = bla.ToString();
+                           
+                            txtProductName.Text = rdr.GetString(1);
+                            txtCountryOfOrigin.Text = rdr.GetString(2);
+                            labelv.Text = labelg.Text;
+                            
+                            prc = rdr.GetDecimal(3);
+                            txtUnitPrice.Text = prc.ToString();
+                            //dltno = rdr.GetString(4);
+                           
+                            this.txtLeadTime.Text = rdr["DLT"].ToString();
+                            txtSpecification.Text = rdr.GetString(5);
+                            
+                            
+
+
+
+                       }
+                        else
+                        {
+                            MessageBox.Show("bla bla");
+                        }
+                        con.Close();
+                    }
+                }
+            }
+
+            else
+            {
+            //DataGridViewRow dr = dataGridView1.CurrentRow;
+                txtProductName.Text = dr.Cells[1].Value.ToString();
+                pId = dr.Cells[0].Value.ToString();
+                labelv.Text = labelg.Text;
+                txtUnitPrice.Text = dr.Cells[4].Value.ToString();
+                txtSpecification.Text = dr.Cells[5].Value.ToString();
+                txtCountryOfOrigin.Text = dr.Cells[6].Value.ToString();
+                txtLeadTime.Text = dr.Cells[7].Value.ToString();
+            }
+
+
+
+
+
+           
+
+
+
 
         }
 
@@ -1086,12 +1167,12 @@ namespace KyotoSalesManagementSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 //cmd = new SqlCommand("SELECT RTRIM(Sl),RTRIM(ProductGenericDescription),RTRIM(ItemDescription),RTRIM(ItemCode) from ProductListSummary where ProductListSummary.ItemCode like '" + txtOProductId.Text + "%' order by ProductListSummary.Sl", con);
-                cmd = new SqlCommand("SELECT T.Sl,T.ProductGenericDescription,T.ItemDescription,T.ItemCode from Brand b INNER JOIN ProductListSummary T ON b.BrandId=T.BrandId where b.BrandName='" + BrandcomboBox.Text + "' and  T.ItemCode like '" + txtOProductId.Text + "%' order by T.Sl desc", con);
+                cmd = new SqlCommand("SELECT T.Sl,T.ProductGenericDescription,T.ItemDescription,T.ItemCode, T.Price, T.Specification, T.CountryOfOrigin, T.DLT, O.ObName from Brand b INNER JOIN ProductListSummary T ON b.BrandId=T.BrandId LEFT OUTER JOIN Obsolete O ON T.ObsoleteId=O.ObsoleteId  where b.BrandName='" + BrandcomboBox.Text + "' and  T.ItemCode like '" + txtOProductId.Text + "%' order by T.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)
                 {
-                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3]);
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6], rdr[7], rdr[8]);
                 }
                 con.Close();
             }
@@ -1111,12 +1192,12 @@ namespace KyotoSalesManagementSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 //cmd = new SqlCommand("SELECT RTRIM(Sl),RTRIM(ProductGenericDescription),RTRIM(ItemDescription),RTRIM(ItemCode) from ProductListSummary where ProductListSummary.ProductGenericDescription like '" + txtOSProductName.Text + "%' order by ProductListSummary.Sl", con);
-                cmd = new SqlCommand("SELECT T.Sl,T.ProductGenericDescription,T.ItemDescription,T.ItemCode from Brand b INNER JOIN ProductListSummary T ON b.BrandId=T.BrandId where b.BrandName='" + BrandcomboBox.Text + "' and  T.ProductGenericDescription like '" + txtOSProductName.Text + "%' order by T.Sl desc", con);
+                cmd = new SqlCommand("SELECT T.Sl,T.ProductGenericDescription,T.ItemDescription,T.ItemCode, T.Price, T.Specification, T.CountryOfOrigin, T.DLT, O.ObName from Brand b INNER JOIN ProductListSummary T ON b.BrandId=T.BrandId LEFT OUTER JOIN Obsolete O ON T.ObsoleteId=O.ObsoleteId  where b.BrandName='" + BrandcomboBox.Text + "' and  T.ProductGenericDescription like '" + txtOSProductName.Text + "%' order by T.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)
                 {
-                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3]);
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6], rdr[7], rdr[8]);
                 }
                 con.Close();
             }
@@ -1223,7 +1304,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDB_iqbal";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
@@ -1757,12 +1838,12 @@ namespace KyotoSalesManagementSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 //cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, MasterStocks.UnitPrice FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
-                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode,   FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId where Brand.BrandName='" + BrandcomboBox.Text + "' order by ProductListSummary.Sl desc", con);
+                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, ProductListSummary.Price, ProductListSummary.Specification, ProductListSummary.CountryOfOrigin, ProductListSummary.DLT, Obsolete.ObName FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId LEFT OUTER JOIN Obsolete ON ProductListSummary.ObsoleteId=Obsolete.ObsoleteId where Brand.BrandName='" + BrandcomboBox.Text + "' order by ProductListSummary.Sl desc", con);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)
                 {
-                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3]);
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6], rdr[7], rdr[8]);
                 }
                 con.Close();
             }

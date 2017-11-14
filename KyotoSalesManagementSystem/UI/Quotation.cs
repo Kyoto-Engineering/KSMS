@@ -1645,7 +1645,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDB_iqbal";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr =new ReportDocument();
@@ -2146,19 +2146,21 @@ namespace KyotoSalesManagementSystem.UI
                 if (rdr.Read())
                 {
 
-                    brandid = Convert.ToInt64(rdr["BrandId"]);
+                    brandid = rdr.GetInt32(0);
                 }
                 con.Close();
 
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 //cmd = new SqlCommand("SELECT RTRIM(ProductListSummary.Sl),RTRIM(ProductListSummary.ProductGenericDescription),RTRIM(ProductListSummary.ItemDescription),RTRIM(ProductListSummary.ItemCode),RTRIM(MasterStocks.MQuantity),RTRIM(MasterStocks.UnitPrice) from ProductListSummary,MasterStocks where MasterStocks.Sl=ProductListSummary.Sl order by MasterStocks.Sl desc", con);
-                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, ProductListSummary.Price, ProductListSummary.Specification, ProductListSummary.CountryOfOrigin, ProductListSummary.DLT FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
+               // cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, ProductListSummary.Price, ProductListSummary.Specification, ProductListSummary.CountryOfOrigin, ProductListSummary.DLT, ProductListSummary.ObsoleteId FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl    where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
+                cmd = new SqlCommand("SELECT ProductListSummary.Sl, ProductListSummary.ProductGenericDescription, ProductListSummary.ItemDescription, ProductListSummary.ItemCode, MasterStocks.MQuantity, ProductListSummary.Price, ProductListSummary.Specification, ProductListSummary.CountryOfOrigin, ProductListSummary.DLT, ProductListSummary.ObsoleteId FROM Brand INNER JOIN ProductListSummary ON Brand.BrandId = ProductListSummary.BrandId INNER JOIN MasterStocks ON ProductListSummary.Sl = MasterStocks.Sl    where Brand.BrandName='" + BrandcomboBox.Text + "' order by MasterStocks.Sl desc", con);
+
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 dataGridView1.Rows.Clear();
                 while (rdr.Read() == true)
                 {
-                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6], rdr[7], rdr[8]);
+                    dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5], rdr[6], rdr[7], rdr[8], rdr[9]);
                 }
                 con.Close();
             }

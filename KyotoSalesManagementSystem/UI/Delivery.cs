@@ -379,7 +379,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDB_iqbal";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
 
@@ -501,7 +501,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB";
+            with1.DatabaseName = "ProductNRelatedDB_iqbal";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
