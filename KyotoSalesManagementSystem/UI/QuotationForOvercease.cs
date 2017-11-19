@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using CrystalDecisions.Shared.Json;
 using KyotoSalesManagementSystem.DAO;
 using KyotoSalesManagementSystem.DBGateway;
 using KyotoSalesManagementSystem.LoginUI;
@@ -1079,16 +1080,15 @@ namespace KyotoSalesManagementSystem.UI
                 {
                     pId = dr.Cells[0].Value.ToString();
                    
-                    DialogResult res1 = MessageBox.Show("Do You Want to Continue with the replaced product of that Obsolete Product?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    DialogResult res1 = MessageBox.Show("Do You Want to Continue with the replaced product?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     
                     if (res1 == DialogResult.Yes)
                     {
                         con = new SqlConnection(cs.DBConn);
                         con.Open();
-                       
+
                         string qq3 =
-                            "select [ProductListSummary].[Sl], [ProductListSummary].[ProductGenericDescription],[ProductListSummary].[CountryOfOrigin],[ProductListSummary].[Price], [ProductListSummary].[DLT],[ProductListSummary].[Specification]  from [dbo].[ProductListSummary] inner join ReplacementofObsoleteProduct on ProductListSummary.Sl = ReplacementofObsoleteProduct.Sl inner join [dbo].[ObsoleteProduct] on [ObsoleteProduct].ObproductId = [dbo].[ReplacementofObsoleteProduct].ObproductId where [ObsoleteProduct].ObproductId  IN  (select [ObsoleteProduct].ObproductId from [ObsoleteProduct] inner join [ProductListSummary] on  [ObsoleteProduct].Sl = [ProductListSummary].Sl where [ProductListSummary].Sl= '"+pId+"'  )";
-                       
+                            "select s.[Sl], s.[ProductGenericDescription],s.[CountryOfOrigin],s.[Price], s.[DLT],s.[Specification],s.[ObsoleteId] from (select [ProductListSummary].[Sl], [ProductListSummary].[ProductGenericDescription],[ProductListSummary].[CountryOfOrigin],[ProductListSummary].[Price], [ProductListSummary].[DLT],[ProductListSummary].[Specification], [ProductListSummary].ObsoleteId  from [dbo].[ProductListSummary]) as s inner join ReplacementofObsoleteProduct on s.Sl = ReplacementofObsoleteProduct.Sl inner join [dbo].[ObsoleteProduct] on [ObsoleteProduct].ObproductId = [dbo].[ReplacementofObsoleteProduct].ObproductId where   [ObsoleteProduct].ObproductId  IN  (select [ObsoleteProduct].ObproductId from [ObsoleteProduct] inner join [ProductListSummary] on  [ObsoleteProduct].Sl = [ProductListSummary].Sl where [ProductListSummary].Sl= '"+ pId +"') and s.ObsoleteId is Null ";                      
                         cmd = new SqlCommand(qq3, con);
                         
                         rdr = cmd.ExecuteReader();
@@ -1116,7 +1116,7 @@ namespace KyotoSalesManagementSystem.UI
                        }
                         else
                         {
-                            MessageBox.Show("bla bla");
+                            MessageBox.Show("There is no replacement product of this Obsolete Product OR The Replacement is Obsolute Now","STOP",MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         con.Close();
                     }
@@ -1304,7 +1304,7 @@ namespace KyotoSalesManagementSystem.UI
             //	Table table = default(Table);
             var with1 = reportConInfo;
             with1.ServerName = "tcp:KyotoServer,49172";
-            with1.DatabaseName = "ProductNRelatedDB_iqbal";
+            with1.DatabaseName = "ProductNRelatedDB";
             with1.UserID = "sa";
             with1.Password = "SystemAdministrator";
             ReportDocument cr = new ReportDocument();
